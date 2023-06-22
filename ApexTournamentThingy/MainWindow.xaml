@@ -6,23 +6,29 @@
         xmlns:local="clr-namespace:ApexTournamentThingy"
         mc:Ignorable="d"
         Title="MainWindow" Height="433" Width="782">
+    <Window.Resources>
+        <DataTemplate x:Key="teamTabTemplate">
+            <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10">
+                <TextBox x:Name="namebox" HorizontalAlignment="Left" Margin="78,4,0,0" Text="Team 1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="team1namebox_TextChanged"/>
+                <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBox x:Name="player1box" HorizontalAlignment="Left" Margin="78,35,0,0" Text="Player 1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Player 1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
+                <TextBox x:Name="player2box" HorizontalAlignment="Left" Margin="78,66,0,0" Text="Player 2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Player 2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0"/>
+                <TextBox x:Name="player3box" HorizontalAlignment="Left" Margin="78,97,0,0" Text="Player 3" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <Label Content="Player 3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,93,0,0"/>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="0,124,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <TabControl>
             <TabItem Header="Team Management">
                 <Grid Background="White">
                     <TabControl x:Name="teamTabControl">
-                        <TabItem x:Name="team1tab" Header="{Binding Text, ElementName=team1namebox}">
-                            <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10">
-                                <TextBox x:Name="team1namebox" HorizontalAlignment="Left" Margin="78,4,0,0" Text="Team 1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="team1namebox_TextChanged"/>
-                                <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                                <TextBox x:Name="team1player1box" HorizontalAlignment="Left" Margin="78,35,0,0" Text="Player 1" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                <Label Content="Player 1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,31,0,0"/>
-                                <TextBox x:Name="team1player2box" HorizontalAlignment="Left" Margin="78,66,0,0" Text="Player 2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                <Label Content="Player 2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,62,0,0"/>
-                                <TextBox x:Name="team1player3box" HorizontalAlignment="Left" Margin="78,97,0,0" Text="Player 3" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                <Label Content="Player 3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,93,0,0"/>
-                                <Button Content="Button" HorizontalAlignment="Left" Margin="10,124,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-                            </Grid>
+                        <TabItem x:Name="team1tab" Header="Team 1" ContentTemplate="{StaticResource teamTabTemplate}">
+                        </TabItem>
+                        <TabItem x:Name="team2tab" Header="Team 2" ContentTemplate="{StaticResource teamTabTemplate}">
                         </TabItem>
                     </TabControl>
                 </Grid>
