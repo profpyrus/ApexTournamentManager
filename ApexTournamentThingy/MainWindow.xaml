@@ -7,23 +7,55 @@
         xmlns:Linq="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" x:Class="ApexTournamentThingy.MainWindow"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="433" Width="782">
+        Title="Apex Tournament Manager" Height="433" Width="782">
     <Window.Resources>
         <DataTemplate x:Key="teamTabTemplate">
-            <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10">
-                <TextBox x:Name="namebox" HorizontalAlignment="Left" Margin="78,4,0,0" Text="{Binding Path=name, Mode=TwoWay}" KeyDown="TextBox_KeyEnterUpdate" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
-                <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <ListBox HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Path=players}" Margin="0,40,0,0">
+            <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="namebox" HorizontalAlignment="Stretch" Margin="0,0,0,0" Text="Team 1" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="120" MinHeight="20" Height="20" Grid.Column="1"/>
+                <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
+                <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <Grid UseLayoutRounding="False" Margin="0,0,0,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="playerbox" Text="Player 1" TextWrapping="Wrap" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" UseLayoutRounding="False" MinHeight="20" Height="20" MinWidth="120" Margin="0,0,2,0"/>
                                 <Label Content="Player 1"/>
-                                <TextBox x:Name="player2box" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" Width="120"/>
-                            </StackPanel>
+
+                                <Label Content="Kills" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <Label Content="0" Grid.Row="1" Grid.Column="2" MinHeight="20" Padding="5,0,5,0" MinWidth="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <Button Grid.Column="1" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="-" BorderBrush="#FF515151" Width="20" Height="20" Click="Button_Click" Grid.Row="1" Margin="2,0,0,0" />
+                                <Button Grid.Column="3" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="+" BorderBrush="#FF515151" Width="20" Height="20" Click="Button_Click" Grid.Row="1" Margin="0,0,2,0" />
+
+                                <Label Content="Deaths" Grid.Column="4" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <Label Content="0" Grid.Row="1" Grid.Column="5" MinHeight="20" Padding="5,0,5,0" MinWidth="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                                <Button Grid.Column="4" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="-" BorderBrush="#FF515151" Width="20" Height="20" Click="Button_Click" Grid.Row="1" Margin="2,0,0,0" />
+                                <Button Grid.Column="6" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="+" BorderBrush="#FF515151" Width="20" Height="20" Click="Button_Click" Grid.Row="1" Margin="0,0,2,0" />
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Click="Button_Click"/>
+                <Button Content="Add new Player" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="Button_Click"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="playerTemplate">
@@ -36,7 +68,13 @@
                     <TabControl x:Name="teamTabControl" ItemsSource="{Binding Path=session.teams}" ContentTemplate="{StaticResource ResourceKey=teamTabTemplate}" Margin="0,0,0,33">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Path=name}">
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                            <Binding Path="id" />
+                                            <Binding Path="name" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
                                 </TextBlock>
                             </DataTemplate>
                         </TabControl.ItemTemplate>
