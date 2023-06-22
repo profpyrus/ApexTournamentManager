@@ -20,7 +20,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="namebox" HorizontalAlignment="Stretch" Margin="0,0,0,0" Text="Team 1" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="120" MinHeight="20" Height="20" Grid.Column="1"/>
+                <TextBox x:Name="namebox" HorizontalAlignment="Stretch" Margin="0,0,0,0" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="120" MinHeight="20" Height="20" Grid.Column="1" KeyDown="TextBox_KeyEnterUpdate"/>
                 <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
                 <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2">
                     <ListBox.ItemTemplate>
@@ -39,7 +39,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="playerbox" Text="Player 1" TextWrapping="Wrap" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" UseLayoutRounding="False" MinHeight="20" Height="20" MinWidth="120" Margin="0,0,2,0"/>
+                                <TextBox x:Name="playerbox" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" UseLayoutRounding="False" MinHeight="20" Height="20" MinWidth="120" Margin="0,0,2,0" KeyDown="TextBox_KeyEnterUpdate"/>
                                 <Label Content="Player 1"/>
 
                                 <Label Content="Kills" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -55,7 +55,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Content="Add new Player" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="Button_Click"/>
+                <Button Content="Add new Player"  Tag="{Binding Path=id}" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="AddPlayer"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="playerTemplate">
@@ -65,7 +65,15 @@
         <TabControl>
             <TabItem Header="Team Management">
                 <Grid Background="White">
-                    <TabControl x:Name="teamTabControl" ItemsSource="{Binding Path=session.teams}" ContentTemplate="{StaticResource ResourceKey=teamTabTemplate}" Margin="0,0,0,33">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TabControl x:Name="teamTabControl" ItemsSource="{Binding Path=session.teams}" ContentTemplate="{StaticResource ResourceKey=teamTabTemplate}" Margin="0,0,0,0" Grid.ColumnSpan="5">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -79,7 +87,8 @@
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                     </TabControl>
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="10,0,0,8" VerticalAlignment="Bottom" Click="Button_Click_1"/>
+                    <Button Content="Add Team" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Bottom" Click="AddTeam" Grid.Row="1" Padding="5,2,5,2"/>
+                    <Button Content="Remove Team" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Bottom" Click="RemoveTeam" Grid.Row="1" Padding="5,2,5,2" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Leaderboards">
