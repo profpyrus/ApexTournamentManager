@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,15 +23,19 @@ namespace ApexTournamentThingy
     /// </summary>
     public partial class MainWindow : Window
     {
-        Session session;
+        public Session session { get; set; }
 
         public MainWindow()
         {
-            InitializeComponent();
             session = new Session(1);
+            Team team = new Team(1, "Team Bromance");
+            team.players.Add(new Player(0, "Profpyrus"));
+            team.players.Add(new Player(1, "Cyrpax"));
+            session.teams.Add(team);
+            InitializeComponent();
         }
 
-        private void team1namebox_TextChanged(object sender, TextChangedEventArgs e)
+        private void namebox_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
 
@@ -51,23 +56,24 @@ namespace ApexTournamentThingy
             data.teams.Add(team);
             Trace.WriteLine(JsonConvert.SerializeObject(data));*/
 
-            int playerCount = 0;
-            teamTabControl.ApplyTemplate();
-            foreach (TabItem tab in teamTabControl.Items)
-            {
-                Team team = new Team(tab.TabIndex, tab.GetTextboxValueByName("namebox"));
-                for (int i = 1; i <= 3; i++)
-                {
-                    string name = tab.GetTextboxValueByName("player" + i + "box");
-                    if (name != "")
-                    {
-                        team.players.Add(new Player(playerCount, name));
-                        playerCount++;
-                    }
-                }
-                session.teams.Add(team);
-            }
+            session.teams.Add(new Team(5, "Looser's Club"));
+            session.teams[0].players.Add(new Player(3, "AnTique"));
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
             Trace.WriteLine(JsonConvert.SerializeObject(session));
+        }
+        private void TextBox_KeyEnterUpdate(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBox tBox = (TextBox)sender;
+                DependencyProperty prop = TextBox.TextProperty;
+
+                BindingExpression binding = BindingOperations.GetBindingExpression(tBox, prop);
+                if (binding != null) { binding.UpdateSource(); }
+            }
         }
     }
 }
