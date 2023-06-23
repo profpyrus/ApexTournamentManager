@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,10 @@ namespace ApexTournamentThingy
 
         public MainWindow()
         {
-            session = new Session(1);
-            Team team = new Team(1, "Team Bromance");
-            team.players.Add(new Player(0, "Profpyrus"));
-            team.players.Add(new Player(1, "Cyrpax"));
+            session = new Session(Guid.NewGuid());
+            Team team = new Team(Guid.NewGuid(), "Team Bromance");
+            team.players.Add(new Player(Guid.NewGuid(), "Profpyrus", 1, 2));
+            team.players.Add(new Player(Guid.NewGuid(), "Cyrpax"));
             session.teams.Add(team);
             InitializeComponent();
         }
@@ -56,8 +57,8 @@ namespace ApexTournamentThingy
             data.teams.Add(team);
             Trace.WriteLine(JsonConvert.SerializeObject(data));*/
 
-            session.teams.Add(new Team(5, "Looser's Club"));
-            ((Team)session.teams[0]).players.Add(new Player(3, "AnTique"));
+            session.teams.Add(new Team(Guid.NewGuid(), "Looser's Club"));
+            ((Team)session.teams[0]).players.Add(new Player(Guid.NewGuid(), "AnTique"));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -65,28 +66,65 @@ namespace ApexTournamentThingy
             Trace.WriteLine(JsonConvert.SerializeObject(session));
         }
 
+        #region Add/Remove Team/Player
         private void AddTeam(object sender, RoutedEventArgs e)
         {
             int newTeamId = session.teams.Count + 1;
-            Team newTeam = new Team(newTeamId, "Team " + newTeamId);
+            Team newTeam = new Team(Guid.NewGuid(), "Team " + newTeamId);
             session.teams.Add(newTeam);
         }
 
         private void RemoveTeam(object sender, RoutedEventArgs e)
         {
-            Object selectedItem = teamTabControl.SelectedItem as TabItem;
-            //Trace.WriteLine(selectedItem.Header);
+            Team selectedItem = teamTabControl.SelectedItem as Team;
+            session.teams.Remove(selectedItem);
         }
         private void AddPlayer(object sender, RoutedEventArgs e)
         {
-            int teamId = Convert.ToInt32(((Button)sender).Tag.ToString());
-            ((Team)session.teams[teamId-1]).players.Add(new Player(1, "New Player"));
+            ((Team)session.teams.FindObjectById((Guid)((Button)sender).Tag)).players.Add(new Player(Guid.NewGuid(), "New Player"));
         }
 
         private void RemovePlayer(object sender, RoutedEventArgs e)
         {
-
+            DependencyObject button = sender as DependencyObject;
+            DependencyObject grid = VisualTreeHelper.GetParent(button);
+            for(int i = 0; i < VisualTreeHelper.GetChildrenCount(grid); i++)
+            {
+                ListBox listbox = VisualTreeHelper.GetChild(grid, i) as ListBox;
+                if(listbox != null)
+                {
+                    List<Player> playersToDelete = new List<Player>();
+                    foreach (Player player in listbox.SelectedItems)
+                    {
+                        playersToDelete.Add(player);
+                    }
+                    foreach(Player player in playersToDelete)
+                    {
+                        session.RemovePlayerById(player.id);
+                    }
+                }
+            }
         }
+        #endregion
+
+        #region Player Stat Modifications
+        private void IncrementKills(object sender, RoutedEventArgs e)
+        {
+            session.GetPlayerById((Guid)((Button)sender).Tag).IncrementKills();
+        }
+        private void DecrementKills(object sender, RoutedEventArgs e)
+        {
+            session.GetPlayerById((Guid)((Button)sender).Tag).DecrementKills();
+        }
+        private void IncrementDeaths(object sender, RoutedEventArgs e)
+        {
+            session.GetPlayerById((Guid)((Button)sender).Tag).IncrementDeaths();
+        }
+        private void DecrementDeaths(object sender, RoutedEventArgs e)
+        {
+            session.GetPlayerById((Guid)((Button)sender).Tag).DecrementDeaths();
+        }
+        #endregion
 
         private void TextBox_KeyEnterUpdate(object sender, KeyEventArgs e)
         {
