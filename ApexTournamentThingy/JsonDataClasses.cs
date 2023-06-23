@@ -14,7 +14,6 @@ namespace ApexTournamentThingy
     public class Session
     {
         public Guid id { get; set; }
-        public int playerCount { get; set; }
         public ObservableCollection<basicData> teams { get; set; }
 
         public Session(Guid newId)
@@ -22,65 +21,149 @@ namespace ApexTournamentThingy
             id = newId; teams = new ObservableCollection<basicData>();
         }
 
-        public void RemovePlayerById(Guid playerId)
+        public void RemovePlayer(Guid playerId)
         {
             Player player = GetPlayerById(playerId);
             foreach(Team team in teams)
             {
                 team.players.Remove(player);
             }
+            RefreshAllPlayerNumbers();
         }
 
-        public void AddPlayerToTeam(int teamId, Player player)
+        public void RemovePlayer(Player player)
         {
+            foreach (Team team in teams)
+            {
+                team.players.Remove(player);
+            }
+            RefreshAllPlayerNumbers();
+        }
+
+        public Player AddPlayerToTeam(Team team, Guid playerId, string playerName, int playerKills = 0, int playerDeaths = 0)
+        {
+            return team.AddPlayer(playerId, playerName, playerKills, playerDeaths);
+        }
+
+        public Player AddPlayerToTeam(Guid teamId, Guid playerId, string playerName, int playerKills = 0, int playerDeaths = 0)
+        {
+            Team team = GetTeamById(teamId);
+            return team.AddPlayer(playerId, playerName, playerKills, playerDeaths);
+        }
+
+        public Team AddTeam(Guid teamId, string teamName, int teamWins = 0)
+        {
+            int newTeamNumber = teams.Count + 1;
+            Team newTeam = new Team(teamId, newTeamNumber, teamName, teamWins);
+            teams.Add(newTeam);
+            return newTeam;
+        }
+
+        public void RemoveTeam(Team team)
+        {
+            teams.Remove(team);
+            RefreshTeamNumbers();
+        }
+
+        public void RefreshAllPlayerNumbers()
+        {
+            foreach(Team team in teams)
+            {
+                team.RefreshPlayerNumbers();
+            }
+        }
+
+        public void RefreshTeamNumbers()
+        {
+            foreach(Team team in teams)
+            {
+                team.SetTeamNumber(teams.IndexOf(team) + 1);
+            }
         }
 
         public Player GetPlayerById(Guid searchId)
         {
             foreach(Team team in teams)
             {
-                foreach(Player player in team.players)
-                {
-                    if(player.id == searchId)
-                    {
-                        return player;
-                    }
-                }
+                return (Player)team.players.FindObjectById(searchId);
             }
             return null;
         }
+
+        public Team GetTeamById(Guid searchId)
+        {
+            return (Team)teams.FindObjectById(searchId);
+        }
     }
-    public class Team : basicData
+    public class Team : basicData, INotifyPropertyChanged
     {
         public Guid id { get; set; }
         public string name { get; set; }
+        public int teamNumber { get; set; }
         public int wins { get; set; }
         public ObservableCollection<basicData> players { get; set; }
 
-        public Team(Guid newId, string newName, int newWins = 0)
+        public Team(Guid newId, int newTeamNumber, string newName, int newWins = 0)
         {
-            id = newId; name = newName; wins = newWins; players = new ObservableCollection<basicData>();
+            id = newId; teamNumber = newTeamNumber; name = newName; wins = newWins; players = new ObservableCollection<basicData>();
         }
 
-        /*public int GetTeamKills()
+        public void SetTeamNumber(int newTeamNumber)
+        {
+            teamNumber = newTeamNumber;
+            NotifyPropertyChanged("teamNumber");
+        }
+
+        public Player AddPlayer(Guid playerId, string playerName, int playerKills = 0, int playerDeaths = 0)
+        {
+            Player newPlayer = new Player(playerId, this.players.Count, this, playerName, playerKills, playerDeaths);
+            players.Add(newPlayer);
+            RefreshPlayerNumbers();
+            return newPlayer;
+        }
+
+        public void RefreshPlayerNumbers()
+        {
+            foreach(Player player in players)
+            {
+                player.SetTeamPlayerNumber(players.IndexOf(player) + 1);
+            }
+        }
+
+        public int GetTeamKills()
         {
             int kills = 0;
             foreach (Player player in players)
                 kills += player.kills;
             return kills;
-        }*/
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public class Player : basicData, INotifyPropertyChanged
     {
         public Guid id { get; set; }
+        public int teamPlayerNumber { get; set; }
+        public Team team { get; set; }
         public string name { get; set; }
         public int kills { get; set; }
         public int deaths { get; set; }
 
-        public Player(Guid newId, string newName, int newKills = 0, int newDeaths = 0)
+        public Player(Guid newId, int newTeamPlayerNumber, Team newTeam, string newName, int newKills = 0, int newDeaths = 0)
         {
-            id = newId; name = newName; kills = newKills; deaths = newDeaths;
+            id = newId; teamPlayerNumber = newTeamPlayerNumber; team = newTeam; name = newName; kills = newKills; deaths = newDeaths;
+        }
+
+        public void SetTeamPlayerNumber(int newTeamPlayerNumber)
+        {
+            teamPlayerNumber = newTeamPlayerNumber;
+            NotifyPropertyChanged("teamPlayerNumber");
         }
 
         public void DecrementKills()

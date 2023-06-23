@@ -29,10 +29,9 @@ namespace ApexTournamentThingy
         public MainWindow()
         {
             session = new Session(Guid.NewGuid());
-            Team team = new Team(Guid.NewGuid(), "Team Bromance");
-            team.players.Add(new Player(Guid.NewGuid(), "Profpyrus", 1, 2));
-            team.players.Add(new Player(Guid.NewGuid(), "Cyrpax"));
-            session.teams.Add(team);
+            Team team = session.AddTeam(Guid.NewGuid(), "Team Bromance");
+            session.AddPlayerToTeam(team, Guid.NewGuid(), "Profpyrus", 1, 2);
+            session.AddPlayerToTeam(team, Guid.NewGuid(), "Cyrpax");
             InitializeComponent();
         }
 
@@ -42,23 +41,7 @@ namespace ApexTournamentThingy
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*Session data = new Session();
-            data.id = 0;
-            Team team = new Team();
-            Player player = new Player();
-            player.id = 1;
-            player.name = "Profpyrus";
-            player.kills = 2;
-            player.deaths = 3;
-            team.players.Add(player);
-            team.id = 15;
-            team.name = "Team Bromance";
-            team.wins = 1;
-            data.teams.Add(team);
-            Trace.WriteLine(JsonConvert.SerializeObject(data));*/
 
-            session.teams.Add(new Team(Guid.NewGuid(), "Looser's Club"));
-            ((Team)session.teams[0]).players.Add(new Player(Guid.NewGuid(), "AnTique"));
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -69,19 +52,18 @@ namespace ApexTournamentThingy
         #region Add/Remove Team/Player
         private void AddTeam(object sender, RoutedEventArgs e)
         {
-            int newTeamId = session.teams.Count + 1;
-            Team newTeam = new Team(Guid.NewGuid(), "Team " + newTeamId);
-            session.teams.Add(newTeam);
+            int newTeamNumber = session.teams.Count + 1;
+            session.AddTeam(Guid.NewGuid(), "Team " + newTeamNumber);
         }
 
         private void RemoveTeam(object sender, RoutedEventArgs e)
         {
             Team selectedItem = teamTabControl.SelectedItem as Team;
-            session.teams.Remove(selectedItem);
+            session.RemoveTeam(selectedItem);
         }
         private void AddPlayer(object sender, RoutedEventArgs e)
         {
-            ((Team)session.teams.FindObjectById((Guid)((Button)sender).Tag)).players.Add(new Player(Guid.NewGuid(), "New Player"));
+            session.AddPlayerToTeam(((Guid)((Button)sender).Tag), Guid.NewGuid(), "New Player");
         }
 
         private void RemovePlayer(object sender, RoutedEventArgs e)
@@ -100,7 +82,7 @@ namespace ApexTournamentThingy
                     }
                     foreach(Player player in playersToDelete)
                     {
-                        session.RemovePlayerById(player.id);
+                        session.RemovePlayer(player);
                     }
                 }
             }
@@ -135,6 +117,10 @@ namespace ApexTournamentThingy
 
                 BindingExpression binding = BindingOperations.GetBindingExpression(tBox, prop);
                 if (binding != null) { binding.UpdateSource(); }
+                foreach(Team team in session.teams)
+                {
+                    team.NotifyPropertyChanged("name");
+                }
             }
         }
     }

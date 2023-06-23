@@ -22,10 +22,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="namebox" HorizontalAlignment="Stretch" Margin="0,0,0,0" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="120" MinHeight="20" Height="20" Grid.Column="1" KeyDown="TextBox_KeyEnterUpdate"/>
                 <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-                <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Extended" VerticalContentAlignment="Stretch">
+                <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Extended" VerticalContentAlignment="Stretch" MinWidth="264">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Tag="{Binding Path=id}" UseLayoutRounding="False" Margin="0,0,0,5">
+                            <Grid Tag="{Binding Path=id}" UseLayoutRounding="False" Margin="0,0,0,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
@@ -40,7 +40,17 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="playerbox" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" UseLayoutRounding="False" MinHeight="20" Height="20" MinWidth="120" Margin="0,0,2,0" KeyDown="TextBox_KeyEnterUpdate"/>
-                                <Label Content="Player 1"/>
+                                <Label>
+                                    <Label.Content>
+                                        <TextBlock>
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}Player {0}">
+                                                    <Binding Path="teamPlayerNumber" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Label.Content>
+                                </Label>
 
                                 <Label Content="Kills" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                                 <Label Content="{Binding Path=kills, Mode=TwoWay}" Grid.Row="1" Grid.Column="2" MinHeight="20" Padding="5,0,5,0" MinWidth="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -77,14 +87,7 @@
                     <TabControl x:Name="teamTabControl" ItemsSource="{Binding Path=session.teams}" ContentTemplate="{StaticResource ResourceKey=teamTabTemplate}" Margin="0,0,0,0" Grid.ColumnSpan="5">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}: {1}">
-                                            <Binding Path="id" />
-                                            <Binding Path="name" />
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
+                                <TextBlock Text="{Binding Path=name}" />
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                     </TabControl>
@@ -92,10 +95,16 @@
                     <Button Content="Remove Team" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Bottom" Click="RemoveTeam" Grid.Row="1" Padding="5,2,5,2" Grid.Column="1"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Match Management">
+                <Grid Background="White"/>
+            </TabItem>
+            <TabItem Header="Points">
+                <Grid Background="White"/>
+            </TabItem>
             <TabItem Header="Leaderboards">
                 <Grid Background="White"/>
             </TabItem>
-            <TabItem Header="Settings">
+            <TabItem Header="Settings" HorizontalAlignment="Stretch">
                 <Grid Background="White"/>
             </TabItem>
         </TabControl>
