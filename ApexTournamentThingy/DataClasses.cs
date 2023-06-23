@@ -21,8 +21,7 @@ namespace ApexTournamentThingy
         public Session(Guid newId)
         {
             id = newId; teams = new ObservableCollection<basicData>(); matches = new ObservableCollection<Match>();
-            for(int i = 0; i < 5; i++)
-                matches.Add(new Match(teams.ToList()));
+            matches.Add(new Match(matches.Count + 1, new Guid(), teams.ToList()));
         }
 
         public void RemovePlayer(Guid playerId)
@@ -211,8 +210,9 @@ namespace ApexTournamentThingy
         public Dictionary<Guid, int> teamPlacements { get; set; }
         public Dictionary<Guid, PlayerData> playerData { get; set; }
 
-        public Match(List<basicData> teams)
+        public Match(int matchNumber, Guid matchId, List<basicData> teams)
         {
+            number = matchNumber; id = matchId;
             foreach(Team team in teams)
             {
                 teamPlacements.Add(team.id, 0);

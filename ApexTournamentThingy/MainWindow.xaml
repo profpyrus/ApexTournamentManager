@@ -9,9 +9,10 @@
         mc:Ignorable="d"
         Title="Apex Tournament Manager" Height="433" Width="782">
     <Window.Resources>
+        <local:SelectionToBoolConverter x:Key="selectionToBoolConverter"/>
         <DataTemplate x:Key="matchTabTemplate" />
         <DataTemplate x:Key="teamTabTemplate">
-            <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
@@ -23,7 +24,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="namebox" HorizontalAlignment="Stretch" Margin="0,0,0,0" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="120" MinHeight="20" Height="20" Grid.Column="1" KeyDown="TextBox_KeyEnterUpdate"/>
                 <Label Content="Team Name" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,5,5,5"/>
-                <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Extended" VerticalContentAlignment="Stretch" MinWidth="264">
+                <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Extended" VerticalContentAlignment="Stretch"  MinWidth="264" MinHeight="0">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Tag="{Binding Path=id}" UseLayoutRounding="False" Margin="2,2,2,2">
@@ -50,8 +51,8 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Button Content="Remove Player" Tag="{Binding Path=id}" HorizontalAlignment="Right" Margin="10,10,10,10" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="RemovePlayer"/>
-                <Button Content="Add new Player" Tag="{Binding Path=id}" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Top" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="AddPlayer"/>
+                <Button Content="Remove Player" Tag="{Binding Path=id}" HorizontalAlignment="Right" Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="RemovePlayer"/>
+                <Button Content="Add new Player" Tag="{Binding Path=id}" HorizontalAlignment="Left" Margin="10,10,0,10" VerticalAlignment="Bottom" Grid.Row="2" Grid.ColumnSpan="2" Padding="5,2,5,2" Click="AddPlayer"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="playerTemplate">
@@ -69,7 +70,7 @@
                         <RowDefinition />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TabControl x:Name="teamTabControl" ItemsSource="{Binding Path=session.teams}" ContentTemplate="{StaticResource ResourceKey=teamTabTemplate}" Margin="0,0,0,0" Grid.ColumnSpan="5">
+                    <TabControl x:Name="teamTabControl" ItemsSource="{Binding Path=session.teams}" ContentTemplate="{StaticResource ResourceKey=teamTabTemplate}" Margin="0,0,0,0" Grid.ColumnSpan="5" TabStripPlacement="Left">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=name}" />
@@ -93,7 +94,13 @@
                     <TabControl x:Name="matchTabControl" ItemsSource="{Binding Path=session.matches}" ContentTemplate="{StaticResource ResourceKey=matchTabTemplate}" Margin="0,0,0,0" Grid.ColumnSpan="5" TabStripPlacement="Left">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="Match XX" />
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}Match {0}">
+                                            <Binding Path="number" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                     </TabControl>
@@ -105,7 +112,53 @@
                 <Grid Background="White"/>
             </TabItem>
             <TabItem Header="Leaderboards">
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid Grid.ColumnSpan="1"/>
+                    <Grid Grid.Column="1" Margin="15,15,15,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame BorderBrush="#FF2E2E2E" Grid.ColumnSpan="10" Padding="0,0,0,0" BorderThickness="1,1,1,1" Margin="-10,-10,-10,-10" Grid.RowSpan="10" />
+                        <Label Content="Matchmode" HorizontalAlignment="Right" Margin="0,0,0,5" VerticalAlignment="Center" Padding="0,0,0,0"/>
+                        <ComboBox x:Name="matchmodeBox" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" SelectedIndex="0" Margin="0,0,0,5">
+                            <ComboBoxItem x:Name="comboBoxItem" Content="All Matches"/>
+                            <ComboBoxItem x:Name="comboBoxItem1" Content="Single Match"/>
+                        </ComboBox>
+                        <Label Content="Match" HorizontalAlignment="Right" Margin="0,0,0,5" VerticalAlignment="Center" Padding="0,0,0,0" Grid.Row="1"/>
+                        <ComboBox x:Name="matchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" SelectedIndex="0" Grid.Row="1" Margin="0,0,0,5" ItemsSource="{Binding Path=session.matches}" IsEnabled="{Binding IsSelected, ConverterParameter=SelectedIndex, ElementName=comboBoxItem1}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}Match {0}">
+                                                <Binding Path="number" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Content="Rank By" HorizontalAlignment="Right" Margin="0,0,0,5" Grid.Row="3" VerticalAlignment="Center" Padding="0,0,0,0"/>
+                        <ComboBox x:Name="rankbyBox" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" SelectedIndex="0" Margin="0,0,0,5">
+                            <ComboBoxItem x:Name="Kills" Content="Kills"/>
+                            <ComboBoxItem x:Name="KD" Content="KD"/>
+                            <ComboBoxItem x:Name="Points" Content="Points"/>
+                        </ComboBox>
+                        <Button x:Name="RefreshLeaderboards" Content="Refresh" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,5,5,5" Padding="5,2,5,2" />
+                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Header="Settings" HorizontalAlignment="Stretch">
                 <Grid Background="White"/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
@@ -122,6 +123,27 @@ namespace ApexTournamentThingy
                     team.NotifyPropertyChanged("name");
                 }
             }
+        }
+    }
+
+    [ValueConversion(typeof(int), typeof(bool))]
+    public class SelectionToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int selectionIndex = System.Convert.ToInt32(value as string);
+            return (selectionIndex != 0);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string strValue = value as string;
+            DateTime resultDateTime;
+            if (DateTime.TryParse(strValue, out resultDateTime))
+            {
+                return resultDateTime;
+            }
+            return DependencyProperty.UnsetValue;
         }
     }
 }
