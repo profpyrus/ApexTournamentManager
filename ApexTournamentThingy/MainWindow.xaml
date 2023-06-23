@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="Apex Tournament Manager" Height="433" Width="782">
     <Window.Resources>
+        <DataTemplate x:Key="matchTabTemplate" />
         <DataTemplate x:Key="teamTabTemplate">
             <Grid x:Name="team1grid" Background="White" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
@@ -25,22 +26,16 @@
                 <ListBox ItemsSource="{Binding Path=players}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Extended" VerticalContentAlignment="Stretch" MinWidth="264">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Tag="{Binding Path=id}" UseLayoutRounding="False" Margin="0,0,0,0">
+                            <Grid Tag="{Binding Path=id}" UseLayoutRounding="False" Margin="2,2,2,2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="playerbox" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" UseLayoutRounding="False" MinHeight="20" Height="20" MinWidth="120" Margin="0,0,2,0" KeyDown="TextBox_KeyEnterUpdate"/>
-                                <Label>
+                                <TextBox x:Name="playerbox" Text="{Binding Path=name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" UseLayoutRounding="False" MinHeight="20" Height="20" MinWidth="220" Margin="0,0,2,0" KeyDown="TextBox_KeyEnterUpdate"/>
+                                <Label VerticalContentAlignment="Center" HorizontalAlignment="Stretch">
                                     <Label.Content>
                                         <TextBlock>
                                             <TextBlock.Text>
@@ -51,16 +46,6 @@
                                         </TextBlock>
                                     </Label.Content>
                                 </Label>
-
-                                <Label Content="Kills" Grid.Column="1" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                                <Label Content="{Binding Path=kills, Mode=TwoWay}" Grid.Row="1" Grid.Column="2" MinHeight="20" Padding="5,0,5,0" MinWidth="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                                <Button Tag="{Binding Path=id}" Grid.Column="1" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="-" BorderBrush="#FF515151" Width="20" Height="20" Click="DecrementKills" Grid.Row="1" Margin="2,0,0,0" />
-                                <Button Tag="{Binding Path=id}" Grid.Column="3" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="+" BorderBrush="#FF515151" Width="20" Height="20" Click="IncrementKills" Grid.Row="1" Margin="0,0,2,0" />
-
-                                <Label Content="Deaths" Grid.Column="4" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                                <Label Content="{Binding Path=deaths}" Grid.Row="1" Grid.Column="5" MinHeight="20" Padding="5,0,5,0" MinWidth="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                                <Button Tag="{Binding Path=id}" Grid.Column="4" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="-" BorderBrush="#FF515151" Width="20" Height="20" Click="DecrementDeaths" Grid.Row="1" Margin="2,0,0,0" />
-                                <Button Tag="{Binding Path=id}" Grid.Column="6" MinWidth="20" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="20" Content="+" BorderBrush="#FF515151" Width="20" Height="20" Click="IncrementDeaths" Grid.Row="1" Margin="0,0,2,0" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -96,7 +81,25 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Match Management">
-                <Grid Background="White"/>
+                <Grid Background="White" Focusable="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TabControl x:Name="matchTabControl" ItemsSource="{Binding Path=session.matches}" ContentTemplate="{StaticResource ResourceKey=matchTabTemplate}" Margin="0,0,0,0" Grid.ColumnSpan="5" TabStripPlacement="Left">
+                        <TabControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Match XX" />
+                            </DataTemplate>
+                        </TabControl.ItemTemplate>
+                    </TabControl>
+                    <Button Content="Add Match" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" Padding="5,2,5,2"/>
+                    <Button Content="Remove Match" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Bottom" Grid.Row="1" Padding="5,2,5,2" Grid.Column="1"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Points">
                 <Grid Background="White"/>

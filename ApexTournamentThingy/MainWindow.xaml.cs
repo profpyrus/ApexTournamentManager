@@ -89,7 +89,7 @@ namespace ApexTournamentThingy
         }
         #endregion
 
-        #region Player Stat Modifications
+        /*#region Player Stat Modifications
         private void IncrementKills(object sender, RoutedEventArgs e)
         {
             session.GetPlayerById((Guid)((Button)sender).Tag).IncrementKills();
@@ -106,7 +106,7 @@ namespace ApexTournamentThingy
         {
             session.GetPlayerById((Guid)((Button)sender).Tag).DecrementDeaths();
         }
-        #endregion
+        #endregion*/
 
         private void TextBox_KeyEnterUpdate(object sender, KeyEventArgs e)
         {
