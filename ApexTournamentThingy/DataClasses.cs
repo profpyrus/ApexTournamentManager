@@ -16,6 +16,8 @@ namespace ApexTournamentThingy
         public Guid id { get; set; }
         public ObservableCollection<basicData> teams { get; set; }
 
+        public ObservableCollection<>
+
         public Session(Guid newId)
         {
             id = newId; teams = new ObservableCollection<basicData>();
@@ -95,6 +97,7 @@ namespace ApexTournamentThingy
             return (Team)teams.FindObjectById(searchId);
         }
     }
+
     public class Team : basicData, INotifyPropertyChanged
     {
         public Guid id { get; set; }
@@ -200,6 +203,19 @@ namespace ApexTournamentThingy
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+
+    public class Match
+    {
+        public Guid id { get; set; }
+        public int number { get; set; }
+        public List<KeyValuePair<Guid, int>> teamPlacements { get; set; }
+
+    }
+
+    public class PlayerData
+    {
+
     }
 
     public interface basicData
