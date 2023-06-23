@@ -97,6 +97,19 @@ namespace ApexTournamentThingy
         {
             return (Team)teams.FindObjectById(searchId);
         }
+
+        public List<Player> GetAllPlayers()
+        {
+            List<Player> players = new List<Player>();
+            foreach(Team team in teams)
+            {
+                foreach(Player player in team.players)
+                {
+                    players.Add(player);
+                }
+            }
+            return players;
+        }
     }
 
     public class Team : basicData, INotifyPropertyChanged

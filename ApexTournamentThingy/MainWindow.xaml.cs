@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Globalization;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
@@ -26,6 +27,7 @@ namespace ApexTournamentThingy
     public partial class MainWindow : Window
     {
         public Session session { get; set; }
+        private DataTable leaderboardDataTable;
 
         public MainWindow()
         {
@@ -123,6 +125,45 @@ namespace ApexTournamentThingy
                     team.NotifyPropertyChanged("name");
                 }
             }
+        }
+
+        private void RefreshLeaderboardsData(object sender, RoutedEventArgs e)
+        {
+            int matchmode = matchmodeBox.SelectedIndex;
+            DataTable data = new DataTable();
+            DataColumn column;
+            DataRow row;
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Int32");
+            column.ColumnName = "Placement";
+            data.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Player";
+            data.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Team";
+            data.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Int32");
+            column.ColumnName = "Kills";
+            data.Columns.Add(column);
+
+            List<Player> players = session.GetAllPlayers();
+            List<KeyValuePair<Guid, int>> killist = new List<KeyValuePair<Guid, int>>();
+            foreach(Player player in players)
+            {
+                killist.Add(new KeyValuePair<Guid, int>(player.id, session.matches[0].playerData[player.id].kills));
+            }
+
+            killist.Sort();
+
+            leaderboardDataTable = data;
         }
     }
 

@@ -117,7 +117,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid Grid.ColumnSpan="1"/>
+                    <DataGrid Grid.ColumnSpan="1" ItemsSource="{Binding}"/>
                     <Grid Grid.Column="1" Margin="15,15,15,15">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -156,7 +156,7 @@
                             <ComboBoxItem x:Name="KD" Content="KD"/>
                             <ComboBoxItem x:Name="Points" Content="Points"/>
                         </ComboBox>
-                        <Button x:Name="RefreshLeaderboards" Content="Refresh" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,5,5,5" Padding="5,2,5,2" />
+                        <Button x:Name="RefreshLeaderboards" Content="Refresh" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5,5,5,5" Padding="5,2,5,2" Click="RefreshLeaderboardsData" />
                     </Grid>
                 </Grid>
             </TabItem>
