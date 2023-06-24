@@ -2,5 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="Base" Color="#192735"/>
     <SolidColorBrush x:Key="BaseHighlight" Color="#111E2C"/>
+    <SolidColorBrush x:Key="TopBar" Color="#111E2C"/>
     <SolidColorBrush x:Key="Text" Color="#e6e6e6"/>
 </ResourceDictionary>

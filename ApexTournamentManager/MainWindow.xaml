@@ -9,7 +9,8 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        FontFamily="Fonts/Dosis">
+        FontFamily="Fonts/#Dosis"
+        FontWeight="DemiBold">
     <Window.Resources>
         <ResourceDictionary Source="Resources/Colors.xaml"/>
     </Window.Resources>
@@ -25,7 +26,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Border Background="{StaticResource BaseHighlight}" Grid.ColumnSpan="2" CornerRadius="10">
-                    <TextBlock Text="Apex Legends Tournament Manager" FontSize="22" Foreground="{StaticResource Text}" FontFamily="/Fonts/Dosis"/>
+                    <TextBlock Text="Apex Legends Tournament Manager" FontSize="22" Foreground="{StaticResource Text}"/>
                 </Border>
             </Grid>
         </Border>
