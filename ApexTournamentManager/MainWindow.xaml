@@ -8,14 +8,12 @@
         Height="600" Width="1200"
         WindowStyle="None"
         Background="Transparent"
+        Foreground="{StaticResource TextColor}"
         AllowsTransparency="True"
         FontFamily="Fonts/#Dosis"
         FontWeight="DemiBold">
-    <Window.Resources>
-        <ResourceDictionary Source="Resources/Colors.xaml"/>
-    </Window.Resources>
     <Grid>
-        <Border Background="{StaticResource Base}" CornerRadius="10">
+        <Border Background="{StaticResource Base}" Style="{StaticResource DefaultBorderStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
@@ -25,9 +23,13 @@
                     <ColumnDefinition Width="175"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Border Background="{StaticResource BaseHighlight}" Grid.ColumnSpan="2" CornerRadius="10">
-                    <TextBlock Text="Apex Legends Tournament Manager" FontSize="22" Foreground="{StaticResource Text}"/>
+                <Border Background="{StaticResource TopBar}" Grid.ColumnSpan="2" Style="{StaticResource DefaultBorderStyle}" Panel.ZIndex="2">
+                    <TextBlock Text="Apex Legends Tournament Manager" FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False"/>
                 </Border>
+                <Border Background="{StaticResource BaseHighlight}" Grid.RowSpan="2" Grid.Column="1"  Style="{StaticResource DefaultBorderStyle}"/>
+                <ContentPresenter Grid.Column="1" Grid.Row="1">
+                    
+                </ContentPresenter>
             </Grid>
         </Border>
     </Grid>
