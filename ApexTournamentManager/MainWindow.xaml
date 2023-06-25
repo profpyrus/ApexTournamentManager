@@ -23,13 +23,42 @@
                     <ColumnDefinition Width="175"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Border Background="{StaticResource TopBar}" Grid.ColumnSpan="2" Style="{StaticResource DefaultBorderStyle}" Panel.ZIndex="2">
-                    <TextBlock Text="Apex Legends Tournament Manager" FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False"/>
-                </Border>
+
+                <StackPanel Grid.Row="1">
+                    <RadioButton Content="Home"
+                                 Height="50"
+                                 Foreground="{StaticResource TextColor}"
+                                 FontSize="16"
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 IsChecked="True"/>
+
+                    <RadioButton Content="Team Management"
+                                 Height="50"
+                                 Foreground="{StaticResource TextColor}"
+                                 FontSize="16"
+                                 Style="{StaticResource MenuBottonTheme}"/>
+
+                    <RadioButton Content="Match Management"
+                                 Height="50"
+                                 Foreground="{StaticResource TextColor}"
+                                 FontSize="16"
+                                 Style="{StaticResource MenuBottonTheme}"/>
+                </StackPanel>
+
                 <Border Background="{StaticResource BaseHighlight}" Grid.RowSpan="2" Grid.Column="1"  Style="{StaticResource DefaultBorderStyle}"/>
-                <ContentPresenter Grid.Column="1" Grid.Row="1">
-                    
-                </ContentPresenter>
+
+                <Border Background="{StaticResource TopBar}"
+                        Grid.ColumnSpan="2"
+                        Style="{StaticResource DefaultBorderStyle}"
+                        MouseDown="Border_MouseDown">
+
+                    <TextBlock Text="Apex Legends Tournament Manager"
+                               FontSize="18"
+                               Margin="10,0,0,0"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"/>
+
+                </Border>
             </Grid>
         </Border>
     </Grid>
