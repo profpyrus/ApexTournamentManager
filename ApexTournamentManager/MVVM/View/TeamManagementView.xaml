@@ -16,7 +16,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Border BorderBrush="{StaticResource Base}" BorderThickness="8" Style="{StaticResource DefaultBorderStyle}">
+        <Border BorderBrush="{StaticResource Base}"
+                BorderThickness="8"
+                Style="{StaticResource DefaultBorderStyle}"
+                Margin="0,0,-8,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
@@ -32,31 +35,54 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Grid.ColumnSpan="2"/>
-                <ListBox Grid.Row="1" Grid.ColumnSpan="2"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Margin="4,0,4,0"
-                         ItemContainerStyle="{StaticResource ListItemTheme}"
-                         ScrollViewer="">
-                    <ListBoxItem Content="Team 1"/>
-                    <ListBoxItem Content="Team 2"/>
-                    <ListBoxItem Content="Team 3"/>
-                    <ListBoxItem Content="Team 4"/>
-                </ListBox>
+                <ListView Grid.Row="1" Grid.ColumnSpan="2"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Margin="4,0,4,0"
+                          IsSynchronizedWithCurrentItem="True"
+                          SelectedIndex="0"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ItemContainerStyle="{StaticResource ListItemTheme}"
+                          ItemsSource="{Binding Teams}"
+                          SelectedItem="{Binding SelectedTeam}"
+                          SelectionMode="Single">
+                </ListView>
                 <Button x:Name="AddTeam"
                         Content="+"
                         Grid.Row="2"
                         Style="{StaticResource AddRemoveButtonTheme}"
-                        Margin="4,4,2,4">
+                        Margin="4,4,2,4"
+                        Command="{Binding AddTeamCommand}">
                 </Button>
                 <Button x:Name="RemoveTeam"
                         Content="-"
                         Grid.Row="2"
                         Grid.Column="1"
                         Style="{StaticResource AddRemoveButtonTheme}"
-                        Margin="2,4,4,4">
+                        Margin="2,4,4,4"
+                        Command="{Binding RemoveTeamCommand}">
                 </Button>
             </Grid>
+        </Border>
+        <Border BorderBrush="{StaticResource Base}"
+                BorderThickness="8"
+                Style="{StaticResource DefaultBorderStyle}"
+                Grid.Column="1">
+            <ContentControl Content="{Binding Teams}"
+                            Margin="10">
+                <ContentControl.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="Team Name" Margin="0,0,0,10"/>
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="300"
+                                     HorizontalAlignment="Left"
+                                     Style="{StaticResource TextBoxTheme}"
+                                     Foreground="{StaticResource TextColor}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ContentControl.ContentTemplate>
+            </ContentControl>
         </Border>
     </Grid>
 </UserControl>

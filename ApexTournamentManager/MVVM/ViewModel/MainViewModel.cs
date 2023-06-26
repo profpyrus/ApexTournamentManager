@@ -1,4 +1,5 @@
 ﻿using ApexTournamentManager.Core;
+using ApexTournamentManager.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
+        private Session _session { get; set; }
 
         public RelayCommand TeamViewCommand { get; set; }
         public RelayCommand MatchViewCommand { get; set; }
@@ -31,7 +33,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         public MainViewModel()
         {
-            TeamVM = new TeamManagementViewModel();
+            _session = new Session(Guid.NewGuid());
+
+            TeamVM = new TeamManagementViewModel(_session);
             MatchVM = new MatchManagementViewModel();
             CurrentView = TeamVM;
 
