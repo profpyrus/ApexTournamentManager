@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="/Styles/BorderStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/AddRemoveButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ListSelectorStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:TeamManagementViewModel}">

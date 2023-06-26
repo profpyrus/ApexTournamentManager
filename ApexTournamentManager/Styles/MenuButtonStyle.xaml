@@ -9,9 +9,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Border VerticalAlignment="Stretch"
-                              HorizontalAlignment="Stretch"
-                              Background="{TemplateBinding Background}"
-                                CornerRadius="15,0,0,15">
+                                HorizontalAlignment="Stretch"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10,0,0,10">
 
                             <TextBlock Text="{TemplateBinding Content}"
                                        VerticalAlignment="Center"
