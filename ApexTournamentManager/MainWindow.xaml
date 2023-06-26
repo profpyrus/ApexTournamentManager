@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApexTournamentManager"
+        xmlns:viewModel="clr-namespace:ApexTournamentManager.MVVM.ViewModel"
         mc:Ignorable="d"
         Height="600" Width="1200"
         WindowStyle="None"
@@ -12,6 +13,10 @@
         AllowsTransparency="True"
         FontFamily="Fonts/#Dosis"
         FontWeight="DemiBold">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
     <Grid>
         <Border Background="{StaticResource Base}" Style="{StaticResource DefaultBorderStyle}">
             <Grid>
@@ -29,20 +34,22 @@
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"
                                  FontSize="16"
-                                 Style="{StaticResource MenuBottonTheme}"
-                                 IsChecked="True"/>
+                                 Style="{StaticResource MenuBottonTheme}"/>
 
                     <RadioButton Content="Team Management"
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"
                                  FontSize="16"
-                                 Style="{StaticResource MenuBottonTheme}"/>
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 IsChecked="True"
+                                 Command="{Binding TeamViewCommand}"/>
 
                     <RadioButton Content="Match Management"
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"
                                  FontSize="16"
-                                 Style="{StaticResource MenuBottonTheme}"/>
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 Command="{Binding MatchViewCommand}"/>
                 </StackPanel>
 
                 <Border Background="{StaticResource BaseHighlight}" Grid.RowSpan="2" Grid.Column="1"  Style="{StaticResource DefaultBorderStyle}"/>
@@ -59,6 +66,13 @@
                                IsHitTestVisible="False"/>
 
                 </Border>
+
+                <ContentControl Margin="15"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Content="{Binding CurrentView}">
+                    
+                </ContentControl>
             </Grid>
         </Border>
     </Grid>
