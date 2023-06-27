@@ -42,7 +42,7 @@
                           IsSynchronizedWithCurrentItem="True"
                           SelectedIndex="0"
                           ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                          ItemContainerStyle="{StaticResource ListItemTheme}"
+                          ItemContainerStyle="{StaticResource TeamListItemTheme}"
                           ItemsSource="{Binding Teams}"
                           SelectedItem="{Binding SelectedTeam}"
                           SelectionMode="Single">
@@ -72,14 +72,75 @@
                             Margin="10">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
-                        <StackPanel>
+                        <Grid HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
                             <TextBlock Text="Team Name" Margin="0,0,0,10"/>
-                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
-                                     Width="300"
-                                     HorizontalAlignment="Left"
+                            <TextBox Grid.Row="1"
+                                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                                     Background="{StaticResource Base}"
+                                     Foreground="{StaticResource TextColor}"
                                      Style="{StaticResource TextBoxTheme}"
-                                     Foreground="{StaticResource TextColor}"/>
-                        </StackPanel>
+                                     Margin="0,0,0,10"
+                                     Padding="10,0,0,0"
+                                     HorizontalAlignment="Stretch"/>
+                            <Border Grid.Row="2"
+                                    BorderBrush="{StaticResource Base}"
+                                    BorderThickness="8"
+                                    Style="{StaticResource DefaultBorderStyle}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition />
+                                        <RowDefinition Height="50" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Players"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Grid.ColumnSpan="2"
+                                               Margin="10"/>
+                                    <ListView Grid.Row="1" Grid.ColumnSpan="2"
+                                              Background="Transparent"
+                                              BorderThickness="0"
+                                              Margin="4,0,4,0"
+                                              IsSynchronizedWithCurrentItem="True"
+                                              SelectedIndex="0"
+                                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                              ItemContainerStyle="{StaticResource PlayerListItemTheme}"
+                                              ItemsSource="{Binding Players}"
+                                              SelectedItem="{Binding SelectedPlayer}"
+                                              SelectionMode="Single">
+                                    </ListView>
+                                    <Button x:Name="AddTeam"
+                                            Content="+"
+                                            Grid.Row="2"
+                                            Style="{StaticResource AddRemoveButtonTheme}"
+                                            Margin="4,4,2,4"
+                                            Command="{Binding AddPlayerCommand}">
+                                    </Button>
+                                    <Button x:Name="RemoveTeam"
+                                            Content="-"
+                                            Grid.Row="2"
+                                            Grid.Column="1"
+                                            Style="{StaticResource AddRemoveButtonTheme}"
+                                            Margin="2,4,4,4"
+                                            Command="{Binding RemovePlayerCommand}">
+                                    </Button>
+                                </Grid>
+                            </Border>
+                        </Grid>
                     </DataTemplate>
                 </ContentControl.ContentTemplate>
             </ContentControl>

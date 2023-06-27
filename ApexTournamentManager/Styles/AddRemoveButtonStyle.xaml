@@ -11,14 +11,14 @@
                         <Border VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="0,0,10,10">
+                                CornerRadius="{TemplateBinding Border.CornerRadius}">
 
                             <TextBlock Text="{TemplateBinding Content}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        TextAlignment="Center"
                                        FontFamily="Fonts/#Dosis"
-                                       FontSize="30"
+                                       FontSize="{TemplateBinding FontSize}"
                                        FontWeight="DemiBold"
                                        Foreground="{StaticResource TextColor}"/>
 
@@ -28,6 +28,7 @@
             </Setter>
 
             <Setter Property="Background" Value="{StaticResource Base}"/>
+            <Setter Property="Border.CornerRadius" Value="0,0,10,10" />
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
 
@@ -41,4 +42,17 @@
         </Style.Triggers>
 
     </Style>
+
+    <Style BasedOn="{StaticResource AddRemoveButtonTheme}"
+           TargetType="Button"
+           x:Key="DecimateButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="10,0,0,10" />
+    </Style>
+
+    <Style BasedOn="{StaticResource AddRemoveButtonTheme}"
+           TargetType="Button"
+           x:Key="AdditionButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="0,10,10,0" />
+    </Style>
+
 </ResourceDictionary>

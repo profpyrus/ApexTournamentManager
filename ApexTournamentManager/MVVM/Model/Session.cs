@@ -20,7 +20,7 @@ namespace ApexTournamentManager.MVVM.Model
         {
             id = newId; teams = new ObservableCollection<basicData>(); matches = new ObservableCollection<Match>();
             AddPlayerToTeam(AddTeam(Guid.NewGuid()), Guid.NewGuid());
-            matches.Add(new Match(matches.Count + 1, Guid.NewGuid(), teams.ToList()));
+            matches.Add(new Match(matches.Count + 1, Guid.NewGuid(), teams));
         }
 
         public void RemovePlayer(Guid playerId)
@@ -74,6 +74,18 @@ namespace ApexTournamentManager.MVVM.Model
             Team team = GetTeamById(teamId);
             teams.Remove(team);
             RefreshTeamNumbers();
+        }
+
+        public void AddMatch(Guid matchId)
+        {
+            matches.Add(new Match(matches.Count+1, matchId, teams));
+        }
+
+        public void RemoveMatch(Match match)
+        {
+            matches.Remove(match);
+            foreach(Match _match in matches)
+                _match.number = matches.IndexOf(_match) + 1;
         }
 
         public void RefreshAllPlayerNumbers()

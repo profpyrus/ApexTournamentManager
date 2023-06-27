@@ -75,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\Converter.cs" />
     <Compile Include="Core\ListSearchHelper.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
@@ -116,6 +117,8 @@
     <Compile Include="MVVM\Model\Team.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MatchManagementViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MatchViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\PlayerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamManagementViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
     <Compile Include="MVVM\View\MatchManagementView.xaml.cs">

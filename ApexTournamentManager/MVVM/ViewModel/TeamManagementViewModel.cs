@@ -2,6 +2,7 @@
 using ApexTournamentManager.MVVM.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Controls;
 
 namespace ApexTournamentManager.MVVM.ViewModel
@@ -26,6 +27,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
             AddTeamCommand = new RelayCommand(o => { _session.AddTeam(System.Guid.NewGuid()); UpdateTeams(); });
             RemoveTeamCommand = new RelayCommand(o => { _session.RemoveTeam(SelectedTeam.teamId); UpdateTeams(); });
+
+            this.PropertyChanged += (obj, args) => { UpdateTeams(); };
 
             UpdateTeams();
         }

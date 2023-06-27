@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace ApexTournamentManager.MVVM.Model
         public Dictionary<Guid, int> teamPlacements { get; set; }
         public Dictionary<Guid, PlayerData> playerData { get; set; }
 
-        public Match(int matchNumber, Guid matchId, List<basicData> teams)
+        public Match(int matchNumber, Guid matchId, ObservableCollection<basicData> teams)
         {
             teamPlacements = new Dictionary<Guid, int>();
             playerData = new Dictionary<Guid, PlayerData>();

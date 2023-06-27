@@ -36,11 +36,10 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _session = new Session(Guid.NewGuid());
 
             TeamVM = new TeamManagementViewModel(_session);
-            MatchVM = new MatchManagementViewModel();
             CurrentView = TeamVM;
 
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
-            MatchViewCommand = new RelayCommand(o => { CurrentView = MatchVM; });
+            MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
         }
     }
 }

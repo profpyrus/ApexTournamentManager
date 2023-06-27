@@ -4,6 +4,7 @@
              xmlns:viewModel="clr-namespace:ApexTournamentManager.MVVM.ViewModel"
              xmlns:view="clr-namespace:ApexTournamentManager.MVVM.View"
              xmlns:local="clr-namespace:ApexTournamentManager"
+             xmlns:core="clr-namespace:ApexTournamentManager.Core"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -23,7 +24,9 @@
             <DataTemplate DataType="{x:Type viewModel:MatchManagementViewModel}">
                 <view:MatchManagementView/>
             </DataTemplate>
-            
+
+            <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

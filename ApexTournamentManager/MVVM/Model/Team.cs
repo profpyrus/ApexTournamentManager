@@ -26,12 +26,18 @@ namespace ApexTournamentManager.MVVM.Model
             NotifyPropertyChanged("teamNumber");
         }
 
-        public Player AddPlayer(Guid playerId, string playerName, int playerKills = 0, int playerDeaths = 0)
+        public Player AddPlayer(Guid playerId, string playerName = "New Player", int playerKills = 0, int playerDeaths = 0)
         {
             Player newPlayer = new Player(playerId, this.players.Count, playerName, this);
             players.Add(newPlayer);
             RefreshPlayerNumbers();
             return newPlayer;
+        }
+
+        public void RemovePlayer(Player player)
+        {
+            players.Remove(player);
+            RefreshPlayerNumbers();
         }
 
         public void RefreshPlayerNumbers()
