@@ -1,4 +1,5 @@
-﻿using ApexTournamentManager.MVVM.Model;
+﻿using ApexTournamentManager.Core;
+using ApexTournamentManager.MVVM.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApexTournamentManager.MVVM.ViewModel
 {
-	internal class LeaderboardValueViewModel
+	internal class LeaderboardValueViewModel : ObservableObject
 	{
         private readonly LeaderboardData _data;
         public LeaderboardData Data { get { return _data; } }
