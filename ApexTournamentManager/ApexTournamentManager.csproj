@@ -118,8 +118,10 @@
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MatchManagementViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MatchViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\PlayerMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\PlayerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamManagementViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\TeamMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
     <Compile Include="MVVM\View\MatchManagementView.xaml.cs">
       <DependentUpon>MatchManagementView.xaml</DependentUpon>
