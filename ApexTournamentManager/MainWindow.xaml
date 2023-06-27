@@ -50,6 +50,13 @@
                                  FontSize="16"
                                  Style="{StaticResource MenuBottonTheme}"
                                  Command="{Binding MatchViewCommand}"/>
+                    
+                    <RadioButton Content="Leaderboards"
+                                 Height="50"
+                                 Foreground="{StaticResource TextColor}"
+                                 FontSize="16"
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 Command="{Binding LeaderboardViewCommand}"/>
                 </StackPanel>
 
                 <Border Background="{StaticResource BaseHighlight}" Grid.RowSpan="2" Grid.Column="1"  Style="{StaticResource DefaultBorderStyle}"/>

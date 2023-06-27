@@ -71,7 +71,8 @@
                 Grid.Column="1">
             <Grid x:Name="MatchView"
                   HorizontalAlignment="Stretch"
-                  Margin="10">
+                  Margin="10"
+                  DataContext="{Binding Matches}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="230"/>
                     <ColumnDefinition />

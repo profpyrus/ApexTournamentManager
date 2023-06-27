@@ -25,6 +25,10 @@
                 <view:MatchManagementView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:LeaderboardViewModel}">
+                <view:LeaderboardView/>
+            </DataTemplate>
+
             <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>
 
         </ResourceDictionary>

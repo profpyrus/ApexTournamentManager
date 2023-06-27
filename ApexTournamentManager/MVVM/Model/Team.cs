@@ -48,14 +48,6 @@ namespace ApexTournamentManager.MVVM.Model
             }
         }
 
-        /*public int GetTeamKills()
-        {
-            int kills = 0;
-            foreach (Player player in players)
-                kills += player.kills;
-            return kills;
-        }*/
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string propertyName = "")

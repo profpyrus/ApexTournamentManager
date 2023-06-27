@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="MVVM\View\LeaderboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\MatchManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +119,7 @@
     <Compile Include="MVVM\Model\PlayerData.cs" />
     <Compile Include="MVVM\Model\Session.cs" />
     <Compile Include="MVVM\Model\Team.cs" />
+    <Compile Include="MVVM\ViewModel\LeaderboardViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MatchManagementViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MatchViewModel.cs" />
@@ -123,6 +128,9 @@
     <Compile Include="MVVM\ViewModel\TeamManagementViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
+    <Compile Include="MVVM\View\LeaderboardView.xaml.cs">
+      <DependentUpon>LeaderboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\MatchManagementView.xaml.cs">
       <DependentUpon>MatchManagementView.xaml</DependentUpon>
     </Compile>

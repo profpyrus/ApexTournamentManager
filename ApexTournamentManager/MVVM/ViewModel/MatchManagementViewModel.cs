@@ -29,28 +29,6 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public string Placement
-        {
-            get
-            {
-                if (SelectedMatch != null && SelectedTeam != null)
-                    return SelectedMatch.Placements[SelectedTeam.teamId].ToString();
-                else
-                    return "XX";
-            }
-
-            set
-            {
-                int newPlacement;
-                if (SelectedMatch != null
-                    && SelectedTeam != null
-                    && int.TryParse(value, out newPlacement)
-                    && newPlacement >= 0
-                    && newPlacement <= 30)
-                    SelectedMatch.Match.teamPlacements[SelectedTeam.teamId] = newPlacement;
-            }
-        }
-
         public RelayCommand AddMatchCommand { get; set; }
         public RelayCommand RemoveMatchCommand { get; set; }
 
@@ -70,7 +48,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _matches.Clear();
             foreach (Match match in _session.matches)
             {
-                _matches.Add(new MatchViewModel(match));
+                _matches.Add(new MatchViewModel(match, _session.teams));
             }
         }
     }

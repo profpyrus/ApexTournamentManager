@@ -25,34 +25,6 @@ namespace ApexTournamentManager.MVVM.Model
             NotifyPropertyChanged("teamPlayerNumber");
         }
 
-        /*public void DecrementKills()
-        {
-            int newVal = kills-1;
-            if (newVal < 0)
-                newVal = kills;
-            kills = newVal;
-            NotifyPropertyChanged("kills");
-        }
-        public void IncrementKills()
-        {
-            kills += 1;
-            NotifyPropertyChanged("kills");
-        }
-
-        public void DecrementDeaths()
-        {
-            int newVal = deaths-1;
-            if (newVal < 0)
-                newVal = deaths;
-            deaths = newVal;
-            NotifyPropertyChanged("deaths");
-        }
-        public void IncrementDeaths()
-        {
-            deaths += 1;
-            NotifyPropertyChanged("deaths");
-        }*/
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string propertyName = "")

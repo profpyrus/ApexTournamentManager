@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ApexTournamentManager.MVVM.Model;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace ApexTournamentManager.MVVM.ViewModel
 {
@@ -11,13 +12,17 @@ namespace ApexTournamentManager.MVVM.ViewModel
     {
         private protected Match _match;
 
-        private protected Dictionary<Guid, int> _teamPlacements => _match.teamPlacements;
+        private protected ObservableCollection<TeamMatchViewModel> _teams;
         private protected Dictionary<Guid, PlayerData> _playerData => _match.playerData;
 
-        public Dictionary<Guid, int> Placements
+        public String MatchNumber
         {
-            get { return _teamPlacements; }
-            set { _match.teamPlacements = value; }
+            get { return _match.number.ToString(); }
+        }
+
+		public IEnumerable<TeamMatchViewModel> Teams
+        {
+            get { return _teams; }
         }
 
         public Match Match
@@ -28,17 +33,14 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public string MatchNumber
-        {
-            get
-            {
-                return _match.number.ToString();
-            }
-        }
-
-        public MatchViewModel(Match match)
+        public MatchViewModel(Match match, IEnumerable<basicData> teams)
         {
             _match = match;
+            _teams = new ObservableCollection<TeamMatchViewModel>();
+            foreach(Team team in teams)
+            {
+                _teams.Add(new TeamMatchViewModel(team, _match));
+            }
         }
     }
 }
