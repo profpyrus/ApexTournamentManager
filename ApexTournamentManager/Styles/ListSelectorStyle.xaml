@@ -71,6 +71,67 @@
     </Style>
 
     <Style TargetType="ListViewItem"
+           x:Key="LeaderboardListItemTheme">
+        <Style.Setters>
+            <Setter Property="Background" Value="{StaticResource Base}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{StaticResource Base}"
+                                CornerRadius="10"
+                                Height="40"
+                                Width="244"
+                                Margin="0,0,10,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                    <TextBlock
+                                           Foreground="{StaticResource TextColor}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Stretch"
+                                           TextAlignment="Left"
+                                           Margin="10,0,7,0">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}#{0}">
+                                                <Binding Source="Rank"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <Border BorderBrush="{StaticResource BaseHighlight}"
+                                        BorderThickness="3"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Name}"
+                                           Grid.Column="1"
+                                           Foreground="{StaticResource TextColor}"
+                                           VerticalAlignment="Center"
+                                           Margin="7,0,7,0"/>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Border BorderBrush="{StaticResource BaseHighlight}"
+                                        BorderThickness="3"/>
+                                    <TextBlock Text="{Binding Value}"
+                                           Foreground="{StaticResource TextColor}"
+                                           VerticalAlignment="Center"
+                                           Margin="7,0,10,0"/>
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource MenuButtonHover}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="ListViewItem"
            x:Key="MatchPlayerListItemTheme">
         <Style.Setters>
             <Setter Property="Background" Value="{StaticResource Base}"/>

@@ -114,11 +114,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Model\basicData.cs" />
+    <Compile Include="MVVM\Model\LeaderboardData.cs" />
     <Compile Include="MVVM\Model\Match.cs" />
     <Compile Include="MVVM\Model\Player.cs" />
     <Compile Include="MVVM\Model\PlayerData.cs" />
+    <Compile Include="MVVM\Model\RankData.cs" />
     <Compile Include="MVVM\Model\Session.cs" />
     <Compile Include="MVVM\Model\Team.cs" />
+    <Compile Include="MVVM\ViewModel\LeaderboardEntityViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LeaderboardMatchViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LeaderboardValueViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LeaderboardViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MatchManagementViewModel.cs" />

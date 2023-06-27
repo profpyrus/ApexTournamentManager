@@ -43,7 +43,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
-            LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(); });
+            LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session); });
         }
     }
 }

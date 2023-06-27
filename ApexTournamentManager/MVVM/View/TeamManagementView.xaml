@@ -36,6 +36,7 @@
                            VerticalAlignment="Center"
                            Grid.ColumnSpan="2"/>
                 <ListView Grid.Row="1" Grid.ColumnSpan="2"
+                          x:Name="teamsListView"
                           Background="Transparent"
                           BorderThickness="0"
                           Margin="4,0,4,0"
@@ -145,5 +146,13 @@
                 </ContentControl.ContentTemplate>
             </ContentControl>
         </Border>
+        <Border Background="{StaticResource Base}"
+                                    Grid.Column="1"
+                                    CornerRadius="10"
+                                    Margin="4"
+                                    Visibility="{Binding SelectedItem,
+                                    Converter={StaticResource
+                                    SelectedToVisibilityConverter},
+                                    ElementName=teamsListView}"/>
     </Grid>
 </UserControl>
