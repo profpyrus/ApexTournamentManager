@@ -16,50 +16,6 @@ namespace ApexTournamentManager.MVVM.ViewModel
         private readonly ObservableCollection<MatchViewModel> _matches;
         public IEnumerable<MatchViewModel> Matches => _matches;
 
-        private readonly ObservableCollection<TeamViewModel> _teams;
-        public IEnumerable<TeamViewModel> Teams => _teams;
-
-        private TeamViewModel _selectedTeam;
-        public TeamViewModel SelectedTeam
-        {
-            get
-            {
-                return _selectedTeam;
-            }
-            set
-            {
-                _selectedTeam = value;
-                OnPropertyChanged(nameof(Placement));
-                OnPropertyChanged(nameof(Players));
-            }
-        }
-
-        private PlayerViewModel _selectedPlayer;
-        public PlayerViewModel SelectedPlayer
-        {
-            get
-            {
-                return _selectedPlayer;
-            }
-            set
-            {
-                if (value != null)
-                    _selectedPlayer = value;
-            }
-        }
-
-        public IEnumerable<PlayerViewModel> Players
-        {
-            get
-            {
-                if (SelectedTeam != null)
-                    return SelectedTeam.Players;
-                else
-                    return null;
-            }
-        }
-
-
         private MatchViewModel _selectedMatch;
         public MatchViewModel SelectedMatch
         {
@@ -70,8 +26,6 @@ namespace ApexTournamentManager.MVVM.ViewModel
             set
             {
                 _selectedMatch = value;
-                OnPropertyChanged(nameof(Placement));
-                OnPropertyChanged(nameof(Players));
             }
         }
 
@@ -103,10 +57,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
         public MatchManagementViewModel(Session session)
         {
             _matches = new ObservableCollection<MatchViewModel>();
-            _teams = new ObservableCollection<TeamViewModel>();
             _session = session;
 
-            AddMatchCommand = new RelayCommand(o => { _session.AddMatch(System.Guid.NewGuid()); UpdateData(); });
+            AddMatchCommand = new RelayCommand(o => { _session.AddMatch(Guid.NewGuid()); UpdateData(); });
             RemoveMatchCommand = new RelayCommand(o => { _session.RemoveMatch(SelectedMatch.Match); UpdateData(); });
 
             UpdateData();
@@ -118,11 +71,6 @@ namespace ApexTournamentManager.MVVM.ViewModel
             foreach (Match match in _session.matches)
             {
                 _matches.Add(new MatchViewModel(match));
-            }
-            _teams.Clear();
-            foreach (Team team in _session.teams)
-            {
-                _teams.Add(new TeamViewModel(team));
             }
         }
     }
