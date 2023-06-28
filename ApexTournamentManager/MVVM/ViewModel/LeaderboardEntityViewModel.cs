@@ -239,6 +239,16 @@ namespace ApexTournamentManager.MVVM.ViewModel
 					int placement = match.teamPlacements[team.id];
 					if (placement != 0)
 						allPlacements.Add(placement);
+
+					foreach (Point point in _session.placementPoints.Reverse())
+					{
+						if (placement >= point.atLeast)
+						{
+							points += point.value;
+							break;
+						}
+					}
+
 					allKills.Add(kills);
 					allPoints.Add(points);
 				}

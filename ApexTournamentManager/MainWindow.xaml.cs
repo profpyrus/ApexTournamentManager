@@ -21,7 +21,7 @@ namespace ApexTournamentManager
     {
         public MainWindow(string name)
         {
-            this.DataContext = new MainViewModel(name);
+            this.DataContext = new MainViewModel(name, this);
             InitializeComponent();
         }
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

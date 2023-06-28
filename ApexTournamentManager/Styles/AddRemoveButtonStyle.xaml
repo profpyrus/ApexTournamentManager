@@ -73,4 +73,16 @@
         <Setter Property="Border.CornerRadius" Value="0,10,10,0" />
     </Style>
 
+    <Style BasedOn="{StaticResource ButtonTheme}"
+           TargetType="Button"
+           x:Key="CloseButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="0,12,12,0" />
+    </Style>
+
+    <Style BasedOn="{StaticResource ButtonTheme}"
+           TargetType="Button"
+           x:Key="MinimizeButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="0,0,0,0" />
+    </Style>
+
 </ResourceDictionary>

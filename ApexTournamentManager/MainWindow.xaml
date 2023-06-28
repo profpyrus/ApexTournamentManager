@@ -69,12 +69,32 @@
                         Grid.ColumnSpan="2"
                         Style="{StaticResource DefaultBorderStyle}"
                         MouseDown="Border_MouseDown">
+                    <Grid>
 
-                    <TextBlock Text="Apex Legends Tournament Manager"
+                        <TextBlock Text="Apex Legends Tournament Manager"
                                FontSize="18"
                                Margin="10,0,0,0"
                                VerticalAlignment="Center"
                                IsHitTestVisible="False"/>
+
+                        <StackPanel HorizontalAlignment="Right"
+                                Width="Auto"
+                                Orientation="Horizontal">
+                            <Button Content="&#128469;"
+                                    Margin="3,3,0,3"
+                                    FontSize="20"
+                                    Width="45"
+                                    Style="{StaticResource MinimizeButtonTheme}"
+                                    Command="{Binding MinimizeWindow}"/>
+                            <Button Content="&#128473;"
+                                    Margin="3"
+                                    FontSize="20"
+                                    Width="45"
+                                    Style="{StaticResource CloseButtonTheme}"
+                                    Command="{Binding CloseWindow}"/>
+                        </StackPanel>
+
+                    </Grid>
 
                 </Border>
 

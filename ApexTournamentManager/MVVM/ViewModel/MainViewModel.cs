@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ApexTournamentManager.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
+        private Window _window;
         private Session _session { get; set; }
 
         public String SessionName { get { return _session.name; } }
@@ -18,6 +20,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
         public RelayCommand MatchViewCommand { get; set; }
         public RelayCommand PointsViewCommand { get; set; }
         public RelayCommand LeaderboardViewCommand { get; set; }
+
+		public RelayCommand CloseWindow { get; set; }
+		public RelayCommand MinimizeWindow { get; set; }
 
 
 		public TeamManagementViewModel TeamVM { get; set; }
@@ -36,8 +41,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public MainViewModel(string name)
+        public MainViewModel(string name, Window window)
         {
+            _window = window;
             _session = new Session(Guid.NewGuid(), name);
 
             TeamVM = new TeamManagementViewModel(_session);
@@ -48,6 +54,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
             PointsViewCommand = new RelayCommand(o => { CurrentView = PointVM; });
             LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session); });
-        }
+
+            CloseWindow = new RelayCommand(o => { _window.Close(); });
+			MinimizeWindow = new RelayCommand(o => { _window.WindowState = WindowState.Minimized; });
+		}
     }
 }
