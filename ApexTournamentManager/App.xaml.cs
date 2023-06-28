@@ -16,6 +16,9 @@ namespace ApexTournamentManager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            Current.MainWindow = new MainWindow("Testsession");
+            Current.MainWindow.Show();
+
             base.OnStartup(e);
         }
     }

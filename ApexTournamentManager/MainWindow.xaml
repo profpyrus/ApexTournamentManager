@@ -13,10 +13,7 @@
         AllowsTransparency="True"
         FontFamily="Fonts/#Dosis"
         FontWeight="DemiBold">
-    <Window.DataContext>
-        <viewModel:MainViewModel/>
-    </Window.DataContext>
-    
+
     <Grid>
         <Border Background="{StaticResource Base}" Style="{StaticResource DefaultBorderStyle}">
             <Grid>
@@ -87,6 +84,18 @@
                                 Content="{Binding CurrentView}">
                     
                 </ContentControl>
+                <TextBlock Grid.Row="1"
+                           TextAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="10"
+                           TextWrapping="Wrap"
+                           TextTrimming="None">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}Session:&#x0a;{0}">
+                            <Binding Path="SessionName"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
             </Grid>
         </Border>
     </Grid>

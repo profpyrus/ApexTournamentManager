@@ -4,8 +4,7 @@
              xmlns:viewModel="clr-namespace:ApexTournamentManager.MVVM.ViewModel"
              xmlns:view="clr-namespace:ApexTournamentManager.MVVM.View"
              xmlns:local="clr-namespace:ApexTournamentManager"
-             xmlns:core="clr-namespace:ApexTournamentManager.Core"
-             StartupUri="MainWindow.xaml">
+             xmlns:core="clr-namespace:ApexTournamentManager.Core">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

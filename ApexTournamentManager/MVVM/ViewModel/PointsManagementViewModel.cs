@@ -99,8 +99,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
             {
                 PointsViewModel pointVM = new PointsViewModel(point);
                 _killPoints.Add(pointVM);
-                if (sender == null)
-                    pointVM.resortEvent += UpdateKillPoints;
+                pointVM.resortEvent += UpdateKillPoints;
             }
 
         }
@@ -114,8 +113,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
             {
                 PointsViewModel pointVM = new PointsViewModel(point);
                 _placementPoints.Add(pointVM);
-                if (sender == null)
-                    pointVM.resortEvent += UpdatePlacementPoints;
+                pointVM.resortEvent += UpdatePlacementPoints;
             }
         }
     }

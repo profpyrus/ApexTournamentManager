@@ -11,18 +11,20 @@ namespace ApexTournamentManager.MVVM.Model
 {
     class Session
     {
+        public string name { get; set; }
         public Guid id { get; set; }
         public ObservableCollection<basicData> teams { get; set; }
         public ObservableCollection<Match> matches { get; set; }
         public ObservableCollection<Point> killPoints { get; set; }
         public ObservableCollection<Point> placementPoints { get; set; }
 
-        public Session(Guid newId)
+        public Session(Guid newId, string newName)
         {
-            id = newId; teams = new ObservableCollection<basicData>(); matches = new ObservableCollection<Match>();
+            name = newName; id = newId;
+            teams = new ObservableCollection<basicData>(); matches = new ObservableCollection<Match>();
             killPoints = new ObservableCollection<Point>(); placementPoints = new ObservableCollection<Point>();
             DefaultPoints();
-            AddPlayerToTeam(AddTeam(Guid.NewGuid()), Guid.NewGuid());
+            AddTeam(Guid.NewGuid());
             matches.Add(new Match(matches.Count + 1, Guid.NewGuid(), teams));
         }
 
@@ -70,15 +72,15 @@ namespace ApexTournamentManager.MVVM.Model
             RefreshAllPlayerNumbers();
         }
 
-        public Player AddPlayerToTeam(Team team, Guid playerId, string playerName = "New Player", int playerKills = 0, int playerDeaths = 0)
+        public Player AddPlayerToTeam(Team team, Guid playerId, string playerName = "New Player")
         {
-            return team.AddPlayer(playerId, playerName, playerKills, playerDeaths);
+            return team.AddPlayer(playerId, playerName);
         }
 
-        public Player AddPlayerToTeam(Guid teamId, Guid playerId, string playerName = "New Player", int playerKills = 0, int playerDeaths = 0)
+        public Player AddPlayerToTeam(Guid teamId, Guid playerId, string playerName = "New Player")
         {
             Team team = GetTeamById(teamId);
-            return team.AddPlayer(playerId, playerName, playerKills, playerDeaths);
+            return team.AddPlayer(playerId, playerName);
         }
 
         public Team AddTeam(Guid teamId, string teamName = null, int teamWins = 0)

@@ -18,6 +18,7 @@ namespace ApexTournamentManager.MVVM.Model
         public Team(Guid newId, int newTeamNumber, string newName, int newWins = 0)
         {
             id = newId; teamNumber = newTeamNumber; name = newName; players = new ObservableCollection<basicData>();
+            AddPlayer(Guid.NewGuid());
         }
 
         public void SetTeamNumber(int newTeamNumber)
@@ -26,7 +27,7 @@ namespace ApexTournamentManager.MVVM.Model
             NotifyPropertyChanged("teamNumber");
         }
 
-        public Player AddPlayer(Guid playerId, string playerName = "New Player", int playerKills = 0, int playerDeaths = 0)
+        public Player AddPlayer(Guid playerId, string playerName = "New Player")
         {
             Player newPlayer = new Player(playerId, this.players.Count, playerName, this);
             players.Add(newPlayer);

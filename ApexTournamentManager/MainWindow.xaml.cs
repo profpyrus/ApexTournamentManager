@@ -1,4 +1,5 @@
 ﻿using ApexTournamentManager.MVVM.Model;
+using ApexTournamentManager.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,9 @@ namespace ApexTournamentManager
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string name)
         {
+            this.DataContext = new MainViewModel(name);
             InitializeComponent();
         }
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

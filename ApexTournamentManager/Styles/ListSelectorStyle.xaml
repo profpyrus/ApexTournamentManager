@@ -154,11 +154,11 @@
                                     <TextBlock Foreground="{StaticResource TextColor}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
-                                               TextAlignment="Left"
+                                               TextAlignment="Center"
                                                Margin="10,0,7,0"
-                                           FontSize="16"
+                                           FontSize="15"
                                                Text="{Binding Rank}"
-                                               Width="17">
+                                               Width="22">
                                     </TextBlock>
                                     <Border BorderBrush="{StaticResource BaseHighlight}"
                                         BorderThickness="2"/>
@@ -177,7 +177,7 @@
                                            VerticalAlignment="Center"
                                                TextAlignment="Center"
                                            Margin="7,0,10,0"
-                                            Width="17"
+                                            Width="22"
                                            FontSize="16"
                                             ToolTip="{Binding ValueUnrounded}"/>
                                 </StackPanel>

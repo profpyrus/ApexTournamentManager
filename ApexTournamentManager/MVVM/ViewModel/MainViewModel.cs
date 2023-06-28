@@ -12,6 +12,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
     {
         private Session _session { get; set; }
 
+        public String SessionName { get { return _session.name; } }
+
         public RelayCommand TeamViewCommand { get; set; }
         public RelayCommand MatchViewCommand { get; set; }
         public RelayCommand PointsViewCommand { get; set; }
@@ -34,9 +36,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(string name)
         {
-            _session = new Session(Guid.NewGuid());
+            _session = new Session(Guid.NewGuid(), name);
 
             TeamVM = new TeamManagementViewModel(_session);
             PointVM = new PointsManagementViewModel(_session);
