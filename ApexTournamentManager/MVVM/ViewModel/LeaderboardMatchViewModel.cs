@@ -24,14 +24,14 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _session = session;
             _match = match;
             _entities = new ObservableCollection<LeaderboardEntityViewModel>();
-            _entities.Add(new LeaderboardEntityViewModel(_match, _session.GetAllPlayers()));
+            _entities.Add(new LeaderboardEntityViewModel(_session, _match, _session.GetAllPlayers()));
             List<Team> teams = new List<Team>();
             foreach (basicData team in _session.teams)
             {
                 teams.Add(team as Team);
             }
 
-            _entities.Add(new LeaderboardEntityViewModel(_match, teams));
+            _entities.Add(new LeaderboardEntityViewModel(_session, _match, teams));
 		}
 
         public LeaderboardMatchViewModel(Session session, string name)
@@ -39,14 +39,14 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _session = session;
             Name = name;
             _entities = new ObservableCollection<LeaderboardEntityViewModel>();
-            _entities.Add(new LeaderboardEntityViewModel(_session.matches, _session.GetAllPlayers()));
+            _entities.Add(new LeaderboardEntityViewModel(_session, _session.GetAllPlayers()));
             List<Team> teams = new List<Team>();
             foreach (basicData team in _session.teams)
             {
                 teams.Add(team as Team);
             }
 
-            _entities.Add(new LeaderboardEntityViewModel(_session.matches, teams));
+            _entities.Add(new LeaderboardEntityViewModel(_session, teams));
         }
 	}
 }
