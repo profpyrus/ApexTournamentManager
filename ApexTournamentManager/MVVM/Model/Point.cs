@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ApexTournamentManager.MVVM.Model
 {
-    class Points
+    class Point
     {
         public int atLeast;
         public int value;
 
-        public Points(int AtLeast, int Value)
+        public Point(int AtLeast, int Value)
         {
             atLeast = AtLeast;
             value = Value;

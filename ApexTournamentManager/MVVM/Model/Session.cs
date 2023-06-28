@@ -13,14 +13,42 @@ namespace ApexTournamentManager.MVVM.Model
     {
         public Guid id { get; set; }
         public ObservableCollection<basicData> teams { get; set; }
-
         public ObservableCollection<Match> matches { get; set; }
+        public ObservableCollection<Point> killPoints { get; set; }
+        public ObservableCollection<Point> placementPoints { get; set; }
 
         public Session(Guid newId)
         {
             id = newId; teams = new ObservableCollection<basicData>(); matches = new ObservableCollection<Match>();
+            killPoints = new ObservableCollection<Point>(); placementPoints = new ObservableCollection<Point>();
+            DefaultPoints();
             AddPlayerToTeam(AddTeam(Guid.NewGuid()), Guid.NewGuid());
             matches.Add(new Match(matches.Count + 1, Guid.NewGuid(), teams));
+        }
+
+        private void DefaultPoints()
+        {
+            DefaultPlacementPoints();
+            DefaultKillPoints();
+        }
+
+        public void DefaultPlacementPoints()
+        {
+            placementPoints.Clear();
+            placementPoints.Add(new Point(1, 10));
+            placementPoints.Add(new Point(2, 5));
+            placementPoints.Add(new Point(3, 3));
+            placementPoints.Add(new Point(6, 1));
+            placementPoints.Add(new Point(10, 0));
+        }
+
+        public void DefaultKillPoints()
+        {
+            killPoints.Clear();
+            for(int i = 1; i <= 15; i++)
+            {
+                killPoints.Add(new Point(i, i));
+            }
         }
 
         public void RemovePlayer(Guid playerId)

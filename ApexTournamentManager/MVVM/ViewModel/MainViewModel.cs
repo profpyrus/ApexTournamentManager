@@ -19,8 +19,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
 
 		public TeamManagementViewModel TeamVM { get; set; }
-        public MatchManagementViewModel MatchVM { get; set; }
-		public LeaderboardViewModel LeadVM { get; set; }
+        public PointsManagementViewModel PointVM { get; set; }
 
 
 		private object _currentView;
@@ -40,11 +39,12 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _session = new Session(Guid.NewGuid());
 
             TeamVM = new TeamManagementViewModel(_session);
-            CurrentView = TeamVM;
+            PointVM = new PointsManagementViewModel(_session);
+            CurrentView = PointVM;
 
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
-            PointsViewCommand = new RelayCommand(o => { CurrentView = new PointsManagementViewModel(_session); });
+            PointsViewCommand = new RelayCommand(o => { CurrentView = PointVM; });
             LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session); });
         }
     }

@@ -51,15 +51,17 @@
                 <Button x:Name="AddTeam"
                         Content="+"
                         Grid.Row="2"
-                        Style="{StaticResource AddRemoveButtonTheme}"
+                        Style="{StaticResource AddButtonTheme}"
                         Margin="4,4,2,4"
+                        FontSize="30"
                         Command="{Binding AddTeamCommand}">
                 </Button>
                 <Button x:Name="RemoveTeam"
                         Content="-"
                         Grid.Row="2"
                         Grid.Column="1"
-                        Style="{StaticResource AddRemoveButtonTheme}"
+                        FontSize="35"
+                        Style="{StaticResource RemoveButtonTheme}"
                         Margin="2,4,4,4"
                         Command="{Binding RemoveTeamCommand}">
                 </Button>
@@ -127,16 +129,18 @@
                                     <Button x:Name="AddTeam"
                                             Content="+"
                                             Grid.Row="2"
-                                            Style="{StaticResource AddRemoveButtonTheme}"
+                                            Style="{StaticResource AddButtonTheme}"
                                             Margin="4,4,2,4"
+                                            FontSize="30"
                                             Command="{Binding AddPlayerCommand}">
                                     </Button>
                                     <Button x:Name="RemoveTeam"
                                             Content="-"
                                             Grid.Row="2"
                                             Grid.Column="1"
-                                            Style="{StaticResource AddRemoveButtonTheme}"
+                                            Style="{StaticResource RemoveButtonTheme}"
                                             Margin="2,4,4,4"
+                                            FontSize="35"
                                             Command="{Binding RemovePlayerCommand}">
                                     </Button>
                                 </Grid>

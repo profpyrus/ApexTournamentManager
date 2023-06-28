@@ -122,7 +122,7 @@
     <Compile Include="MVVM\Model\Match.cs" />
     <Compile Include="MVVM\Model\Player.cs" />
     <Compile Include="MVVM\Model\PlayerData.cs" />
-    <Compile Include="MVVM\Model\Points.cs" />
+    <Compile Include="MVVM\Model\Point.cs" />
     <Compile Include="MVVM\Model\RankData.cs" />
     <Compile Include="MVVM\Model\Session.cs" />
     <Compile Include="MVVM\Model\Team.cs" />

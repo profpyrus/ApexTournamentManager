@@ -36,12 +36,19 @@
                                  FontSize="16"
                                  Style="{StaticResource MenuBottonTheme}"/>
 
+                    <RadioButton Content="Point Management"
+                                 Height="50"
+                                 Foreground="{StaticResource TextColor}"
+                                 FontSize="16"
+                                 IsChecked="True"
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 Command="{Binding PointsViewCommand}"/>
+
                     <RadioButton Content="Team Management"
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"
                                  FontSize="16"
                                  Style="{StaticResource MenuBottonTheme}"
-                                 IsChecked="True"
                                  Command="{Binding TeamViewCommand}"/>
 
                     <RadioButton Content="Match Management"
@@ -50,13 +57,6 @@
                                  FontSize="16"
                                  Style="{StaticResource MenuBottonTheme}"
                                  Command="{Binding MatchViewCommand}"/>
-
-                    <RadioButton Content="Point Management"
-                                 Height="50"
-                                 Foreground="{StaticResource TextColor}"
-                                 FontSize="16"
-                                 Style="{StaticResource MenuBottonTheme}"
-                                 Command="{Binding PointsViewCommand}"/>
 
                     <RadioButton Content="Leaderboards"
                                  Height="50"

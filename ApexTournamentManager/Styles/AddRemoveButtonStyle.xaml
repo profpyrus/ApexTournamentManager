@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="Button"
-           x:Key="AddRemoveButtonTheme">
+           x:Key="ButtonTheme">
 
         <Style.Setters>
             <Setter Property="Template">
@@ -43,13 +43,31 @@
 
     </Style>
 
-    <Style BasedOn="{StaticResource AddRemoveButtonTheme}"
+    <Style BasedOn="{StaticResource ButtonTheme}"
+           TargetType="Button"
+           x:Key="AddButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="0,0,0,10" />
+    </Style>
+
+    <Style BasedOn="{StaticResource ButtonTheme}"
+           TargetType="Button"
+           x:Key="ResetButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="0,0,0,0" />
+    </Style>
+
+    <Style BasedOn="{StaticResource ButtonTheme}"
+           TargetType="Button"
+           x:Key="RemoveButtonTheme">
+        <Setter Property="Border.CornerRadius" Value="0,0,10,0" />
+    </Style>
+
+    <Style BasedOn="{StaticResource ButtonTheme}"
            TargetType="Button"
            x:Key="DecimateButtonTheme">
         <Setter Property="Border.CornerRadius" Value="10,0,0,10" />
     </Style>
 
-    <Style BasedOn="{StaticResource AddRemoveButtonTheme}"
+    <Style BasedOn="{StaticResource ButtonTheme}"
            TargetType="Button"
            x:Key="AdditionButtonTheme">
         <Setter Property="Border.CornerRadius" Value="0,10,10,0" />

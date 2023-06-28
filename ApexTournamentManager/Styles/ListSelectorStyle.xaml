@@ -39,6 +39,68 @@
     </Style>
 
     <Style TargetType="ListViewItem"
+           x:Key="PlacementPointsListItemTheme">
+        <Style.Setters>
+            <Setter Property="Background" Value="{StaticResource Base}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                Height="40"
+                                Margin="0,0,0,4">
+                            <StackPanel Margin="4"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                <TextBox Grid.Row="1"
+                                         Text="{Binding AtLeast, UpdateSourceTrigger=PropertyChanged}"
+                                         Background="{StaticResource BaseHighlight}"
+                                         Foreground="{StaticResource TextColor}"
+                                         Style="{StaticResource TextBoxTheme}"
+                                         TextAlignment="Center"
+                                         Height="30"
+                                         Width="35"
+                                         Margin="0,0,4,0"/>
+                                <TextBlock Text="{TemplateBinding Content}"
+                                           Foreground="{StaticResource TextColor}"
+                                           VerticalAlignment="Center"
+                                           FontSize="17"/>
+                                <TextBox Grid.Row="1"
+                                         Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                                         Background="{StaticResource BaseHighlight}"
+                                         Foreground="{StaticResource TextColor}"
+                                         Style="{StaticResource TextBoxTheme}"
+                                         TextAlignment="Center"
+                                         Height="30"
+                                         Width="35"
+                                         Margin="10,0,4,0"/>
+                                <TextBlock Text="Points"
+                                           Foreground="{StaticResource TextColor}"
+                                           VerticalAlignment="Center"
+                                           FontSize="17"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Content" Value="or lower:"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource MenuButtonHover}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="ListViewItem"
+           BasedOn="{StaticResource PlacementPointsListItemTheme}"
+           x:Key="KillPointsListItemTheme">
+        <Setter Property="Content" Value="or more:"/>
+    </Style>
+
+    <Style TargetType="ListViewItem"
            x:Key="MatchListItemTheme">
         <Style.Setters>
             <Setter Property="Background" Value="{StaticResource Base}"/>
@@ -89,14 +151,13 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                    <TextBlock
-                                           Foreground="{StaticResource TextColor}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"
-                                           TextAlignment="Left"
-                                           Margin="10,0,7,0"
-                                           Text="{Binding Rank}"
-                                            Width="15">
+                                    <TextBlock Foreground="{StaticResource TextColor}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               TextAlignment="Left"
+                                               Margin="10,0,7,0"
+                                               Text="{Binding Rank}"
+                                               Width="15">
                                     </TextBlock>
                                     <Border BorderBrush="{StaticResource BaseHighlight}"
                                         BorderThickness="2"/>

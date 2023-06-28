@@ -5,8 +5,138 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ApexTournamentManager.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="535" d:DesignWidth="995"
+             FontFamily="/Fonts/#Dosis"
+             FontWeight="DemiBold"
+             FontSize="16"
+             Foreground="{StaticResource TextColor}">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="{StaticResource Base}"
+                BorderThickness="8"
+                Width="270"
+                Style="{StaticResource DefaultBorderStyle}"
+                Margin="0,0,8,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Placements"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Grid.ColumnSpan="3"/>
+                <ListView Grid.Row="1" Grid.ColumnSpan="3"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Margin="4,0,4,0"
+                          IsSynchronizedWithCurrentItem="True"
+                          SelectedIndex="0"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ItemContainerStyle="{StaticResource PlacementPointsListItemTheme}"
+                          ItemsSource="{Binding PlacementPoints}"
+                          SelectedItem="{Binding SelectedPlacementPoint, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single">
+                </ListView>
+                <Button Content="+"
+                        Grid.Row="2"
+                        FontSize="30"
+                        Style="{StaticResource AddButtonTheme}"
+                        Margin="4,4,2,4"
+                        Command="{Binding AddPlacementPoint}"
+                        ToolTip="Add a new allocation to the list">
+                </Button>
+                <Button Content="&#x27F2;"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        FontSize="35"
+                        Style="{StaticResource ResetButtonTheme}"
+                        Margin="2,4,2,4"
+                        Command="{Binding ResetPlacementPoints}"
+                        ToolTip="Reset list to the default">
+                </Button>
+                <Button Content="-"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        FontSize="35"
+                        Style="{StaticResource RemoveButtonTheme}"
+                        Margin="2,4,4,4"
+                        Command="{Binding RemovePlacementPoint}"
+                        ToolTip="Remove highlighted allocation">
+                </Button>
+            </Grid>
+        </Border>
+        <Border BorderBrush="{StaticResource Base}"
+                BorderThickness="8"
+                Style="{StaticResource DefaultBorderStyle}"
+                Margin="0,0,8,0"
+                Width="270"
+                Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Kills"
+                           TextAlignment="Center"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Grid.ColumnSpan="3"/>
+                <ListView Grid.Row="1" Grid.ColumnSpan="3"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Margin="4,0,4,0"
+                          IsSynchronizedWithCurrentItem="True"
+                          SelectedIndex="0"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ItemContainerStyle="{StaticResource KillPointsListItemTheme}"
+                          ItemsSource="{Binding KillPoints}"
+                          SelectedItem="{Binding SelectedKillPoint, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single">
+                </ListView>
+                <Button Content="+"
+                        Grid.Row="2"
+                        FontSize="30"
+                        Style="{StaticResource AddButtonTheme}"
+                        Margin="4,4,2,4"
+                        Command="{Binding AddKillPoint}"
+                        ToolTip="Add a new allocation to the list">
+                </Button>
+                <Button Content="&#x27F2;"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        FontSize="35"
+                        Style="{StaticResource ResetButtonTheme}"
+                        Margin="2,4,2,4"
+                        Command="{Binding ResetKillPoints}"
+                        ToolTip="Reset list to the default">
+                </Button>
+                <Button Content="-"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        FontSize="35"
+                        Style="{StaticResource RemoveButtonTheme}"
+                        Margin="2,4,4,4"
+                        Command="{Binding RemoveKillPoint}"
+                        ToolTip="Remove highlighted allocation">
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
