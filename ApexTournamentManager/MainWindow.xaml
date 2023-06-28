@@ -50,7 +50,14 @@
                                  FontSize="16"
                                  Style="{StaticResource MenuBottonTheme}"
                                  Command="{Binding MatchViewCommand}"/>
-                    
+
+                    <RadioButton Content="Point Management"
+                                 Height="50"
+                                 Foreground="{StaticResource TextColor}"
+                                 FontSize="16"
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 Command="{Binding PointsViewCommand}"/>
+
                     <RadioButton Content="Leaderboards"
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"

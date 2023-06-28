@@ -7,12 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="535" d:DesignWidth="995">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
@@ -22,61 +16,77 @@
                 BorderThickness="8"
                 Margin="0,0,-8,0"
                 Style="{StaticResource DefaultBorderStyle}">
-            <StackPanel Margin="10">
-                <ComboBox Margin="0,0,0,10"
-                          IsSynchronizedWithCurrentItem="True"
-                          ItemsSource="{Binding Matches}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <ComboBox Margin="0,0,0,10"
-                          IsSynchronizedWithCurrentItem="True"
-                          DataContext="{Binding Matches}"
-                          ItemsSource="{Binding Entities}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <ComboBox Margin="0,0,0,10"
-                          IsSynchronizedWithCurrentItem="True"
-                          DataContext="{Binding Entities}"
-                          ItemsSource="{Binding Values}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
         </Border>
+        <Grid Margin="8" Grid.ColumnSpan="2">
+            <ComboBox Margin="10,10,0,10"
+                      IsSynchronizedWithCurrentItem="True"
+                      Height="20"
+                      Width="165"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Left"
+                      ItemsSource="{Binding Matches, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Grid DataContext="{Binding Matches}">
+                <ComboBox Margin="10,60,0,10"
+                          IsSynchronizedWithCurrentItem="True"
+                          Height="20"
+                          Width="165"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding Entities, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Grid DataContext="{Binding Entities}">
+                    <ComboBox Margin="10,110,0,10"
+                              IsSynchronizedWithCurrentItem="True"
+                              Height="20"
+                              Width="165"
+                              VerticalAlignment="Top"
+                              HorizontalAlignment="Left"
+                              ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Grid Margin="212,0,0,0"
+                          DataContext="{Binding Values}">
+                        <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                  ScrollViewer.PanningMode="HorizontalOnly"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  BorderThickness="0"
+                                  Style="{StaticResource ListSelectorTheme}"
+                                  ItemContainerStyle="{StaticResource LeaderboardListItemTheme}"
+                                  ItemsSource="{Binding Data}"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Left"
+                                  Padding="0,0,-10,-10">
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
         <Border Grid.Column="1" Grid.RowSpan="10"
                 BorderBrush="{StaticResource Base}"
                 BorderThickness="8"
                 Style="{StaticResource DefaultBorderStyle}">
-            <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                      ScrollViewer.PanningMode="HorizontalOnly"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      BorderThickness="0"
-                      Style="{StaticResource ListSelectorTheme}"
-                      ItemContainerStyle="{StaticResource LeaderboardListItemTheme}"
-                      DataContext="{Binding Values}"
-                      ItemsSource="{Binding Data}"
-                      VerticalAlignment="Center"
-                      HorizontalAlignment="Left"
-                      Margin="13,0,0,0"
-                      Padding="0,0,-10,-10">
-
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
 
         </Border>
     </Grid>

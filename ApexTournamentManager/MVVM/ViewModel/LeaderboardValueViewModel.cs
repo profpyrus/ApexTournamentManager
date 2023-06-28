@@ -11,24 +11,24 @@ namespace ApexTournamentManager.MVVM.ViewModel
 {
 	internal class LeaderboardValueViewModel : ObservableObject
 	{
-        private readonly LeaderboardData _data;
-        public LeaderboardData Data { get { return _data; } }
+        private readonly ObservableCollection<RankData> _data;
+        public IEnumerable<RankData> Data { get { return _data; } }
         public string Name { get; }
 
         public LeaderboardValueViewModel(List<RankData> data, string name)
         {
             Name = name;
-            List<RankData> sortedData = data.OrderBy(o => o.Value).ToList();
+            _data = new ObservableCollection<RankData>();
+            List<RankData> sortedData = data.OrderBy(o => o.ValueUnrounded).ToList();
+            sortedData.Reverse();
             foreach (RankData dataPoint in sortedData)
             {
                 int newRank = sortedData.IndexOf(dataPoint) + 1;
-                if(newRank != 1 && dataPoint.Value == sortedData[sortedData.IndexOf(dataPoint) - 1].Value)
-                    newRank = sortedData[sortedData.IndexOf(dataPoint) - 1].Rank;
-                dataPoint.Rank = newRank;
+                if(newRank != 1 && dataPoint.ValueUnrounded == sortedData[sortedData.IndexOf(dataPoint) - 1].ValueUnrounded)
+                    newRank = sortedData[sortedData.IndexOf(dataPoint) - 1]._rank;
+                dataPoint._rank = newRank;
+                _data.Add(dataPoint);
 			}
-			
-                
-            _data = new LeaderboardData(sortedData);
 		}
     }
 }

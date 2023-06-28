@@ -8,14 +8,22 @@ namespace ApexTournamentManager.MVVM.Model
 {
 	internal class RankData
 	{
-        public int Rank { get; set; }
+        public int _rank;
+        public string Rank
+        {
+            get
+            {
+                return "#" + _rank.ToString();
+            }
+        }
 		public string Name { get; set; }
-		public int Value { get; set; }
+		public double ValueRounded { get { return Math.Round(ValueUnrounded * 10) / 10; } }
+        public double ValueUnrounded { get; set; }
 
-        public RankData(string name, int value)
+        public RankData(string name, double value)
         {
             Name = name;
-            Value = value;
+            ValueUnrounded = value;
         }
     }
 }

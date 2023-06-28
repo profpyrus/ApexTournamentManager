@@ -15,7 +15,7 @@
 
                             <TextBlock Text="{TemplateBinding Content}"
                                        VerticalAlignment="Center"
-                                       Margin="20,0,0,0"/>
+                                       Margin="15,0,0,0"/>
 
                         </Border>
                     </ControlTemplate>

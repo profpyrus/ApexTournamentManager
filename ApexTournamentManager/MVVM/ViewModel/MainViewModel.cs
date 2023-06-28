@@ -14,7 +14,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         public RelayCommand TeamViewCommand { get; set; }
         public RelayCommand MatchViewCommand { get; set; }
-		public RelayCommand LeaderboardViewCommand { get; set; }
+        public RelayCommand PointsViewCommand { get; set; }
+        public RelayCommand LeaderboardViewCommand { get; set; }
 
 
 		public TeamManagementViewModel TeamVM { get; set; }
@@ -43,6 +44,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
+            PointsViewCommand = new RelayCommand(o => { CurrentView = new PointsManagementViewModel(_session); });
             LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session); });
         }
     }

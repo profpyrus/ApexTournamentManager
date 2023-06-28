@@ -102,7 +102,6 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ItemContainerStyle="{StaticResource TeamListItemTheme}"
                                   ItemsSource="{Binding Teams}"
-                                  SelectedItem="{Binding SelectedTeam}"
                                   SelectionMode="Single">
                         </ListView>
                     </Grid>
@@ -148,7 +147,6 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ItemContainerStyle="{StaticResource MatchPlayerListItemTheme}"
                                   ItemsSource="{Binding Players}"
-                                  SelectedItem="{Binding SelectedPlayer}"
                                   SelectionMode="Single">
                         </ListView>
                     </Grid>

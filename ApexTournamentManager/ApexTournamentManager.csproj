@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\MatchManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\PointManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,10 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Model\basicData.cs" />
-    <Compile Include="MVVM\Model\LeaderboardData.cs" />
     <Compile Include="MVVM\Model\Match.cs" />
     <Compile Include="MVVM\Model\Player.cs" />
     <Compile Include="MVVM\Model\PlayerData.cs" />
+    <Compile Include="MVVM\Model\Points.cs" />
     <Compile Include="MVVM\Model\RankData.cs" />
     <Compile Include="MVVM\Model\Session.cs" />
     <Compile Include="MVVM\Model\Team.cs" />
@@ -130,6 +135,8 @@
     <Compile Include="MVVM\ViewModel\MatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\PlayerMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\PlayerViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\PointsManagementViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\PointsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamManagementViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
@@ -138,6 +145,9 @@
     </Compile>
     <Compile Include="MVVM\View\MatchManagementView.xaml.cs">
       <DependentUpon>MatchManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\PointManagementView.xaml.cs">
+      <DependentUpon>PointManagementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\TeamManagementView.xaml.cs">
       <DependentUpon>TeamManagementView.xaml</DependentUpon>

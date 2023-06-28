@@ -21,6 +21,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		{ 
 			_session = session;
 			_matches = new ObservableCollection<LeaderboardMatchViewModel>();
+			_matches.Add(new LeaderboardMatchViewModel(_session, "All Matches"));
 			foreach (Match match in _session.matches)
 			{
 				_matches.Add(new LeaderboardMatchViewModel(match, _session, "Match #" + match.number.ToString()));

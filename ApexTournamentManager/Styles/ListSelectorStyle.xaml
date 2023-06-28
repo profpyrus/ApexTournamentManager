@@ -92,30 +92,30 @@
                                     <TextBlock
                                            Foreground="{StaticResource TextColor}"
                                            VerticalAlignment="Center"
-                                           HorizontalAlignment="Stretch"
+                                           HorizontalAlignment="Center"
                                            TextAlignment="Left"
-                                           Margin="10,0,7,0">
-                                        <TextBlock.Text>
-                                            <MultiBinding StringFormat="{}#{0}">
-                                                <Binding Source="Rank"/>
-                                            </MultiBinding>
-                                        </TextBlock.Text>
+                                           Margin="10,0,7,0"
+                                           Text="{Binding Rank}"
+                                            Width="15">
                                     </TextBlock>
                                     <Border BorderBrush="{StaticResource BaseHighlight}"
-                                        BorderThickness="3"/>
+                                        BorderThickness="2"/>
                                 </StackPanel>
                                 <TextBlock Text="{Binding Name}"
                                            Grid.Column="1"
                                            Foreground="{StaticResource TextColor}"
                                            VerticalAlignment="Center"
-                                           Margin="7,0,7,0"/>
+                                           Margin="10,0,10,0"/>
                                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                                     <Border BorderBrush="{StaticResource BaseHighlight}"
-                                        BorderThickness="3"/>
-                                    <TextBlock Text="{Binding Value}"
+                                        BorderThickness="2"/>
+                                    <TextBlock Text="{Binding ValueRounded}"
                                            Foreground="{StaticResource TextColor}"
                                            VerticalAlignment="Center"
-                                           Margin="7,0,10,0"/>
+                                               TextAlignment="Center"
+                                           Margin="7,0,10,0"
+                                            Width="15"
+                                            ToolTip="{Binding ValueUnrounded}"/>
                                 </StackPanel>
 
                             </Grid>

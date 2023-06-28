@@ -34,8 +34,19 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _entities.Add(new LeaderboardEntityViewModel(_match, teams));
 		}
 
-		void SelectionChanged(object sender, SelectionChangedEventArgs args)
-		{
-		}
+        public LeaderboardMatchViewModel(Session session, string name)
+        {
+            _session = session;
+            Name = name;
+            _entities = new ObservableCollection<LeaderboardEntityViewModel>();
+            _entities.Add(new LeaderboardEntityViewModel(_session.matches, _session.GetAllPlayers()));
+            List<Team> teams = new List<Team>();
+            foreach (basicData team in _session.teams)
+            {
+                teams.Add(team as Team);
+            }
+
+            _entities.Add(new LeaderboardEntityViewModel(_session.matches, teams));
+        }
 	}
 }
