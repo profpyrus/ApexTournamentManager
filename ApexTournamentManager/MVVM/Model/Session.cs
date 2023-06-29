@@ -90,12 +90,12 @@ namespace ApexTournamentManager.MVVM.Model
             return team.AddPlayer(playerId, playerName);
         }
 
-        public Team AddTeam(Guid teamId, string teamName = null, int teamWins = 0)
+        public Team AddTeam(Guid teamId, string teamName = null)
         {
             if (teamName == null)
                 teamName = "Team " + (teams.Count + 1);
             int newTeamNumber = teams.Count + 1;
-            Team newTeam = new Team(teamId, newTeamNumber, teamName, teamWins);
+            Team newTeam = new Team(teamId, newTeamNumber, teamName);
             teams.Add(newTeam);
             return newTeam;
         }

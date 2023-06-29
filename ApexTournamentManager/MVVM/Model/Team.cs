@@ -15,15 +15,17 @@ namespace ApexTournamentManager.MVVM.Model
         public int teamNumber { get; set; }
         public ObservableCollection<basicData> players { get; set; }
 
-        public Team(Guid newId, int newTeamNumber, string newName, int newWins = 0)
+        public Team(Guid newId, int newTeamNumber, string newName)
         {
             id = newId; teamNumber = newTeamNumber; name = newName; players = new ObservableCollection<basicData>();
             AddPlayer(Guid.NewGuid());
         }
 
-		public Team(Guid newId, int newTeamNumber, string newName, int newWins, List<Player> newPlayers)
+		public Team(Guid newId, int newTeamNumber, string newName, List<Player> newPlayers)
 		{
 			id = newId; teamNumber = newTeamNumber; name = newName; players = new ObservableCollection<basicData>(newPlayers);
+            foreach (Player player in players)
+                player.team = this;
 		}
 
 		public void SetTeamNumber(int newTeamNumber)

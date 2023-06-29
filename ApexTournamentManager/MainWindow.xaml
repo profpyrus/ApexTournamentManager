@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ApexTournamentManager"
-        xmlns:viewModel="clr-namespace:ApexTournamentManager.MVVM.ViewModel"
         mc:Ignorable="d"
         Height="600" Width="1200"
         WindowStyle="None"
@@ -12,7 +10,7 @@
         Foreground="{StaticResource TextColor}"
         AllowsTransparency="True"
         FontFamily="Fonts/#Dosis"
-        FontWeight="DemiBold">
+        FontWeight="DemiBold" Title="Apex Legends Tournament Manager">
 
     <Grid>
         <Border Background="{StaticResource Base}" Style="{StaticResource DefaultBorderStyle}">

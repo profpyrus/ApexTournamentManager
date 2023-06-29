@@ -19,15 +19,23 @@ namespace ApexTournamentManager
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(string name, Application app)
+        public MainWindow(Session session, Application app)
         {
-            this.DataContext = new MainViewModel(name, this, app);
+            this.DataContext = new MainViewModel(session, this, app);
             InitializeComponent();
         }
+
+
+
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-    }
+
+		private void Button_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+
+		}
+	}
 }

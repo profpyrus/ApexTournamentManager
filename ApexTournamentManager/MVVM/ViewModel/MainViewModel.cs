@@ -45,13 +45,12 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public MainViewModel(string name, Window window, System.Windows.Application app)
+        public MainViewModel(Session session, Window window, System.Windows.Application app)
         {
             SaveAndLoadHandler snl = new SaveAndLoadHandler();
-            snl.DeserializeSession(snl.SerializeSession(new Session(Guid.NewGuid(), "Neue Session")));
 
 			_window = window;
-            _session = new Session(Guid.NewGuid(), name);
+            _session = session;
 
             obs = new ObsConnectionHandler();
 

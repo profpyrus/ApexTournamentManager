@@ -9,6 +9,9 @@ using ApexTournamentManager.MVVM.Model;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using System.CodeDom;
+using System.ComponentModel;
+using Microsoft.Win32;
+using System.IO;
 
 namespace ApexTournamentManager.Core
 {
@@ -21,18 +24,90 @@ namespace ApexTournamentManager.Core
 
 		public string SerializeSession(Session session)
 		{
-			return Newtonsoft.Json.JsonConvert.SerializeObject(session,
-				Newtonsoft.Json.Formatting.Indented, new Newtonsoft.Json.JsonSerializerSettings
+			return JsonConvert.SerializeObject(session,
+				Formatting.Indented, new JsonSerializerSettings
 				{ 
-					ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+					ReferenceLoopHandling = ReferenceLoopHandling.Ignore
 				});
+		}
+
+		public Session SaveSession(string SessionName)
+		{
+			SaveFileDialog dialog = new SaveFileDialog();
+
+			dialog.FileName = SessionName;
+			dialog.Filter = "Apex Legends Tournament Manager Session Files(*.atms)|*.atms";
+			dialog.DefaultExt = "atms";
+			dialog.ShowDialog();
+
+			Session session = new Session(Guid.NewGuid(), dialog.SafeFileName);
+
+			File.WriteAllText(dialog.FileName, SerializeSession(session));
+
+			return session;
 		}
 
 		public Session DeserializeSession(string json)
 		{
-			Newtonsoft.Json.Linq.JObject jsession = Newtonsoft.Json.Linq.JObject.Parse(json);
-			string test = jsession["name"].Value<string>();
-			return null;
+			JObject jsession = JObject.Parse(json);
+
+			List<Team> teams = new List<Team>();
+
+			foreach (JToken jteam in jsession["teams"])
+			{
+				List<Player> players = new List<Player>();
+
+				foreach(JToken jplayer in jteam["players"])
+				{
+					string pid = jplayer["id"].Value<string>();
+					string pname = jplayer["name"].Value<string>();
+					int teamPlayerNumber = jplayer["teamPlayerNumber"].Value<int>();
+					players.Add(new Player(Guid.Parse(pid), teamPlayerNumber, pname));
+				}
+
+				string tid = jteam["id"].Value<string>();
+				string tname = jteam["name"].Value<string>();
+				int teamNumber = jteam["teamNumber"].Value<int>();
+				teams.Add(new Team(Guid.Parse(tid), teamNumber, tname, players));
+			}
+
+
+			List<Match> matches = new List<Match>();
+
+			foreach (JToken jmatch in jsession["matches"])
+			{
+				string mid = jmatch["id"].Value<string>();
+				int mnumber = jmatch["number"].Value<int>();
+				Dictionary<Guid, int> teamPlacements = JsonConvert.DeserializeObject<Dictionary<Guid, int>>(jmatch["teamPlacements"].ToString());
+				Dictionary<Guid, JToken> jplayerData = JsonConvert.DeserializeObject<Dictionary<Guid, JToken>>(jmatch["playerData"].ToString());
+				Dictionary<Guid, PlayerData> playerData = new Dictionary<Guid, PlayerData>();
+
+                foreach(KeyValuePair<Guid, JToken> pair in jplayerData)
+					playerData[pair.Key] = new PlayerData(pair.Value.Value<int>("kills"), pair.Value.Value<int>("deaths"));
+                matches.Add(new Match(mnumber, Guid.Parse(mid), teamPlacements, playerData));
+			}
+
+
+			List<Point> killPoints = new List<Point>();
+
+			foreach(JToken jkillpoint in jsession["killPoints"])
+			{
+				killPoints.Add(new Point(jkillpoint["atLeast"].Value<int>(), jkillpoint["value"].Value<int>()));
+			}
+
+
+			List<Point> placementPoints = new List<Point>();
+
+			foreach (JToken jplacementpoint in jsession["placementPoints"])
+			{
+				placementPoints.Add(new Point(jplacementpoint["atLeast"].Value<int>(), jplacementpoint["value"].Value<int>()));
+			}
+
+
+			string sname = jsession["name"].Value<string>();
+			string sid = jsession["id"].Value<string>();
+
+			return new Session(Guid.Parse(sid), sname, teams, matches, killPoints, placementPoints);
 		}
 	}
 }

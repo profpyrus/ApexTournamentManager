@@ -102,6 +102,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OpenOrNewDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,6 +192,9 @@
     </Compile>
     <Compile Include="MVVM\View\TeamManagementView.xaml.cs">
       <DependentUpon>TeamManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OpenOrNewDialog.xaml.cs">
+      <DependentUpon>OpenOrNewDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

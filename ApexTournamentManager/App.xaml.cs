@@ -14,12 +14,20 @@ namespace ApexTournamentManager
     /// </summary>
     public partial class App : Application
     {
+        protected OpenOrNewDialog dialog;
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            Current.MainWindow = new MainWindow("Testsession", this);
-            Current.MainWindow.Show();
+			Current.MainWindow = new OpenOrNewDialog(this);
+			Current.MainWindow.Show();
 
-            base.OnStartup(e);
+			base.OnStartup(e);
         }
-    }
+
+        public void ValidPathFound(object sender, EventArgs e)
+		{
+			Current.MainWindow = new MainWindow("Testsession", this);
+			Current.MainWindow.Show();
+		}
+	}
 }
