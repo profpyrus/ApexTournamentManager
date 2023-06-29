@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="ApexTournamentManager.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ApexTournamentManager.MVVM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="535" d:DesignWidth="995"
+             FontFamily="/Fonts/#Dosis"
+             FontWeight="DemiBold"
+             FontSize="16"
+             Foreground="{StaticResource TextColor}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.RowSpan="10"
+                BorderBrush="{StaticResource Base}"
+                BorderThickness="8"
+                Margin="0,0,-8,0"
+                Style="{StaticResource DefaultBorderStyle}">
+            <StackPanel Margin="15">
+                <TextBlock Text="Session"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,10"
+                           FontSize="20"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Grid.RowSpan="10"
+                BorderBrush="{StaticResource Base}"
+                BorderThickness="8"
+                Margin="0,0,-8,0"
+                Style="{StaticResource DefaultBorderStyle}">
+            <StackPanel Margin="15">
+                <TextBlock Text="OBS Settings"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,10"
+                           FontSize="20"/>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,0,0,15">
+                    <StackPanel>
+                        <TextBlock Text="IP Address:"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,0"
+                           FontSize="16"/>
+                        <TextBox Style="{StaticResource TextBoxTheme}"
+                             Height="30"
+                             Width="150"
+                             Background="{StaticResource Base}"/>
+                    </StackPanel>
+                    <TextBlock Text=":"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           Margin="0,0,0,0"
+                           FontSize="20"/>
+                </StackPanel>
+                <Button Style="{StaticResource ButtonTheme}"
+                        Height="30"
+                        Content="Connect to OBS"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

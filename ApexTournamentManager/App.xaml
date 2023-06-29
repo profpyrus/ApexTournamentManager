@@ -19,6 +19,10 @@
             <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>
             <core:ObjectToLeaderboardValueViewModelConverter x:Key="ObjectToLeaderboardValueViewModelConverter"/>
 
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:TeamManagementViewModel}">
                 <view:TeamManagementView/>
             </DataTemplate>

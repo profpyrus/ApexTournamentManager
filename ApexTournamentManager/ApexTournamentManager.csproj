@@ -82,6 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="MVVM\View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\LeaderboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,13 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Model\basicData.cs" />
-    <Compile Include="MVVM\Model\Json\JMatch.cs" />
-    <Compile Include="MVVM\Model\Json\JPlayer.cs" />
-    <Compile Include="MVVM\Model\Json\JPlayerData.cs" />
-    <Compile Include="MVVM\Model\Json\JPoint.cs" />
-    <Compile Include="MVVM\Model\Json\JRankData.cs" />
-    <Compile Include="MVVM\Model\Json\JSession.cs" />
-    <Compile Include="MVVM\Model\Json\JTeam.cs" />
     <Compile Include="MVVM\Model\Match.cs" />
     <Compile Include="MVVM\Model\Player.cs" />
     <Compile Include="MVVM\Model\PlayerData.cs" />
@@ -161,6 +158,7 @@
     <Compile Include="MVVM\Model\RankData.cs" />
     <Compile Include="MVVM\Model\Session.cs" />
     <Compile Include="MVVM\Model\Team.cs" />
+    <Compile Include="MVVM\ViewModel\HomeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LeaderboardEntityViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LeaderboardMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LeaderboardValueViewModel.cs" />
@@ -175,6 +173,9 @@
     <Compile Include="MVVM\ViewModel\TeamManagementViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamMatchViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
+    <Compile Include="MVVM\View\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\LeaderboardView.xaml.cs">
       <DependentUpon>LeaderboardView.xaml</DependentUpon>
     </Compile>

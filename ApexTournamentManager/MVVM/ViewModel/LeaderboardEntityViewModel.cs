@@ -22,13 +22,13 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
 		public RelayCommand LeaderboardToOBS { get; set; }
 
-		private IEnumerable<RankData> _selectedDataset;
+		private LeaderboardValueViewModel _selectedDataset;
 		public LeaderboardValueViewModel SelectedDataset
 		{
 			set
 			{
-				if (value != null && value.Data.Count() != 0)
-					_selectedDataset = value.Data;
+				if (value != null)
+					_selectedDataset = value;
 			}
 		}
 

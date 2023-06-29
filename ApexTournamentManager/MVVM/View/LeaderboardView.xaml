@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ApexTournamentManager.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="535" d:DesignWidth="995">
+             d:DesignHeight="535" d:DesignWidth="995"
+             FontFamily="/Fonts/#Dosis"
+             FontWeight="DemiBold"
+             FontSize="16"
+             Foreground="{StaticResource TextColor}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

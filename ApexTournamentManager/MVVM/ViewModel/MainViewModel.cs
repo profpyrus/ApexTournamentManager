@@ -28,7 +28,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		public RelayCommand MinimizeWindow { get; set; }
 
 
-		public TeamManagementViewModel TeamVM { get; set; }
+        public HomeViewModel HomeVM { get; set; }
+        public TeamManagementViewModel TeamVM { get; set; }
         public PointsManagementViewModel PointVM { get; set; }
 
 
@@ -52,11 +53,11 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _session = new Session(Guid.NewGuid(), name);
 
             obs = new ObsConnectionHandler();
-            obs.Connect();
 
+            HomeVM = new HomeViewModel();
             TeamVM = new TeamManagementViewModel(_session);
             PointVM = new PointsManagementViewModel(_session);
-            CurrentView = PointVM;
+            CurrentView = HomeVM;
 
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });

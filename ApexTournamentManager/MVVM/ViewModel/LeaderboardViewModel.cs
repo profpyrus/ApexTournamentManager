@@ -32,7 +32,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
 		public void sendDataToObs(object sender, EventArgs e)
         {
-			_obs.SendLeaderboardToObs((IEnumerable<RankData>)sender);
+			_obs.SendLeaderboardToObs((LeaderboardValueViewModel)sender);
 		}
 	}
 }
