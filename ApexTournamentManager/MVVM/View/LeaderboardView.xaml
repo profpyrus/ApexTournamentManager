@@ -11,6 +11,14 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <StackPanel VerticalAlignment="Bottom"
+                    Margin="15,15,7,15">
+            <Button Content="Leaderboard to OBS"
+                    Style="{StaticResource ButtonTheme}"
+                    FontSize="12"
+                    Height="30"
+                    Command="{Binding LeaderboardOBS}"/>
+        </StackPanel>
         <Border Grid.Column="0" Grid.RowSpan="10"
                 BorderBrush="{StaticResource Base}"
                 BorderThickness="8"

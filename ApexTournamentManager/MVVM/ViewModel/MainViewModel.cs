@@ -6,17 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using OBSWebsocketDotNet;
-using OBSWebsocketDotNet.Communication;
-using OBSWebsocketDotNet.Types;
 using System.Windows.Forms;
 
 namespace ApexTournamentManager.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        private OBSWebsocket obs = new OBSWebsocket();
-
         private Window _window;
         private Session _session { get; set; }
 
@@ -49,15 +44,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         public MainViewModel(string name, Window window)
         {
-			System.Threading.Tasks.Task.Run(() =>
-			{
-			    obs.ConnectAsync("ws://localhost:4455", "");
+            string test = Newtonsoft.Json.JsonConvert.SerializeObject(new Session(Guid.NewGuid(), "SerializedSession"), Newtonsoft.Json.Formatting.Indented, new Newtonsoft.Json.JsonSerializerSettings { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore});
 
-			});
-            System.Threading.Thread.Sleep(1000);
-
-
-			obs.SetCurrentProgramScene("Szene");
 
 			_window = window;
             _session = new Session(Guid.NewGuid(), name);

@@ -28,7 +28,7 @@
             </Setter>
 
             <Setter Property="Background" Value="{StaticResource Base}"/>
-            <Setter Property="Border.CornerRadius" Value="0,0,10,10" />
+            <Setter Property="Border.CornerRadius" Value="10,10,10,10" />
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
 

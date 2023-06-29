@@ -112,6 +112,8 @@
     </Compile>
     <Compile Include="Core\Converter.cs" />
     <Compile Include="Core\ListSearchHelper.cs" />
+    <Compile Include="Core\ObsConnectionHandler.cs" />
+    <Compile Include="Core\ObsConnectionHandlerDefines.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -145,6 +147,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Model\basicData.cs" />
+    <Compile Include="MVVM\Model\Json\JMatch.cs" />
+    <Compile Include="MVVM\Model\Json\JPlayer.cs" />
+    <Compile Include="MVVM\Model\Json\JPlayerData.cs" />
+    <Compile Include="MVVM\Model\Json\JPoint.cs" />
+    <Compile Include="MVVM\Model\Json\JRankData.cs" />
+    <Compile Include="MVVM\Model\Json\JSession.cs" />
+    <Compile Include="MVVM\Model\Json\JTeam.cs" />
     <Compile Include="MVVM\Model\Match.cs" />
     <Compile Include="MVVM\Model\Player.cs" />
     <Compile Include="MVVM\Model\PlayerData.cs" />
@@ -205,8 +214,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MVVM\Model\Json\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
