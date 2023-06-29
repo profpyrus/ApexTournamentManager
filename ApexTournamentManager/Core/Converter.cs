@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApexTournamentManager.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -17,6 +18,20 @@ namespace ApexTournamentManager.Core
                 return Visibility.Hidden;
             else
                 return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    class ObjectToLeaderboardValueViewModelConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            LeaderboardValueViewModel test = value as LeaderboardValueViewModel;
+            return test;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

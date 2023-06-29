@@ -28,7 +28,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
                     newRank = sortedData[sortedData.IndexOf(dataPoint) - 1]._rank;
                 dataPoint._rank = newRank;
                 _data.Add(dataPoint);
-			}
-		}
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ApexTournamentManager.MVVM.Model;
 using OBSWebsocketDotNet;
 using OBSWebsocketDotNet.Types;
+using defines = ApexTournamentManager.Core.ObsConnectionHandlerDefines;
 
 namespace ApexTournamentManager.Core
 {
@@ -35,16 +36,12 @@ namespace ApexTournamentManager.Core
 
         public void SendLeaderboardToObs(IEnumerable<RankData> data)
         {
-            List<SceneItemDetails> items = obs.GetSceneItemList("ATMs");
-            foreach (SceneItemDetails item in items)
-            {
-                if (item.SourceKind == null && item.SourceName.Contains("ATMr"))
-                {
-                    InputSettings set = obs.GetInputSettings("ATMr1n");
-                    set.Settings["text"] = "Und?";
-                    obs.SetInputSettings(set);
-                }
-            }
+            InputSettings set = obs.GetInputSettings("ATMr1n");
+            set.Settings["text"] = data.First().Name;
+            obs.SetInputSettings(set);
+            set = obs.GetInputSettings("ATMr1r");
+            set.Settings["text"] = "#" + data.First().Rank;
+            obs.SetInputSettings(set);
         }
     }
 }

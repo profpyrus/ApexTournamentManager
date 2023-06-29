@@ -11,20 +11,21 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel VerticalAlignment="Bottom"
-                    Margin="15,15,7,15">
-            <Button Content="Leaderboard to OBS"
-                    Style="{StaticResource ButtonTheme}"
-                    FontSize="12"
-                    Height="30"
-                    Command="{Binding LeaderboardOBS}"/>
-        </StackPanel>
         <Border Grid.Column="0" Grid.RowSpan="10"
                 BorderBrush="{StaticResource Base}"
                 BorderThickness="8"
                 Margin="0,0,-8,0"
                 Style="{StaticResource DefaultBorderStyle}">
         </Border>
+        <StackPanel VerticalAlignment="Bottom"
+                    Margin="15,15,7,15"
+                    DataContext="{Binding SelectedItem, ElementName=EntityComboBox, UpdateSourceTrigger=PropertyChanged}">
+            <Button Content="Leaderboard to OBS"
+                    Style="{StaticResource ButtonTheme}"
+                    FontSize="12"
+                    Height="30"
+                    Command="{Binding LeaderboardToOBS}"/>
+        </StackPanel>
         <Grid Margin="8" Grid.ColumnSpan="2">
             <ComboBox Margin="10,10,0,10"
                       IsSynchronizedWithCurrentItem="True"
@@ -40,7 +41,8 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Grid DataContext="{Binding Matches}">
-                <ComboBox Margin="10,60,0,10"
+                <ComboBox x:Name="EntityComboBox"
+                          Margin="10,60,0,10"
                           IsSynchronizedWithCurrentItem="True"
                           Height="20"
                           Width="165"
@@ -60,6 +62,7 @@
                               Width="165"
                               VerticalAlignment="Top"
                               HorizontalAlignment="Left"
+                              SelectedItem="{Binding SelectedDataset, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -67,12 +70,13 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Grid Margin="212,0,0,0"
+                    <Grid Margin="0,0,0,0"
                           DataContext="{Binding Values}">
                         <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ScrollViewer.PanningMode="HorizontalOnly"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   BorderThickness="0"
+                                  Margin="212,0,0,0"
                                   Style="{StaticResource ListSelectorTheme}"
                                   ItemContainerStyle="{StaticResource LeaderboardListItemTheme}"
                                   ItemsSource="{Binding Data}"
@@ -86,7 +90,6 @@
                                 </ItemsPanelTemplate>
                             </ListView.ItemsPanel>
                         </ListView>
-
                     </Grid>
                 </Grid>
             </Grid>

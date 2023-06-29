@@ -16,6 +16,9 @@
                 <ResourceDictionary Source="/Styles/TextBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>
+            <core:ObjectToLeaderboardValueViewModelConverter x:Key="ObjectToLeaderboardValueViewModelConverter"/>
+
             <DataTemplate DataType="{x:Type viewModel:TeamManagementViewModel}">
                 <view:TeamManagementView/>
             </DataTemplate>
@@ -31,8 +34,6 @@
             <DataTemplate DataType="{x:Type viewModel:LeaderboardViewModel}">
                 <view:LeaderboardView/>
             </DataTemplate>
-
-            <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>
 
         </ResourceDictionary>
     </Application.Resources>

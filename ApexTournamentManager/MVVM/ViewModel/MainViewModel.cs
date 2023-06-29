@@ -15,6 +15,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
         private Window _window;
         private Session _session { get; set; }
 
+        ObsConnectionHandler obs;
+
         public String SessionName { get { return _session.name; } }
 
         public RelayCommand TeamViewCommand { get; set; }
@@ -46,9 +48,11 @@ namespace ApexTournamentManager.MVVM.ViewModel
         {
             string test = Newtonsoft.Json.JsonConvert.SerializeObject(new Session(Guid.NewGuid(), "SerializedSession"), Newtonsoft.Json.Formatting.Indented, new Newtonsoft.Json.JsonSerializerSettings { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore});
 
-
 			_window = window;
             _session = new Session(Guid.NewGuid(), name);
+
+            obs = new ObsConnectionHandler();
+            obs.Connect();
 
             TeamVM = new TeamManagementViewModel(_session);
             PointVM = new PointsManagementViewModel(_session);
@@ -57,7 +61,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
             PointsViewCommand = new RelayCommand(o => { CurrentView = PointVM; });
-            LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session); });
+            LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session, obs); });
 
             CloseWindow = new RelayCommand(o => { _window.Close(); });
 			MinimizeWindow = new RelayCommand(o => { _window.WindowState = WindowState.Minimized; });

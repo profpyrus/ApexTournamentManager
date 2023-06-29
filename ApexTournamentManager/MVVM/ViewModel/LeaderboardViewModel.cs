@@ -16,16 +16,23 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		private ObservableCollection<LeaderboardMatchViewModel> _matches;
 		public IEnumerable<LeaderboardMatchViewModel> Matches { get { return _matches; } }
 
+		private ObsConnectionHandler _obs;
 
-		public LeaderboardViewModel(Session session)
+		public LeaderboardViewModel(Session session, ObsConnectionHandler obs)
 		{ 
 			_session = session;
 			_matches = new ObservableCollection<LeaderboardMatchViewModel>();
-			_matches.Add(new LeaderboardMatchViewModel(_session, "All Matches"));
+			_matches.Add(new LeaderboardMatchViewModel(_session, "All Matches", this));
 			foreach (Match match in _session.matches)
 			{
-				_matches.Add(new LeaderboardMatchViewModel(match, _session, "Match #" + match.number.ToString()));
+				_matches.Add(new LeaderboardMatchViewModel(match, _session, "Match #" + match.number.ToString(), this));
 			}
+			_obs = obs;
+		}
+
+		public void sendDataToObs(object sender, EventArgs e)
+        {
+			_obs.SendLeaderboardToObs((IEnumerable<RankData>)sender);
 		}
 	}
 }

@@ -18,35 +18,35 @@ namespace ApexTournamentManager.MVVM.ViewModel
         public IEnumerable<LeaderboardEntityViewModel> Entities { get{ return _entities; } }
         public string Name { get; }
 
-        public LeaderboardMatchViewModel(Match match, Session session, string name)
+        public LeaderboardMatchViewModel(Match match, Session session, string name, LeaderboardViewModel vm)
         {
             Name = name;
             _session = session;
             _match = match;
             _entities = new ObservableCollection<LeaderboardEntityViewModel>();
-            _entities.Add(new LeaderboardEntityViewModel(_session, _match, _session.GetAllPlayers()));
+            _entities.Add(new LeaderboardEntityViewModel(_session, _match, _session.GetAllPlayers(), vm));
             List<Team> teams = new List<Team>();
             foreach (basicData team in _session.teams)
             {
                 teams.Add(team as Team);
             }
 
-            _entities.Add(new LeaderboardEntityViewModel(_session, _match, teams));
+            _entities.Add(new LeaderboardEntityViewModel(_session, _match, teams, vm));
 		}
 
-        public LeaderboardMatchViewModel(Session session, string name)
+        public LeaderboardMatchViewModel(Session session, string name, LeaderboardViewModel vm)
         {
             _session = session;
             Name = name;
             _entities = new ObservableCollection<LeaderboardEntityViewModel>();
-            _entities.Add(new LeaderboardEntityViewModel(_session, _session.GetAllPlayers()));
+            _entities.Add(new LeaderboardEntityViewModel(_session, _session.GetAllPlayers(), vm));
             List<Team> teams = new List<Team>();
             foreach (basicData team in _session.teams)
             {
                 teams.Add(team as Team);
             }
 
-            _entities.Add(new LeaderboardEntityViewModel(_session, teams));
+            _entities.Add(new LeaderboardEntityViewModel(_session, teams, vm));
         }
 	}
 }

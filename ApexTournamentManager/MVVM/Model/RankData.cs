@@ -13,7 +13,7 @@ namespace ApexTournamentManager.MVVM.Model
         {
             get
             {
-                return "#" + _rank.ToString();
+                return _rank.ToString();
             }
         }
 		public string Name { get; set; }

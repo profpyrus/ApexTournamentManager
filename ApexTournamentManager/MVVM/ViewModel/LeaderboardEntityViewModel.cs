@@ -12,13 +12,27 @@ namespace ApexTournamentManager.MVVM.ViewModel
 {
 	internal class LeaderboardEntityViewModel : ObservableObject
 	{
+		public EventHandler dataToObs;
+
 		private readonly Session _session;
 		private readonly Match _match;
 		private readonly ObservableCollection<LeaderboardValueViewModel> _values;
         public IEnumerable<LeaderboardValueViewModel> Values { get { return _values; } }
 		public string Name { get; }
 
-        public LeaderboardEntityViewModel(Session session, Match match, IEnumerable<Player> players)
+		public RelayCommand LeaderboardToOBS { get; set; }
+
+		private IEnumerable<RankData> _selectedDataset;
+		public LeaderboardValueViewModel SelectedDataset
+		{
+			set
+			{
+				if (value != null && value.Data.Count() != 0)
+					_selectedDataset = value.Data;
+			}
+		}
+
+		public LeaderboardEntityViewModel(Session session, Match match, IEnumerable<Player> players, LeaderboardViewModel vm)
 		{
 			_session = session;
 			_match = match;
@@ -72,9 +86,16 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			_values.Add(new LeaderboardValueViewModel(deathData, "Deaths"));
 			_values.Add(new LeaderboardValueViewModel(kdData, "K/D"));
 			_values.Add(new LeaderboardValueViewModel(pointsData, "Points"));
+
+			LeaderboardToOBS = new RelayCommand(o =>
+			{
+				dataToObs.Invoke(_selectedDataset, EventArgs.Empty);
+			});
+
+			dataToObs += vm.sendDataToObs;
 		}
 
-		public LeaderboardEntityViewModel(Session session, Match match, IEnumerable<Team> teams)
+		public LeaderboardEntityViewModel(Session session, Match match, IEnumerable<Team> teams, LeaderboardViewModel vm)
 		{
 			_session = session;
 			_match = match;
@@ -113,9 +134,16 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			_values.Add(new LeaderboardValueViewModel(placementsData, "Placements"));
 			_values.Add(new LeaderboardValueViewModel(killsData, "Kills"));
 			_values.Add(new LeaderboardValueViewModel(pointsData, "Points"));
+
+			LeaderboardToOBS = new RelayCommand(o =>
+			{
+				dataToObs.Invoke(_selectedDataset, EventArgs.Empty);
+			});
+
+			dataToObs += vm.sendDataToObs;
 		}
 
-		public LeaderboardEntityViewModel(Session session, IEnumerable<Player> players)
+		public LeaderboardEntityViewModel(Session session, IEnumerable<Player> players, LeaderboardViewModel vm)
 		{
 			_session = session;
 			IEnumerable<Match> matches = _session.matches;
@@ -188,9 +216,16 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			_values.Add(new LeaderboardValueViewModel(deathsTotalData, "Deaths (Total)"));
 			_values.Add(new LeaderboardValueViewModel(deathsAvrgData, "Deaths (Average)"));
 			_values.Add(new LeaderboardValueViewModel(kdData, "K/D"));
+
+			LeaderboardToOBS = new RelayCommand(o =>
+			{
+				dataToObs.Invoke(_selectedDataset, EventArgs.Empty);
+			});
+
+			dataToObs += vm.sendDataToObs;
 		}
 
-		public LeaderboardEntityViewModel(Session session, IEnumerable<Team> teams)
+		public LeaderboardEntityViewModel(Session session, IEnumerable<Team> teams, LeaderboardViewModel vm)
 		{
 			_session = session;
 			IEnumerable<Match> matches = _session.matches;
@@ -272,6 +307,13 @@ namespace ApexTournamentManager.MVVM.ViewModel
 				_values.Add(new LeaderboardValueViewModel(placementsTotalData, "Placements (Total)"));
 				_values.Add(new LeaderboardValueViewModel(placementsAvrgData, "Placements (Average)"));
 			}
+
+			LeaderboardToOBS = new RelayCommand(o =>
+			{
+				dataToObs.Invoke(_selectedDataset, EventArgs.Empty);
+			});
+
+			dataToObs += vm.sendDataToObs;
 		}
 	}
 }
