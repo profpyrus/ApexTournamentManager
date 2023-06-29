@@ -13,12 +13,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="315"/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Grid.RowSpan="10"
                 BorderBrush="{StaticResource Base}"
                 BorderThickness="8"
-                Margin="0,0,-8,0"
+                Margin="0"
                 Style="{StaticResource DefaultBorderStyle}">
             <StackPanel Margin="15">
                 <TextBlock Text="Session"
@@ -31,35 +31,92 @@
         <Border Grid.Column="1" Grid.RowSpan="10"
                 BorderBrush="{StaticResource Base}"
                 BorderThickness="8"
-                Margin="0,0,-8,0"
+                Margin="15,0,0,0"
                 Style="{StaticResource DefaultBorderStyle}">
-            <StackPanel Margin="15">
-                <TextBlock Text="OBS Settings"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,10"
-                           FontSize="20"/>
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,15">
-                    <StackPanel>
-                        <TextBlock Text="IP Address:"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,0"
-                           FontSize="16"/>
-                        <TextBox Style="{StaticResource TextBoxTheme}"
-                             Height="30"
-                             Width="150"
-                             Background="{StaticResource Base}"/>
+            <Grid Margin="15">
+                <StackPanel>
+                    <TextBlock Text="OBS Settings"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,15"
+                               FontSize="20"/>
+                    <Border Style="{StaticResource DefaultBorderStyle}"
+                            BorderThickness="4"
+                            BorderBrush="{StaticResource Base}"
+                            CornerRadius="2"
+                            Margin="-19,0,-19,15"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="IP Address:"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,0"
+                               FontSize="16"/>
+                            <TextBox Style="{StaticResource TextBoxTheme}"
+                                     Text="{Binding IPText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="120"
+                                     Height="30"
+                                     TextAlignment="left"
+                                     HorizontalAlignment="Stretch"
+                                     Padding="5,0"
+                                     Foreground="{StaticResource TextColor}"
+                                     Background="{StaticResource Base}"/>
+                        </StackPanel>
+                        <TextBlock Text=":"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Margin="0,0,0,0"
+                               Height="30"
+                               FontSize="20"/>
+                        <StackPanel>
+                            <TextBlock Text="Port:"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,0"
+                               FontSize="16"/>
+                            <TextBox Style="{StaticResource TextBoxTheme}"
+                                     Text="{Binding PortText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Width="70"
+                                     Height="30"
+                                     TextAlignment="Left"
+                                     HorizontalAlignment="Stretch"
+                                     Padding="5,0"
+                                     Foreground="{StaticResource TextColor}"
+                                     Background="{StaticResource Base}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <TextBlock Text=":"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Bottom"
-                           Margin="0,0,0,0"
-                           FontSize="20"/>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Button Style="{StaticResource ButtonTheme}"
+                                Height="35"
+                                Margin="0,0,10,0"
+                                Width="120"
+                                FontFamily="/Fonts/#Dosis"
+                                Content="Connect to OBS"
+                                Command="{Binding ConnectToOBS}"/>
+                        <Border CornerRadius="10"
+                                Height="35"
+                                Width="35"
+                                Background="{Binding ConnectionStatus}"/>
+                    </StackPanel>
+                    <Border Style="{StaticResource DefaultBorderStyle}"
+                            BorderThickness="4"
+                            BorderBrush="{StaticResource Base}"
+                            CornerRadius="2"
+                            Margin="-19,15,-19,15"/>
+                    <Button Style="{StaticResource ButtonTheme}"
+                            Height="35"
+                            Margin="10,0,10,10"
+                            FontFamily="/Fonts/#Dosis"
+                            Content="Send Testvalues to OBS"
+                            Command="{Binding TestvaluesToOBS}"/>
+                    <Button Style="{StaticResource ButtonTheme}"
+                            Height="35"
+                            Margin="10,0,10,10"
+                            FontFamily="/Fonts/#Dosis"
+                            Content="Clear OBS Leaderboard"
+                            Command="{Binding ClearvaluesToOBS}"/>
                 </StackPanel>
-                <Button Style="{StaticResource ButtonTheme}"
-                        Height="30"
-                        Content="Connect to OBS"/>
-            </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

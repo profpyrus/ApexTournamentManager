@@ -33,7 +33,7 @@
         <Grid Margin="8" Grid.ColumnSpan="2">
             <ComboBox Margin="10,10,0,10"
                       IsSynchronizedWithCurrentItem="True"
-                      Height="20"
+                      Height="30"
                       Width="165"
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left"
@@ -48,7 +48,7 @@
                 <ComboBox x:Name="EntityComboBox"
                           Margin="10,60,0,10"
                           IsSynchronizedWithCurrentItem="True"
-                          Height="20"
+                          Height="30"
                           Width="165"
                           VerticalAlignment="Top"
                           HorizontalAlignment="Left"
@@ -62,7 +62,7 @@
                 <Grid DataContext="{Binding Entities}">
                     <ComboBox Margin="10,110,0,10"
                               IsSynchronizedWithCurrentItem="True"
-                              Height="20"
+                              Height="30"
                               Width="165"
                               VerticalAlignment="Top"
                               HorizontalAlignment="Left"

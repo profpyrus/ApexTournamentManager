@@ -1,8 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="MenuButtonHover" Color="#43277d"/>
-    <SolidColorBrush x:Key="BaseHighlight" Color="#361f64"/>
-    <SolidColorBrush x:Key="Base" Color="#28174b"/>
-    <SolidColorBrush x:Key="TopBar" Color="#1b0f32"/>
-    <SolidColorBrush x:Key="TextColor" Color="#e6e6e6"/>
+    <SolidColorBrush x:Key="MenuButtonHover"    Color="#14244a"/>
+    <SolidColorBrush x:Key="BaseHighlight"      Color="#101b36"/>
+    <SolidColorBrush x:Key="Base"               Color="#0d1426"/>
+    <SolidColorBrush x:Key="NotConnected"       Color="#400a0e"/>
+    <SolidColorBrush x:Key="Connected"          Color="#12380f"/>
+    <SolidColorBrush x:Key="TopBar"             Color="#0c101c"/>
+    <SolidColorBrush x:Key="TextColor"          Color="#e6e6e6"/>
 </ResourceDictionary>

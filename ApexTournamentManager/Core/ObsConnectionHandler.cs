@@ -40,16 +40,26 @@ namespace ApexTournamentManager.Core
             List<RankData> ranks = new List<RankData>();
             for(int i = 1; i <= 30; i++)
             {
-                ranks.Add(new RankData(i + ". PLACE", i));
-            }
-            SendLeaderboardToObs(new LeaderboardValueViewModel(ranks, "TESTRANKING"));
+                ranks.Add(new RankData(i + ". PLACE", 31-i));
+			}
+			SendLeaderboardToObs(new LeaderboardValueViewModel(ranks, "TESTRANKING"));
         }
+
+        public void ClearLeaderboardToObs()
+        {
+			for (int i = 1; i <= 30; i++)
+			{
+				ClearObsRank(i);
+			}
+            ClearObsTextSource(defines.itemNamePrefix + defines.rankedByKey);
+		}
 
         public void SendLeaderboardToObs(LeaderboardValueViewModel vm)
         {
             List<RankData> data = vm.Data.ToList();
             int i = 0;
-            foreach(RankData rank in data)
+			WriteToObsTextSource(vm.Name, defines.itemNamePrefix + defines.rankedByKey);
+			foreach (RankData rank in data)
             {
                 i += 1;
                 int index = data.IndexOf(rank) + 1;
@@ -60,12 +70,11 @@ namespace ApexTournamentManager.Core
                 i += 1;
                 ClearObsRank(i);
             }
-            WriteToObsTextSource(defines.itemNamePrefix + defines.rankedByKey, vm.Name);
         }
 
         public void WriteToObsRank(int index, string rank, string name, double points)
         {
-            string itemPrefix = defines.itemNamePrefix + index;
+            string itemPrefix = defines.itemNamePrefix + index.ToString();
             WriteToObsTextSource("#" + rank, itemPrefix + defines.rankKey);
             WriteToObsTextSource(name, itemPrefix + defines.nameKey);
             WriteToObsTextSource(points.ToString(), itemPrefix + defines.pointKey);
@@ -91,5 +100,18 @@ namespace ApexTournamentManager.Core
             {
             }
         }
-    }
+
+		public void ClearObsTextSource(string name)
+		{
+			try
+			{
+				InputSettings set = obs.GetInputSettings(name);
+				set.Settings["text"] = "";
+				obs.SetInputSettings(set);
+			}
+			catch (OBSWebsocketDotNet.ErrorResponseException e)
+			{
+			}
+		}
+	}
 }

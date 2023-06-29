@@ -31,13 +31,14 @@
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"
                                  FontSize="16"
-                                 Style="{StaticResource MenuBottonTheme}"/>
+                                 IsChecked="True"
+                                 Style="{StaticResource MenuBottonTheme}"
+                                 Command="{Binding HomeViewCommand}"/>
 
                     <RadioButton Content="Point Management"
                                  Height="50"
                                  Foreground="{StaticResource TextColor}"
                                  FontSize="16"
-                                 IsChecked="True"
                                  Style="{StaticResource MenuBottonTheme}"
                                  Command="{Binding PointsViewCommand}"/>
 

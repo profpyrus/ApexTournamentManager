@@ -17,7 +17,7 @@
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        TextAlignment="Center"
-                                       FontFamily="Fonts/#Dosis"
+                                       FontFamily="{TemplateBinding FontFamily}"
                                        FontSize="{TemplateBinding FontSize}"
                                        FontWeight="DemiBold"
                                        Foreground="{StaticResource TextColor}"/>

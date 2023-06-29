@@ -12,7 +12,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        private Window _window;
+		private Window _window;
         private Session _session { get; set; }
 
         ObsConnectionHandler obs;
@@ -45,16 +45,17 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public MainViewModel(string name, Window window)
+        public MainViewModel(string name, Window window, System.Windows.Application app)
         {
-            string test = Newtonsoft.Json.JsonConvert.SerializeObject(new Session(Guid.NewGuid(), "SerializedSession"), Newtonsoft.Json.Formatting.Indented, new Newtonsoft.Json.JsonSerializerSettings { ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore});
+            SaveAndLoadHandler snl = new SaveAndLoadHandler();
+            snl.DeserializeSession(snl.SerializeSession(new Session(Guid.NewGuid(), "Neue Session")));
 
 			_window = window;
             _session = new Session(Guid.NewGuid(), name);
 
             obs = new ObsConnectionHandler();
 
-            HomeVM = new HomeViewModel();
+            HomeVM = new HomeViewModel(obs, app);
             TeamVM = new TeamManagementViewModel(_session);
             PointVM = new PointsManagementViewModel(_session);
             CurrentView = HomeVM;

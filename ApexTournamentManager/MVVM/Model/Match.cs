@@ -29,5 +29,12 @@ namespace ApexTournamentManager.MVVM.Model
                 }
             }
         }
-    }
+
+		public Match(int matchNumber, Guid matchId, Dictionary<Guid, int> newTeamPlacements, Dictionary<Guid, PlayerData> newPlayerData)
+		{
+			teamPlacements = newTeamPlacements;
+            playerData = newPlayerData;
+			number = matchNumber; id = matchId;
+		}
+	}
 }

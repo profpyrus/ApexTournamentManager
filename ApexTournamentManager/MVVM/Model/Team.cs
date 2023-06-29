@@ -21,7 +21,12 @@ namespace ApexTournamentManager.MVVM.Model
             AddPlayer(Guid.NewGuid());
         }
 
-        public void SetTeamNumber(int newTeamNumber)
+		public Team(Guid newId, int newTeamNumber, string newName, int newWins, List<Player> newPlayers)
+		{
+			id = newId; teamNumber = newTeamNumber; name = newName; players = new ObservableCollection<basicData>(newPlayers);
+		}
+
+		public void SetTeamNumber(int newTeamNumber)
         {
             teamNumber = newTeamNumber;
             NotifyPropertyChanged("teamNumber");

@@ -28,7 +28,14 @@ namespace ApexTournamentManager.MVVM.Model
             matches.Add(new Match(matches.Count + 1, Guid.NewGuid(), teams));
         }
 
-        private void DefaultPoints()
+		public Session(Guid newId, string newName, IEnumerable<Team> newTeams, IEnumerable<Match> newMatches, IEnumerable<Point> newKillPoints, IEnumerable<Point> newPlacementPoints)
+		{
+			name = newName; id = newId;
+			teams = new ObservableCollection<basicData>(newTeams); matches = new ObservableCollection<Match>(newMatches);
+			killPoints = new ObservableCollection<Point>(newKillPoints); placementPoints = new ObservableCollection<Point>(newPlacementPoints);
+		}
+
+		private void DefaultPoints()
         {
             DefaultPlacementPoints();
             DefaultKillPoints();
