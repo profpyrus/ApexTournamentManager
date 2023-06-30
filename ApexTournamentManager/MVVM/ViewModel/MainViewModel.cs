@@ -17,6 +17,11 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         ObsConnectionHandler obs;
 
+        public Session session
+        {
+            get { return _session; }
+            set { _session = value; OnPropertyChanged(nameof(SessionName)); }
+        }
         public String SessionName { get { return _session.name; } }
 
         public RelayCommand HomeViewCommand { get; set; }
@@ -55,18 +60,16 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
             obs = new ObsConnectionHandler();
 
-            HomeVM = new HomeViewModel(obs, app);
-            TeamVM = new TeamManagementViewModel(_session);
-            PointVM = new PointsManagementViewModel(_session);
+            HomeVM = new HomeViewModel(obs,this, app, snl);
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
-            TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
+            TeamViewCommand = new RelayCommand(o => { CurrentView = new TeamManagementViewModel(_session); });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
-            PointsViewCommand = new RelayCommand(o => { CurrentView = PointVM; });
+            PointsViewCommand = new RelayCommand(o => { CurrentView = new PointsManagementViewModel(_session); });
             LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session, obs); });
 
-            CloseWindow = new RelayCommand(o => { _window.Close(); });
+            CloseWindow = new RelayCommand(o => { HomeVM.SaveSession.Execute(this); _window.Close(); });
 			MinimizeWindow = new RelayCommand(o => { _window.WindowState = WindowState.Minimized; });
 		}
     }

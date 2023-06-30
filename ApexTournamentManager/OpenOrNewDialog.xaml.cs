@@ -50,11 +50,13 @@ namespace ApexTournamentManager
 		private void CreateNewSession_Click(object sender, RoutedEventArgs e)
 		{
 			FoundValidFile?.Invoke(snl.CreateSession(SessionName), EventArgs.Empty);
+			this.Close();
 		}
 
 		private void OpenSession_Click(object sender, RoutedEventArgs e)
 		{
-
+			FoundValidFile?.Invoke("", EventArgs.Empty);
+			this.Close();
 		}
 
 		private void Cancel_Click(object sender, RoutedEventArgs e)

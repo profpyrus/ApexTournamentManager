@@ -113,5 +113,10 @@ namespace ApexTournamentManager.Core
 			{
 			}
 		}
+
+        public void CreateAllRankTextsources()
+        {
+
+        }
 	}
 }

@@ -30,14 +30,29 @@ namespace ApexTournamentManager.Core
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.FileName = SessionName;
 
-			GetFileDialog(dialog);
+			if ((bool)GetFileDialog(dialog))
+			{
+				string sessionName = dialog.SafeFileName.Substring(0, dialog.SafeFileName.Length - 5);
+				Session session = new Session(Guid.NewGuid(), sessionName, dialog.FileName);
 
-			string sessionName = dialog.SafeFileName.Substring(0, dialog.SafeFileName.Length - 5);
-			Session session = new Session(Guid.NewGuid(), sessionName, dialog.FileName);
+				SaveSession(session);
 
-			SaveSession(session);
+				return dialog.FileName;
+			}
+			else return null;
+		}
 
-			return dialog.FileName;
+		public void SaveSessionAs(Session session)
+		{
+			SaveFileDialog dialog = new SaveFileDialog();
+			dialog.FileName = session.name;
+
+			if ((bool)GetFileDialog(dialog))
+			{
+				string sessionName = dialog.SafeFileName.Substring(0, dialog.SafeFileName.Length - 5);
+
+				SaveSession(session);
+			}
 		}
 
 		public void SaveSession(Session session)
@@ -49,23 +64,30 @@ namespace ApexTournamentManager.Core
         {
 			OpenFileDialog dialog = new OpenFileDialog();
 
-			GetFileDialog(dialog);
-
-			string ssession = File.ReadAllText(dialog.FileName);
-			return DeserializeSession(ssession, dialog.FileName);
+			if ((bool)GetFileDialog(dialog))
+			{
+				string ssession = File.ReadAllText(dialog.FileName);
+				return DeserializeSession(ssession, dialog.FileName);
+			}
+			else return null;
         }
 
 		public Session OpenSession(string path)
 		{
-			string ssession = File.ReadAllText(path);
-			return DeserializeSession(ssession, path);
+			if (path == "")
+				return OpenSession();
+			else
+			{
+				string ssession = File.ReadAllText(path);
+				return DeserializeSession(ssession, path);
+			}
 		}
 
-		public void GetFileDialog(FileDialog dialog)
+		public bool? GetFileDialog(FileDialog dialog)
 		{
 			dialog.Filter = filter;
 			dialog.DefaultExt = defaultExt;
-			dialog.ShowDialog();
+			return dialog.ShowDialog();
 		}
 
 		public string SerializeSession(Session session)
