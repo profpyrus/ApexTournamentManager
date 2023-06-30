@@ -20,6 +20,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
         public IEnumerable<LeaderboardValueViewModel> Values { get { return _values; } }
 		public string Name { get; }
 
+		public bool IsConnected { get; private set; }
+
 		public RelayCommand LeaderboardToOBS { get; set; }
 
 		private LeaderboardValueViewModel _selectedDataset;
@@ -93,6 +95,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			});
 
 			dataToObs += vm.sendDataToObs;
+			IsConnected = vm.IsConnected;
 		}
 
 		public LeaderboardEntityViewModel(Session session, Match match, IEnumerable<Team> teams, LeaderboardViewModel vm)
@@ -141,6 +144,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			});
 
 			dataToObs += vm.sendDataToObs;
+			IsConnected = vm.IsConnected;
 		}
 
 		public LeaderboardEntityViewModel(Session session, IEnumerable<Player> players, LeaderboardViewModel vm)
@@ -223,6 +227,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			});
 
 			dataToObs += vm.sendDataToObs;
+			IsConnected = vm.IsConnected;
 		}
 
 		public LeaderboardEntityViewModel(Session session, IEnumerable<Team> teams, LeaderboardViewModel vm)
@@ -314,6 +319,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			});
 
 			dataToObs += vm.sendDataToObs;
+			IsConnected = vm.IsConnected;
 		}
 	}
 }

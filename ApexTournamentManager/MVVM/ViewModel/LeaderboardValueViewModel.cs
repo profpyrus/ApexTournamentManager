@@ -15,12 +15,13 @@ namespace ApexTournamentManager.MVVM.ViewModel
         public IEnumerable<RankData> Data { get { return _data; } }
         public string Name { get; }
 
-        public LeaderboardValueViewModel(List<RankData> data, string name)
+        public LeaderboardValueViewModel(List<RankData> data, string name, bool AscendingOrder = false)
         {
             Name = name;
             _data = new ObservableCollection<RankData>();
             List<RankData> sortedData = data.OrderBy(o => o.ValueUnrounded).ToList();
-            sortedData.Reverse();
+            if(!AscendingOrder)
+                sortedData.Reverse();
             foreach (RankData dataPoint in sortedData)
             {
                 int newRank = sortedData.IndexOf(dataPoint) + 1;

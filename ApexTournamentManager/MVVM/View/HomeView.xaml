@@ -83,7 +83,7 @@
                             Margin="-19,0,-19,15"/>
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center"
-                                Margin="0,0,0,15">
+                                Margin="0,0,0,10">
                         <StackPanel>
                             <TextBlock Text="IP Address:"
                                HorizontalAlignment="Center"
@@ -145,13 +145,67 @@
                             Margin="10,0,10,10"
                             FontFamily="/Fonts/#Dosis"
                             Content="Send Testvalues to OBS"
+                            IsEnabled="{Binding IsConnected}"
                             Command="{Binding TestvaluesToOBS}"/>
                     <Button Style="{StaticResource ButtonTheme}"
                             Height="35"
                             Margin="10,0,10,10"
                             FontFamily="/Fonts/#Dosis"
                             Content="Clear OBS Leaderboard"
+                            IsEnabled="{Binding IsConnected}"
                             Command="{Binding ClearvaluesToOBS}"/>
+                    <Border Style="{StaticResource DefaultBorderStyle}"
+                            BorderThickness="4"
+                            BorderBrush="{StaticResource Base}"
+                            CornerRadius="2"
+                            Margin="-19,15,-19,15"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Template Name"
+                               HorizontalAlignment="Center"
+                               Margin="10,0,7,0"
+                               FontSize="16"/>
+                        <TextBox Style="{StaticResource TextBoxTheme}"
+                                 Grid.Row="1"
+                                 Text="{Binding TemplateName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Height="30"
+                             TextAlignment="left"
+                             HorizontalAlignment="Stretch"
+                             Margin="10,0,7,0"
+                             Padding="5,0"
+                             Foreground="{StaticResource TextColor}"
+                             Background="{StaticResource Base}"/>
+                        <TextBlock Text="Scene Name"
+                               HorizontalAlignment="Center"
+                               Margin="7,0,10,0"
+                                   Grid.Column="2"
+                               FontSize="16"/>
+                        <TextBox Style="{StaticResource TextBoxTheme}"
+                                 Grid.Row="1"
+                                 Grid.Column="2"
+                                 Text="{Binding SceneName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Height="30"
+                             TextAlignment="left"
+                             HorizontalAlignment="Stretch"
+                             Margin="7,0,10,0"
+                             Padding="5,0"
+                             Foreground="{StaticResource TextColor}"
+                             Background="{StaticResource Base}"/>
+                    </Grid>
+                    <Button Style="{StaticResource ButtonTheme}"
+                                Height="35"
+                                Margin="10,10,10,0"
+                                FontFamily="/Fonts/#Dosis"
+                                Content="Create Ranksources"
+                            IsEnabled="{Binding IsConnected}"
+                                Command="{Binding CreateSources}"/>
                 </StackPanel>
             </Grid>
         </Border>

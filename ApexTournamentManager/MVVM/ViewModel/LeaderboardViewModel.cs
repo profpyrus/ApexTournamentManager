@@ -17,10 +17,12 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		public IEnumerable<LeaderboardMatchViewModel> Matches { get { return _matches; } }
 
 		private ObsConnectionHandler _obs;
+		public bool IsConnected { get; private set; }
 
 		public LeaderboardViewModel(Session session, ObsConnectionHandler obs)
 		{ 
 			_session = session;
+			IsConnected = obs.IsConnected;
 			_matches = new ObservableCollection<LeaderboardMatchViewModel>();
 			_matches.Add(new LeaderboardMatchViewModel(_session, "All Matches", this));
 			foreach (Match match in _session.matches)

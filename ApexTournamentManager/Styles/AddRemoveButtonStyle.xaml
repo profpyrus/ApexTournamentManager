@@ -28,6 +28,7 @@
             </Setter>
 
             <Setter Property="Background" Value="{StaticResource Base}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
             <Setter Property="Border.CornerRadius" Value="10,10,10,10" />
             <Setter Property="BorderThickness" Value="0"/>
         </Style.Setters>
@@ -38,6 +39,10 @@
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource MenuButtonHover}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource TextColorDisbaled}"/>
+                <Setter Property="Background" Value="{StaticResource BaseDisabled}"/>
             </Trigger>
         </Style.Triggers>
 

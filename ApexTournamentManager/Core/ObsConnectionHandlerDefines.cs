@@ -15,7 +15,9 @@ namespace ApexTournamentManager.Core
         public static string pointKey = "p";
         public static string rankedByKey = "b";
 
-        public static string ipPrefix = "ws://";
+        public static string textSourceKind = "text_gdiplus_v2";
+
+		public static string ipPrefix = "ws://";
         public static string defaultIp = "localhost";
         public static string defaultPort = "4455";
     }

@@ -3,8 +3,10 @@
     <SolidColorBrush x:Key="MenuButtonHover"    Color="#14244a"/>
     <SolidColorBrush x:Key="BaseHighlight"      Color="#101b36"/>
     <SolidColorBrush x:Key="Base"               Color="#0d1426"/>
+    <SolidColorBrush x:Key="BaseDisabled"       Color="#1f232b"/>
     <SolidColorBrush x:Key="NotConnected"       Color="#400a0e"/>
     <SolidColorBrush x:Key="Connected"          Color="#12380f"/>
     <SolidColorBrush x:Key="TopBar"             Color="#0c101c"/>
     <SolidColorBrush x:Key="TextColor"          Color="#e6e6e6"/>
+    <SolidColorBrush x:Key="TextColorDisbaled"  Color="#9e9e9e"/>
 </ResourceDictionary>

@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using ApexTournamentManager.MVVM.Model;
 using ApexTournamentManager.MVVM.ViewModel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OBSWebsocketDotNet;
 using OBSWebsocketDotNet.Types;
 using defines = ApexTournamentManager.Core.ObsConnectionHandlerDefines;
 
 namespace ApexTournamentManager.Core
 {
-    class ObsConnectionHandler
+    class ObsConnectionHandler : ObservableObject
     {
         OBSWebsocket obs;
+        public bool IsConnected { get { return obs.IsConnected; } }
 
         public ObsConnectionHandler()
         {
@@ -40,9 +45,9 @@ namespace ApexTournamentManager.Core
             List<RankData> ranks = new List<RankData>();
             for(int i = 1; i <= 30; i++)
             {
-                ranks.Add(new RankData(i + ". PLACE", 31-i));
+                ranks.Add(new RankData(i + ". PLACE", i));
 			}
-			SendLeaderboardToObs(new LeaderboardValueViewModel(ranks, "TESTRANKING"));
+			SendLeaderboardToObs(new LeaderboardValueViewModel(ranks, "TESTRANKING", true));
         }
 
         public void ClearLeaderboardToObs()
@@ -109,14 +114,55 @@ namespace ApexTournamentManager.Core
 				set.Settings["text"] = "";
 				obs.SetInputSettings(set);
 			}
-			catch (OBSWebsocketDotNet.ErrorResponseException e)
-			{
-			}
+			catch (OBSWebsocketDotNet.ErrorResponseException e) { }
 		}
 
-        public void CreateAllRankTextsources()
+        public void CreateAllRankTextsources(string template, string scene)
         {
+            try
+			{
+				InputSettings set = obs.GetInputSettings(template);
+                JObject defaultSet = obs.GetInputDefaultSettings(defines.textSourceKind);
+                string name = "";
+				int i = 0;
+                try
+				{
+                    name = defines.itemNamePrefix + defines.rankedByKey;
+                    set.Settings["InputName"] = name;
+					obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
+				}
+                catch (OBSWebsocketDotNet.ErrorResponseException) { }
+				while (i < 30)
+				{
+					i += 1;
+                    string itemNamePrefix = defines.itemNamePrefix + i.ToString();
+					name = itemNamePrefix + defines.nameKey;
+					set.Settings["InputName"] = name;
+					try
+					{
+						obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
+					}
+                    catch (OBSWebsocketDotNet.ErrorResponseException e) { }
 
+					name = itemNamePrefix + defines.rankKey;
+					set.Settings["InputName"] = name;
+					try
+					{
+						obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
+					}
+					catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+
+					name = itemNamePrefix + defines.pointKey;
+					set.Settings["InputName"] = name;
+					try
+					{
+						obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
+					}
+					catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+				}
+                SendTestleaderboardToObs();
+			}
+            catch (OBSWebsocketDotNet.ErrorResponseException e) { }
         }
 	}
 }

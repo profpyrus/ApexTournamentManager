@@ -28,6 +28,7 @@
                     Style="{StaticResource ButtonTheme}"
                     FontSize="12"
                     Height="30"
+                    IsEnabled="{Binding IsConnected}"
                     Command="{Binding LeaderboardToOBS}"/>
         </StackPanel>
         <Grid Margin="8" Grid.ColumnSpan="2">
