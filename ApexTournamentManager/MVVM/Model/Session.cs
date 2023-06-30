@@ -13,14 +13,15 @@ namespace ApexTournamentManager.MVVM.Model
     {
         public string name { get; set; }
         public Guid id { get; set; }
+        public string path { get; set; }
         public ObservableCollection<basicData> teams { get; set; }
         public ObservableCollection<Match> matches { get; set; }
         public ObservableCollection<Point> killPoints { get; set; }
         public ObservableCollection<Point> placementPoints { get; set; }
 
-        public Session(Guid newId, string newName)
+        public Session(Guid newId, string newName, string newPath)
         {
-            name = newName; id = newId;
+            name = newName; id = newId; path = newPath;
             teams = new ObservableCollection<basicData>(); matches = new ObservableCollection<Match>();
             killPoints = new ObservableCollection<Point>(); placementPoints = new ObservableCollection<Point>();
             DefaultPoints();
@@ -28,9 +29,9 @@ namespace ApexTournamentManager.MVVM.Model
             matches.Add(new Match(matches.Count + 1, Guid.NewGuid(), teams));
         }
 
-		public Session(Guid newId, string newName, IEnumerable<Team> newTeams, IEnumerable<Match> newMatches, IEnumerable<Point> newKillPoints, IEnumerable<Point> newPlacementPoints)
+		public Session(Guid newId, string newName, string newPath, IEnumerable<Team> newTeams, IEnumerable<Match> newMatches, IEnumerable<Point> newKillPoints, IEnumerable<Point> newPlacementPoints)
 		{
-			name = newName; id = newId;
+			name = newName; id = newId; path = newPath;
 			teams = new ObservableCollection<basicData>(newTeams); matches = new ObservableCollection<Match>(newMatches);
 			killPoints = new ObservableCollection<Point>(newKillPoints); placementPoints = new ObservableCollection<Point>(newPlacementPoints);
 		}

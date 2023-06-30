@@ -49,7 +49,7 @@ namespace ApexTournamentManager
 
 		private void CreateNewSession_Click(object sender, RoutedEventArgs e)
 		{
-			FoundValidFile?.Invoke(snl.SaveSession(SessionName), EventArgs.Empty);
+			FoundValidFile?.Invoke(snl.CreateSession(SessionName), EventArgs.Empty);
 		}
 
 		private void OpenSession_Click(object sender, RoutedEventArgs e)

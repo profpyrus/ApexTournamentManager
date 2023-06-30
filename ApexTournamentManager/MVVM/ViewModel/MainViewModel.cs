@@ -19,6 +19,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         public String SessionName { get { return _session.name; } }
 
+        public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand TeamViewCommand { get; set; }
         public RelayCommand MatchViewCommand { get; set; }
         public RelayCommand PointsViewCommand { get; set; }
@@ -45,12 +46,12 @@ namespace ApexTournamentManager.MVVM.ViewModel
             }
         }
 
-        public MainViewModel(Session session, Window window, System.Windows.Application app)
+        public MainViewModel(string sessionPath, Window window, System.Windows.Application app)
         {
             SaveAndLoadHandler snl = new SaveAndLoadHandler();
 
 			_window = window;
-            _session = session;
+            _session = snl.OpenSession(sessionPath);
 
             obs = new ObsConnectionHandler();
 
@@ -59,6 +60,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
             PointVM = new PointsManagementViewModel(_session);
             CurrentView = HomeVM;
 
+            HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
             TeamViewCommand = new RelayCommand(o => { CurrentView = TeamVM; });
             MatchViewCommand = new RelayCommand(o => { CurrentView = new MatchManagementViewModel(_session); });
             PointsViewCommand = new RelayCommand(o => { CurrentView = PointVM; });

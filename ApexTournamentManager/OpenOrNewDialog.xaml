@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApexTournamentManager"
         mc:Ignorable="d"
-        Height="239" Width="300"
+        Height="250" Width="300"
         WindowStyle="None"
         Background="Transparent"
         Foreground="{StaticResource TextColor}"
@@ -30,25 +30,10 @@
                                VerticalAlignment="Center"
                                IsHitTestVisible="False"/>
                 </Border>
-
                 <StackPanel HorizontalAlignment="Stretch"
                             Grid.Row="1"
                             Margin="15">
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="New Session Name:"
-                               HorizontalAlignment="Center"
-                               Margin="0,0,0,0"
-                               FontSize="16"/>
-                        <TextBox x:Name="SessionNameBox"
-                                 Style="{StaticResource TextBoxTheme}"
-                                 Text="{Binding Path=SessionName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 Height="35"
-                                 TextAlignment="Center"
-                                 HorizontalAlignment="Stretch"
-                                 Padding="5,0"
-                                 Foreground="{StaticResource TextColor}"
-                                 Background="{StaticResource Base}"/>
-                    </StackPanel>
+                    
                     <Button Style="{StaticResource ButtonTheme}"
                             Height="35"
                             Margin="0,0,0,15"
@@ -61,27 +46,26 @@
                             BorderBrush="{StaticResource Base}"
                             CornerRadius="0"
                             Margin="-15,0,-15,15"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource ButtonTheme}"
+                    <Button Style="{StaticResource ButtonTheme}"
                             Height="35"
-                            Margin="0,0,7,0"
+                            Margin="0,0,0,0"
                             FontFamily="/Fonts/#Dosis"
                             FontSize="16"
                             Content="Open Session"
                             Click="OpenSession_Click"/>
-                        <Button Style="{StaticResource ButtonTheme}"
+                    <Border Style="{StaticResource DefaultBorderStyle}"
+                            BorderThickness="4"
+                            BorderBrush="{StaticResource Base}"
+                            CornerRadius="0"
+                            Margin="-15,15,-15,15"/>
+                    <Button Style="{StaticResource ButtonTheme}"
                             Height="35"
-                            Margin="7,0,0,0"
+                            Margin="0,0,0,0"
                             FontFamily="/Fonts/#Dosis"
                             FontSize="16"
                             Content="Cancel"
                             Grid.Column="1"
                             Click="Cancel_Click"/>
-                    </Grid>
                 </StackPanel>
             </Grid>
         </Border>

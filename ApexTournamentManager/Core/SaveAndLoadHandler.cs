@@ -17,37 +17,67 @@ namespace ApexTournamentManager.Core
 {
 	class SaveAndLoadHandler
 	{
+		string filter = "Apex Legends Tournament Manager Session Files(*.atms)|*.atms";
+		string defaultExt = "atms";
+
 		public SaveAndLoadHandler()
 		{
 			
+		}
+
+		public string CreateSession(string SessionName)
+		{
+			SaveFileDialog dialog = new SaveFileDialog();
+			dialog.FileName = SessionName;
+
+			GetFileDialog(dialog);
+
+			string sessionName = dialog.SafeFileName.Substring(0, dialog.SafeFileName.Length - 5);
+			Session session = new Session(Guid.NewGuid(), sessionName, dialog.FileName);
+
+			SaveSession(session);
+
+			return dialog.FileName;
+		}
+
+		public void SaveSession(Session session)
+		{
+			File.WriteAllText(session.path, SerializeSession(session));
+		}
+
+		public Session OpenSession()
+        {
+			OpenFileDialog dialog = new OpenFileDialog();
+
+			GetFileDialog(dialog);
+
+			string ssession = File.ReadAllText(dialog.FileName);
+			return DeserializeSession(ssession, dialog.FileName);
+        }
+
+		public Session OpenSession(string path)
+		{
+			string ssession = File.ReadAllText(path);
+			return DeserializeSession(ssession, path);
+		}
+
+		public void GetFileDialog(FileDialog dialog)
+		{
+			dialog.Filter = filter;
+			dialog.DefaultExt = defaultExt;
+			dialog.ShowDialog();
 		}
 
 		public string SerializeSession(Session session)
 		{
 			return JsonConvert.SerializeObject(session,
 				Formatting.Indented, new JsonSerializerSettings
-				{ 
+				{
 					ReferenceLoopHandling = ReferenceLoopHandling.Ignore
 				});
 		}
 
-		public Session SaveSession(string SessionName)
-		{
-			SaveFileDialog dialog = new SaveFileDialog();
-
-			dialog.FileName = SessionName;
-			dialog.Filter = "Apex Legends Tournament Manager Session Files(*.atms)|*.atms";
-			dialog.DefaultExt = "atms";
-			dialog.ShowDialog();
-
-			Session session = new Session(Guid.NewGuid(), dialog.SafeFileName);
-
-			File.WriteAllText(dialog.FileName, SerializeSession(session));
-
-			return session;
-		}
-
-		public Session DeserializeSession(string json)
+		public Session DeserializeSession(string json, string path)
 		{
 			JObject jsession = JObject.Parse(json);
 
@@ -107,7 +137,7 @@ namespace ApexTournamentManager.Core
 			string sname = jsession["name"].Value<string>();
 			string sid = jsession["id"].Value<string>();
 
-			return new Session(Guid.Parse(sid), sname, teams, matches, killPoints, placementPoints);
+			return new Session(Guid.Parse(sid), sname, path, teams, matches, killPoints, placementPoints);
 		}
 	}
 }

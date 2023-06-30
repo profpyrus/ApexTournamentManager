@@ -26,7 +26,7 @@ namespace ApexTournamentManager
 
         public void ValidPathFound(object sender, EventArgs e)
 		{
-			Current.MainWindow = new MainWindow("Testsession", this);
+			Current.MainWindow = new MainWindow(sender as string, this);
 			Current.MainWindow.Show();
 		}
 	}

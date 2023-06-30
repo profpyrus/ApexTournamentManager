@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 
 namespace ApexTournamentManager
 {
-    public partial class MainWindow : Window
+    partial class MainWindow : Window
     {
-        public MainWindow(Session session, Application app)
+        public MainWindow(string sessionPath, Application app)
         {
-            this.DataContext = new MainViewModel(session, this, app);
+            this.DataContext = new MainViewModel(sessionPath, this, app);
             InitializeComponent();
         }
 
