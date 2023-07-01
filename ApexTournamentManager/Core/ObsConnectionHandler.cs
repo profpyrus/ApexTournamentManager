@@ -43,7 +43,7 @@ namespace ApexTournamentManager.Core
         public void SendTestleaderboardToObs()
         {
             List<RankData> ranks = new List<RankData>();
-            for(int i = 1; i <= 30; i++)
+            for(int i = 1; i <= defines.maximumRankCount; i++)
             {
                 ranks.Add(new RankData(i + ". PLACE", i));
 			}
@@ -52,7 +52,7 @@ namespace ApexTournamentManager.Core
 
         public void ClearLeaderboardToObs()
         {
-			for (int i = 1; i <= 30; i++)
+			for (int i = 1; i <= defines.maximumRankCount; i++)
 			{
 				ClearObsRank(i);
 			}
@@ -70,7 +70,7 @@ namespace ApexTournamentManager.Core
                 int index = data.IndexOf(rank) + 1;
                 WriteToObsRank(index, rank.Rank, rank.Name, rank.ValueRounded);
             }
-            for(; i <= 30;)
+            for(; i <= defines.maximumRankCount;)
             {
                 i += 1;
                 ClearObsRank(i);
@@ -101,7 +101,7 @@ namespace ApexTournamentManager.Core
                 set.Settings["text"] = text;
                 obs.SetInputSettings(set);
             }
-            catch (OBSWebsocketDotNet.ErrorResponseException e)
+            catch (OBSWebsocketDotNet.ErrorResponseException)
             {
             }
         }
@@ -114,7 +114,7 @@ namespace ApexTournamentManager.Core
 				set.Settings["text"] = "";
 				obs.SetInputSettings(set);
 			}
-			catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+			catch (OBSWebsocketDotNet.ErrorResponseException) { }
 		}
 
         public void CreateAllRankTextsources(string template, string scene)
@@ -124,7 +124,7 @@ namespace ApexTournamentManager.Core
 				InputSettings set = obs.GetInputSettings(template);
                 JObject defaultSet = obs.GetInputDefaultSettings(defines.textSourceKind);
                 string name = "";
-				int i = 0;
+				int i = defines.maximumRankCount;
                 try
 				{
                     name = defines.itemNamePrefix + defines.rankedByKey;
@@ -132,9 +132,8 @@ namespace ApexTournamentManager.Core
 					obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
 				}
                 catch (OBSWebsocketDotNet.ErrorResponseException) { }
-				while (i < 30)
+				while (i > 0)
 				{
-					i += 1;
                     string itemNamePrefix = defines.itemNamePrefix + i.ToString();
 					name = itemNamePrefix + defines.nameKey;
 					set.Settings["InputName"] = name;
@@ -142,7 +141,7 @@ namespace ApexTournamentManager.Core
 					{
 						obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
 					}
-                    catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+                    catch (OBSWebsocketDotNet.ErrorResponseException) { }
 
 					name = itemNamePrefix + defines.rankKey;
 					set.Settings["InputName"] = name;
@@ -150,7 +149,7 @@ namespace ApexTournamentManager.Core
 					{
 						obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
 					}
-					catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+					catch (OBSWebsocketDotNet.ErrorResponseException) { }
 
 					name = itemNamePrefix + defines.pointKey;
 					set.Settings["InputName"] = name;
@@ -158,11 +157,13 @@ namespace ApexTournamentManager.Core
 					{
 						obs.CreateInput(scene, name, defines.textSourceKind, set.Settings, true);
 					}
-					catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+					catch (OBSWebsocketDotNet.ErrorResponseException) { }
+
+                    i -= 1;
 				}
                 SendTestleaderboardToObs();
 			}
-            catch (OBSWebsocketDotNet.ErrorResponseException e) { }
+            catch (OBSWebsocketDotNet.ErrorResponseException) { }
         }
 	}
 }

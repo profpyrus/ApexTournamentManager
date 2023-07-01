@@ -49,7 +49,7 @@ namespace ApexTournamentManager.MVVM.Model
             placementPoints.Add(new Point(2, 5));
             placementPoints.Add(new Point(3, 3));
             placementPoints.Add(new Point(6, 1));
-            placementPoints.Add(new Point(10, 0));
+            placementPoints.Add(new Point(11, 0));
         }
 
         public void DefaultKillPoints()

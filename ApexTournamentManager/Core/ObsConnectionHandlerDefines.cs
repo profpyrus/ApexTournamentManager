@@ -20,5 +20,8 @@ namespace ApexTournamentManager.Core
 		public static string ipPrefix = "ws://";
         public static string defaultIp = "localhost";
         public static string defaultPort = "4455";
+
+
+        public static int maximumRankCount = 60;
     }
 }

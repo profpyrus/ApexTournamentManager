@@ -94,8 +94,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
         {
             _killPoints.Clear();
             List<Point> newPoints = new List<Point>(_session.killPoints);
-            newPoints.OrderBy(o => o.atLeast);
-            foreach (Point point in newPoints)
+			newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
+			foreach (Point point in newPoints)
             {
                 PointsViewModel pointVM = new PointsViewModel(point);
                 _killPoints.Add(pointVM);

@@ -85,7 +85,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			}
 
 			_values.Add(new LeaderboardValueViewModel(killData, "Kills"));
-			_values.Add(new LeaderboardValueViewModel(deathData, "Deaths"));
+			_values.Add(new LeaderboardValueViewModel(deathData, "Deaths", true));
 			_values.Add(new LeaderboardValueViewModel(kdData, "K/D"));
 			_values.Add(new LeaderboardValueViewModel(pointsData, "Points"));
 
@@ -134,7 +134,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 				pointsData.Add(new RankData(team.name, points));
 			}
 
-			_values.Add(new LeaderboardValueViewModel(placementsData, "Placements"));
+			_values.Add(new LeaderboardValueViewModel(placementsData, "Placements", true));
 			_values.Add(new LeaderboardValueViewModel(killsData, "Kills"));
 			_values.Add(new LeaderboardValueViewModel(pointsData, "Points"));
 
@@ -217,8 +217,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			_values.Add(new LeaderboardValueViewModel(pointsAvrgData, "Points (Average)"));
 			_values.Add(new LeaderboardValueViewModel(killsTotalData, "Kills (Total)"));
 			_values.Add(new LeaderboardValueViewModel(killsAvrgData, "Kills (Average)"));
-			_values.Add(new LeaderboardValueViewModel(deathsTotalData, "Deaths (Total)"));
-			_values.Add(new LeaderboardValueViewModel(deathsAvrgData, "Deaths (Average)"));
+			_values.Add(new LeaderboardValueViewModel(deathsTotalData, "Deaths (Total)", true));
+			_values.Add(new LeaderboardValueViewModel(deathsAvrgData, "Deaths (Average)", true));
 			_values.Add(new LeaderboardValueViewModel(kdData, "K/D"));
 
 			LeaderboardToOBS = new RelayCommand(o =>
@@ -309,8 +309,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			_values.Add(new LeaderboardValueViewModel(killsAvrgData, "Kills (Average)"));
 			if(placementsTotalData.Count != 0)
 			{
-				_values.Add(new LeaderboardValueViewModel(placementsTotalData, "Placements (Total)"));
-				_values.Add(new LeaderboardValueViewModel(placementsAvrgData, "Placements (Average)"));
+				_values.Add(new LeaderboardValueViewModel(placementsTotalData, "Placements (Total)", true));
+				_values.Add(new LeaderboardValueViewModel(placementsAvrgData, "Placements (Average)", true));
 			}
 
 			LeaderboardToOBS = new RelayCommand(o =>
