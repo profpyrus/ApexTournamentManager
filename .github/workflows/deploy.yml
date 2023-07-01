@@ -26,6 +26,4 @@ jobs:
         run: nuget restore ${{ env.PROJECT_PATH }}
   
       - name: Build Solution
-        run: msbuild build ${{ env.PROJECT_PATH }} -c Release --no-restore
-  
-      - run: msbuild publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile --no-build
+        run: msbuild ${{ env.PROJECT_PATH }} /p:Configuration=Release
