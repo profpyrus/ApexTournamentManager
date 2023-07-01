@@ -6,7 +6,7 @@ on:
       - "release"
 
 env:
-  PROJECT_PATH: ApexTournamentManager/ApexTournamentManager.csproj
+  PROJECT_PATH: ApexTournamentManager.sln
 
 jobs:
   deploy:
@@ -14,12 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
   
-      - uses: actions/setup-dotnet@v3
+      - name: Setup MSbuild
+        uses: microsoft/setup-msbuild@v1.3.1
         with:
-          dotnet-framework-version: 4.8.x
+          msbuild-architecture: x64
 
-      - run: dotnet restore ${{ env.PROJECT_PATH }}
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.2.0
+
+      - name: Restore NuGet packages
+        run: nuget restore ${{ env.PROJECT_PATH }}
   
-      - run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+      - name: Build Solution
+        run: msbuild build ${{ env.PROJECT_PATH }} -c Release --no-restore
   
-      - run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile --no-build
+      - run: msbuild publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile --no-build
