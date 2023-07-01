@@ -45,7 +45,7 @@
                           ScrollViewer.VerticalScrollBarVisibility="Disabled"
                           ItemContainerStyle="{StaticResource TeamListItemTheme}"
                           ItemsSource="{Binding Teams}"
-                          SelectedItem="{Binding SelectedTeam}"
+                          SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
                           SelectionMode="Single">
                 </ListView>
                 <Button x:Name="AddTeam"
