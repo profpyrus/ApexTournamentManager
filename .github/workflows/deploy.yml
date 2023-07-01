@@ -26,4 +26,9 @@ jobs:
         run: nuget restore ${{ env.PROJECT_PATH }}
   
       - name: Build Solution
-        run: msbuild ${{ env.PROJECT_PATH }} /p:Configuration=Release
+        run: msbuild ${{ env.PROJECT_PATH }} /p:Configuration=Release /p:SelfContained=true
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: test
+          path: ApexTournamentManager\bin\Release\
