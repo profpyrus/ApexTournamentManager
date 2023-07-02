@@ -63,6 +63,7 @@
                         FontSize="35"
                         Style="{StaticResource RemoveButtonTheme}"
                         Margin="2,4,4,4"
+                        IsEnabled="{Binding TeamCount, Converter={StaticResource CountToBoolConverter}}"
                         Command="{Binding RemoveTeamCommand}">
                 </Button>
             </Grid>
@@ -123,10 +124,10 @@
                                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                               ItemContainerStyle="{StaticResource PlayerListItemTheme}"
                                               ItemsSource="{Binding Players}"
-                                              SelectedItem="{Binding SelectedPlayer}"
+                                              SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}"
                                               SelectionMode="Single">
                                     </ListView>
-                                    <Button x:Name="AddTeam"
+                                    <Button x:Name="AddPlayer"
                                             Content="+"
                                             Grid.Row="2"
                                             Style="{StaticResource AddButtonTheme}"
@@ -134,13 +135,14 @@
                                             FontSize="30"
                                             Command="{Binding AddPlayerCommand}">
                                     </Button>
-                                    <Button x:Name="RemoveTeam"
+                                    <Button x:Name="RemovePlayer"
                                             Content="-"
                                             Grid.Row="2"
                                             Grid.Column="1"
                                             Style="{StaticResource RemoveButtonTheme}"
                                             Margin="2,4,4,4"
                                             FontSize="35"
+                                            IsEnabled="{Binding PlayerCount, Converter={StaticResource CountToBoolConverter}}"
                                             Command="{Binding RemovePlayerCommand}">
                                     </Button>
                                 </Grid>
@@ -150,13 +152,13 @@
                 </ContentControl.ContentTemplate>
             </ContentControl>
         </Border>
-        <Border Background="{StaticResource Base}"
+        <!--<Border Background="{StaticResource Base}"
                                     Grid.Column="1"
                                     CornerRadius="10"
                                     Margin="4"
                                     Visibility="{Binding SelectedItem,
                                     Converter={StaticResource
                                     SelectedToVisibilityConverter},
-                                    ElementName=teamsListView}"/>
+                                    ElementName=teamsListView}"/>-->
     </Grid>
 </UserControl>

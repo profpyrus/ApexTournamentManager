@@ -26,6 +26,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
                     _selectedPlayer = value;
             }
         }
+        public int PlayerCount { get { return _players.Count; } }
 
         public RelayCommand AddPlayerCommand { get; set; }
         public RelayCommand RemovePlayerCommand { get; set; }
@@ -58,16 +59,10 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _players = new ObservableCollection<PlayerViewModel>();
             _team = team;
 
-            AddPlayerCommand = new RelayCommand(o => {
-                team.AddPlayer(Guid.NewGuid());
-                OnPropertyChanged(nameof(Players));
-            });
+            AddPlayerCommand = new RelayCommand(o => { team.AddPlayer(Guid.NewGuid()); UpdatePlayers(); });
+            RemovePlayerCommand = new RelayCommand(o => { team.RemovePlayer(_selectedPlayer.Player); UpdatePlayers(_players.IndexOf(_selectedPlayer)); });
 
-            RemovePlayerCommand = new RelayCommand(o => { team.RemovePlayer(SelectedPlayer.Player); OnPropertyChanged(); });
-
-            PropertyChanged += TeamVM_PropertyChanged;
-
-            UpdatePlayers();
+            UpdatePlayers(0);
         }
 
         void UpdatePlayers()
@@ -76,10 +71,25 @@ namespace ApexTournamentManager.MVVM.ViewModel
             foreach (Player player in _team.players)
             {
                 _players.Add(new PlayerViewModel(player));
-            }
-        }
+			}
+			_selectedPlayer = _players.Last();
+			OnPropertyChanged(nameof(SelectedPlayer));
+			OnPropertyChanged(nameof(PlayerCount));
+		}
 
-        void TeamVM_PropertyChanged(object obj, PropertyChangedEventArgs e)
+		void UpdatePlayers(int index)
+		{
+			_players.Clear();
+			foreach (Player player in _team.players)
+			{
+				_players.Add(new PlayerViewModel(player));
+			}
+			_selectedPlayer = _players.ElementAtOrLast(index);
+			OnPropertyChanged(nameof(SelectedPlayer));
+			OnPropertyChanged(nameof(PlayerCount));
+		}
+
+		void TeamVM_PropertyChanged(object obj, PropertyChangedEventArgs e)
         {
             UpdatePlayers();
         }

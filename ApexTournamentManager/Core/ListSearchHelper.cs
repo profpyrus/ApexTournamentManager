@@ -33,5 +33,13 @@ namespace ApexTournamentManager.Core
             }
             return null;
         }
+
+        public static T ElementAtOrLast<T>(this ObservableCollection<T> list, int index)
+        {
+            T obj = list.ElementAtOrDefault(index);
+            if(obj != null)
+                return obj;
+            else return list.Last();
+        }
     }
 }

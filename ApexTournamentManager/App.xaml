@@ -17,6 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>
+            <core:CountToBoolConverter x:Key="CountToBoolConverter"/>
             <core:ObjectToLeaderboardValueViewModelConverter x:Key="ObjectToLeaderboardValueViewModelConverter"/>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

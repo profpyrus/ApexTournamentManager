@@ -62,6 +62,7 @@
                         Style="{StaticResource RemoveButtonTheme}"
                         Margin="2,4,4,4"
                         FontSize="35"
+                        IsEnabled="{Binding MatchCount, Converter={StaticResource CountToBoolConverter}}"
                         Command="{Binding RemoveMatchCommand}">
                 </Button>
             </Grid>
@@ -104,6 +105,7 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ItemContainerStyle="{StaticResource TeamListItemTheme}"
                                   ItemsSource="{Binding Teams}"
+                                  SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
                                   SelectionMode="Single">
                         </ListView>
                     </Grid>
@@ -154,21 +156,21 @@
                     </Grid>
                 </Border>
 
-                <Border Background="{StaticResource Base}"
+                <!--<Border Background="{StaticResource Base}"
                         Grid.Column="1"
                         CornerRadius="0,10,10,0"
                         Margin="-4,24,4,24"
-                        Visibility="{Binding SelectedItem, Converter={StaticResource SelectedToVisibilityConverter}, ElementName=matchesTeamListView}"/>
+                        Visibility="{Binding SelectedItem, Converter={StaticResource SelectedToVisibilityConverter}, ElementName=matchesTeamListView}"/>-->
             </Grid>
         </Border>
 
-        <Border Background="{StaticResource Base}"
+        <!--<Border Background="{StaticResource Base}"
                 Grid.Column="1"
                 CornerRadius="10"
                 Margin="4"
                 Visibility="{Binding SelectedItem,
                 Converter={StaticResource
                 SelectedToVisibilityConverter},
-                ElementName=matchesListView}"/>
+                ElementName=matchesListView}"/>-->
     </Grid>
 </UserControl>

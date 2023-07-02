@@ -320,6 +320,7 @@
             <Trigger Property="IsKeyboardFocusWithin" Value="True">
                 <Setter Property="IsSelected" Value="True" />
             </Trigger>
+            <Trigger Property="IsKeyboardFocusWithin" Value="False"/>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

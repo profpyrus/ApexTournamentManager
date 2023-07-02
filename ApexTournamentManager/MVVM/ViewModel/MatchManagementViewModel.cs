@@ -28,6 +28,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
                 _selectedMatch = value;
             }
         }
+        public int MatchCount { get { return _matches.Count; } }
 
         public RelayCommand AddMatchCommand { get; set; }
         public RelayCommand RemoveMatchCommand { get; set; }
@@ -38,9 +39,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
             _session = session;
 
             AddMatchCommand = new RelayCommand(o => { _session.AddMatch(Guid.NewGuid()); UpdateData(); });
-            RemoveMatchCommand = new RelayCommand(o => { _session.RemoveMatch(SelectedMatch.Match); UpdateData(); });
+            RemoveMatchCommand = new RelayCommand(o => { _session.RemoveMatch(SelectedMatch.Match); UpdateData(_matches.IndexOf(_selectedMatch)); });
 
-            UpdateData();
+            UpdateData(0);
         }
 
         private void UpdateData()
@@ -50,6 +51,21 @@ namespace ApexTournamentManager.MVVM.ViewModel
             {
                 _matches.Add(new MatchViewModel(match, _session.teams));
             }
+            _selectedMatch = _matches.First();
+            OnPropertyChanged(nameof(SelectedMatch));
+            OnPropertyChanged(nameof(MatchCount));
         }
-    }
+
+		private void UpdateData(int index)
+		{
+			_matches.Clear();
+			foreach (Match match in _session.matches)
+			{
+				_matches.Add(new MatchViewModel(match, _session.teams));
+			}
+			_selectedMatch = _matches.ElementAtOrLast(index);
+			OnPropertyChanged(nameof(SelectedMatch));
+			OnPropertyChanged(nameof(MatchCount));
+		}
+	}
 }
