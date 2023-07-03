@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -18,7 +20,8 @@ namespace ApexTournamentManager
 
         protected override void OnStartup(StartupEventArgs e)
         {
-			Current.MainWindow = new OpenOrNewDialog(this);
+            dialog = new OpenOrNewDialog(this);
+			Current.MainWindow = dialog;
 			Current.MainWindow.Show();
 
 			base.OnStartup(e);
@@ -26,8 +29,13 @@ namespace ApexTournamentManager
 
         public void ValidPathFound(object sender, EventArgs e)
 		{
-			Current.MainWindow = new MainWindow(sender as string, this);
-			Current.MainWindow.Show();
+            string path = sender as string;
+            if (File.Exists(path))
+			{
+				Current.MainWindow = new MainWindow(sender as string, this);
+                dialog.Close();
+				Current.MainWindow.Show();
+			}
 		}
 	}
 }

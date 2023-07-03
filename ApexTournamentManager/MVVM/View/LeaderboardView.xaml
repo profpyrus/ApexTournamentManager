@@ -32,12 +32,13 @@
                     Command="{Binding LeaderboardToOBS}"/>
         </StackPanel>
         <Grid Margin="8" Grid.ColumnSpan="2">
-            <ComboBox Margin="10,10,0,10"
+            <ComboBox Margin="10,12,0,10"
                       IsSynchronizedWithCurrentItem="True"
-                      Height="30"
-                      Width="165"
+                      Height="35"
+                      Width="170"
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left"
+                      SelectedIndex="0"
                       ItemsSource="{Binding Matches, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -47,12 +48,13 @@
             </ComboBox>
             <Grid DataContext="{Binding Matches}">
                 <ComboBox x:Name="EntityComboBox"
-                          Margin="10,60,0,10"
+                          Margin="10,62,0,10"
                           IsSynchronizedWithCurrentItem="True"
-                          Height="30"
-                          Width="165"
+                          Height="35"
+                          Width="170"
                           VerticalAlignment="Top"
                           HorizontalAlignment="Left"
+                          SelectedIndex="0"
                           ItemsSource="{Binding Entities, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -61,12 +63,13 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Grid DataContext="{Binding Entities}">
-                    <ComboBox Margin="10,110,0,10"
+                    <ComboBox Margin="10,112,0,10"
                               IsSynchronizedWithCurrentItem="True"
-                              Height="30"
-                              Width="165"
+                              Height="35"
+                              Width="170"
                               VerticalAlignment="Top"
                               HorizontalAlignment="Left"
+                              SelectedIndex="0"
                               SelectedItem="{Binding SelectedDataset, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding Values, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBox.ItemTemplate>

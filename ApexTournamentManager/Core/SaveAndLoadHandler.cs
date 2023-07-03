@@ -60,27 +60,31 @@ namespace ApexTournamentManager.Core
 			File.WriteAllText(session.path, SerializeSession(session));
 		}
 
-		public Session OpenSession()
+		public string OpenSessionFile()
         {
 			OpenFileDialog dialog = new OpenFileDialog();
 
 			if ((bool)GetFileDialog(dialog))
 			{
-				string ssession = File.ReadAllText(dialog.FileName);
-				return DeserializeSession(ssession, dialog.FileName);
+				return dialog.FileName;
 			}
-			else return null;
+			else return "";
         }
 
-		public Session OpenSession(string path)
+		public Session OpenSession()
 		{
-			if (path == "")
-				return OpenSession();
-			else
+			string path = OpenSessionFile();
+			if (!string.IsNullOrEmpty(path))
 			{
 				string ssession = File.ReadAllText(path);
 				return DeserializeSession(ssession, path);
-			}
+			} else { return null; }
+		}
+
+		public Session OpenSession(string path)
+		{
+			string ssession = File.ReadAllText(path);
+			return DeserializeSession(ssession, path);
 		}
 
 		public bool? GetFileDialog(FileDialog dialog)

@@ -50,7 +50,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
 			SaveSession = new RelayCommand(o => { _snl.SaveSession(_mvm.session); });
 			SaveSessionAs = new RelayCommand(o => { _snl.SaveSessionAs(_mvm.session); });
-			OpenSession = new RelayCommand(o => { _mvm.session = _snl.OpenSession(); });
+			OpenSession = new RelayCommand(o => { var session = _snl.OpenSession(); if (session != null) _mvm.session = session; });
 
 			ConnectToOBS = new RelayCommand(o => { ConnectionStatus = (IsConnected = _obs.Connect(IPText, PortText, "")) ? connectedColor : disconnectedColor; OnPropertyChanged(nameof(ConnectionStatus)); OnPropertyChanged(nameof(IsConnected)); });
             TestvaluesToOBS = new RelayCommand(o => { _obs.SendTestleaderboardToObs(); });

@@ -27,6 +27,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		private LeaderboardValueViewModel _selectedDataset;
 		public LeaderboardValueViewModel SelectedDataset
 		{
+			get { return _selectedDataset; }
 			set
 			{
 				if (value != null)

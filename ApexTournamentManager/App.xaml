@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="/Resources/Colors.xaml"/>
                 <ResourceDictionary Source="/Resources/Texts.xaml"/>
                 <ResourceDictionary Source="/Styles/BorderStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/AddRemoveButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListSelectorStyle.xaml"/>
