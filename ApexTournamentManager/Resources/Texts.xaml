@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <System:String x:Key="InfoText" xml:space="preserve">    Das hier ist der Info Text der hoffentlich gleich in der Seite steht und zu lesen ist.
+    Dieses Programm ist noch in der BETA, also unfertig. Alle Bugs die auftreteten und Ideen für Funktionen, die ihr habt, können gerne an mich weitergeleitet werden
+    Ansonsten wünsche ich viel Spaß, Erfolg, gesparte Zeit und coole Turniere mit dem Programm! :D</System:String>
+</ResourceDictionary>
