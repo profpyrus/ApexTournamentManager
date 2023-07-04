@@ -12,7 +12,8 @@ jobs:
   deploy:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v3
   
       - name: Setup MSbuild
         uses: microsoft/setup-msbuild@v1.3.1
@@ -27,6 +28,21 @@ jobs:
   
       - name: Build Solution
         run: msbuild ${{ env.PROJECT_PATH }} /p:Configuration=Release /p:SelfContained=true
+        
+      - name: Remove app.publish
+        uses: JesseTG/rm@v1.0.3
+        with:
+          path: ApexTournamentManager\bin\Release\app.publish
+          
+      - name: Remove .application file
+        uses: JesseTG/rm@v1.0.3
+        with:
+          path: ApexTournamentManager\bin\ApexTournamentManager.application
+          
+      - name: Remove .pdb file
+        uses: JesseTG/rm@v1.0.3
+        with:
+          path: ApexTournamentManager\bin\ApexTournamentManager.pdb
 
       - uses: actions/upload-artifact@v3
         with:
