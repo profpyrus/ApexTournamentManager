@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,9 @@ namespace ApexTournamentManager.MVVM.View
         public HomeView()
         {
             InitializeComponent();
+            TextBlock infoText = (TextBlock)FindName("InfoText");
+            IEnumerable<Attribute> customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute));
+			infoText.Text = infoText.Text.Replace("PROGRAMVERSION", ((AssemblyDescriptionAttribute)customAttributes.First()).Description);
         }
     }
 }

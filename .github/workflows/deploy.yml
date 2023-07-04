@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - "release"
+    tags:
+      - "V*"
 
 env:
   PROJECT_PATH: ApexTournamentManager.sln
@@ -25,6 +27,13 @@ jobs:
 
       - name: Restore NuGet packages
         run: nuget restore ${{ env.PROJECT_PATH }}
+
+      - name: Insert Version Tag to AssemblyInfo.cs $GITHUB_REF_NAME
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "DEVBUILD"
+          replace: $GITHUB_REF_NAME
+          include: "**AssemblyInfo.cs"
   
       - name: Build Solution
         run: msbuild ${{ env.PROJECT_PATH }} /p:Configuration=Release /p:SelfContained=true
@@ -37,12 +46,12 @@ jobs:
       - name: Remove .application file
         uses: JesseTG/rm@v1.0.3
         with:
-          path: ApexTournamentManager\bin\ApexTournamentManager.application
+          path: ApexTournamentManager\bin\Release\ApexTournamentManager.application
           
       - name: Remove .pdb file
         uses: JesseTG/rm@v1.0.3
         with:
-          path: ApexTournamentManager\bin\ApexTournamentManager.pdb
+          path: ApexTournamentManager\bin\Release\ApexTournamentManager.pdb
 
       - uses: actions/upload-artifact@v3
         with:

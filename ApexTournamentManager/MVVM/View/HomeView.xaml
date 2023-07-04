@@ -225,7 +225,8 @@
                         BorderBrush="{StaticResource Base}"
                         CornerRadius="0"
                         Margin="-15,0,-15,15"/>
-                <TextBlock Text="{StaticResource InfoText}"
+                <TextBlock x:Name="InfoText"
+                           Text="{StaticResource InfoText}"
                            TextWrapping="Wrap"/>
             </StackPanel>
         </Border>

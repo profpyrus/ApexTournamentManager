@@ -4,5 +4,12 @@
     <System:String x:Key="InfoText" xml:space="preserve">This tool is supposed to help you manage your Apex Tournaments, especially if you are Streaming it! Setup your connection to OBS, configure your own Point System, add Teams and Players, manage Matches and send your Leaderboard to OBS!
 
 In the future, you will find different links and references here. :)
- - Prof</System:String>
+ - Prof
+
+
+
+
+Current version: PROGRAMVERSION</System:String>
+
+    <System:String x:Key="TestReference" xml:space="preserve">Some string</System:String>
 </ResourceDictionary>
