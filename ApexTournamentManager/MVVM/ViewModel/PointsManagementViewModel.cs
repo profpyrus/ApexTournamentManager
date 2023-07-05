@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,9 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         public IEnumerable<PointsViewModel> PlacementPoints { get { return _placementPoints; } }
         public IEnumerable<PointsViewModel> KillPoints { get { return _killPoints; } }
+
+        public int KillPointCount { get { return _killPoints.Count; } }
+        public int PlacementPointCount { get { return _placementPoints.Count; } }
 
         private PointsViewModel _selectedKillPoint;
         private PointsViewModel _selectedPlacementPoint;
@@ -70,8 +74,8 @@ namespace ApexTournamentManager.MVVM.ViewModel
                 _session.killPoints.Add(new Point(newAtLeast, 0));
                 UpdateKillPoints();
             });
-            ResetKillPoints = new RelayCommand(o => { _session.DefaultKillPoints(); UpdateKillPoints(); });
-            RemoveKillPoint = new RelayCommand(o => { _session.killPoints.Remove(_selectedKillPoint.Point); UpdateKillPoints(); });
+            ResetKillPoints = new RelayCommand(o => { _session.DefaultKillPoints(); UpdateKillPoints(0); });
+            RemoveKillPoint = new RelayCommand(o => { _session.killPoints.Remove(_selectedKillPoint.Point); UpdateKillPoints(_killPoints.IndexOf(_selectedKillPoint)); });
 
             AddPlacementPoint = new RelayCommand(o => {
                 int newAtLeast = 1;
@@ -82,15 +86,15 @@ namespace ApexTournamentManager.MVVM.ViewModel
                 _session.placementPoints.Add(new Point(newAtLeast, 0));
                 UpdatePlacementPoints();
             });
-            ResetPlacementPoints = new RelayCommand(o => { _session.DefaultPlacementPoints(); UpdatePlacementPoints(); });
-            RemovePlacementPoint = new RelayCommand(o => { _session.placementPoints.Remove(_selectedPlacementPoint.Point); UpdatePlacementPoints(); });
+            ResetPlacementPoints = new RelayCommand(o => { _session.DefaultPlacementPoints(); UpdatePlacementPoints(0); });
+            RemovePlacementPoint = new RelayCommand(o => { _session.placementPoints.Remove(_selectedPlacementPoint.Point); UpdatePlacementPoints(_placementPoints.IndexOf(_selectedPlacementPoint)); });
 
-            UpdateKillPoints();
-            UpdatePlacementPoints();
+            UpdateKillPoints(0);
+            UpdatePlacementPoints(0);
 
         }
 
-        private void UpdateKillPoints(object sender = null, EventArgs e = null)
+        private void UpdateKillPoints()
         {
             _killPoints.Clear();
             List<Point> newPoints = new List<Point>(_session.killPoints);
@@ -100,21 +104,92 @@ namespace ApexTournamentManager.MVVM.ViewModel
                 PointsViewModel pointVM = new PointsViewModel(point);
                 _killPoints.Add(pointVM);
                 pointVM.resortEvent += UpdateKillPoints;
-            }
+			}
+			_selectedKillPoint = _killPoints.Last();
+			OnPropertyChanged(nameof(SelectedKillPoint));
+			OnPropertyChanged(nameof(KillPointCount));
+		}
 
-        }
+		private void UpdateKillPoints(object sender, EventArgs e)
+		{
+			_killPoints.Clear();
+			List<Point> newPoints = new List<Point>(_session.killPoints);
+			newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
+			int ind = newPoints.IndexOf((sender as PointsViewModel).Point);
+			foreach (Point point in newPoints)
+			{
+				PointsViewModel pointVM = new PointsViewModel(point);
+				_killPoints.Add(pointVM);
+				pointVM.resortEvent += UpdateKillPoints;
+			}
+			_selectedKillPoint = _killPoints.ElementAtOrLast(ind);
+			OnPropertyChanged(nameof(SelectedKillPoint));
+			OnPropertyChanged(nameof(KillPointCount));
+		}
 
-        private void UpdatePlacementPoints(object sender = null, EventArgs e = null)
-        {
-            _placementPoints.Clear();
-            List<Point> newPoints = new List<Point>(_session.placementPoints);
-            newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
-            foreach (Point point in newPoints)
-            {
-                PointsViewModel pointVM = new PointsViewModel(point);
-                _placementPoints.Add(pointVM);
-                pointVM.resortEvent += UpdatePlacementPoints;
-            }
-        }
-    }
+		private void UpdateKillPoints(int index)
+		{
+			_killPoints.Clear();
+			List<Point> newPoints = new List<Point>(_session.killPoints);
+			newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
+			foreach (Point point in newPoints)
+			{
+				PointsViewModel pointVM = new PointsViewModel(point);
+				_killPoints.Add(pointVM);
+				pointVM.resortEvent += UpdateKillPoints;
+			}
+			_selectedKillPoint = _killPoints.ElementAtOrLast(index);
+			OnPropertyChanged(nameof(SelectedKillPoint));
+			OnPropertyChanged(nameof(KillPointCount));
+		}
+
+		private void UpdatePlacementPoints()
+		{
+			_placementPoints.Clear();
+			List<Point> newPoints = new List<Point>(_session.placementPoints);
+			newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
+			foreach (Point point in newPoints)
+			{
+				PointsViewModel pointVM = new PointsViewModel(point);
+				_placementPoints.Add(pointVM);
+				pointVM.resortEvent += UpdatePlacementPoints;
+			}
+			_selectedPlacementPoint = _placementPoints.Last();
+			OnPropertyChanged(nameof(SelectedPlacementPoint));
+			OnPropertyChanged(nameof(PlacementPointCount));
+		}
+
+		private void UpdatePlacementPoints(object sender, EventArgs e)
+		{
+			_placementPoints.Clear();
+			List<Point> newPoints = new List<Point>(_session.placementPoints);
+			newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
+			int ind = newPoints.IndexOf((sender as PointsViewModel).Point);
+			foreach (Point point in newPoints)
+			{
+				PointsViewModel pointVM = new PointsViewModel(point);
+				_placementPoints.Add(pointVM);
+				pointVM.resortEvent += UpdatePlacementPoints;
+			}
+			_selectedPlacementPoint = _placementPoints.ElementAtOrLast(ind);
+			OnPropertyChanged(nameof(SelectedPlacementPoint));
+			OnPropertyChanged(nameof(PlacementPointCount));
+		}
+
+		private void UpdatePlacementPoints(int index)
+		{
+			_placementPoints.Clear();
+			List<Point> newPoints = new List<Point>(_session.placementPoints);
+			newPoints = newPoints.OrderBy(o => o.atLeast).ToList();
+			foreach (Point point in newPoints)
+			{
+				PointsViewModel pointVM = new PointsViewModel(point);
+				_placementPoints.Add(pointVM);
+				pointVM.resortEvent += UpdatePlacementPoints;
+			}
+			_selectedPlacementPoint = _placementPoints.ElementAtOrLast(index);
+			OnPropertyChanged(nameof(SelectedPlacementPoint));
+			OnPropertyChanged(nameof(PlacementPointCount));
+		}
+	}
 }

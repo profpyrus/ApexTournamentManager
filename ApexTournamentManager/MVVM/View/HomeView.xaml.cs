@@ -24,9 +24,9 @@ namespace ApexTournamentManager.MVVM.View
         public HomeView()
         {
             InitializeComponent();
-            TextBlock infoText = (TextBlock)FindName("InfoText");
+            TextBlock infoText = (TextBlock)FindName("VersionText");
             IEnumerable<Attribute> customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute));
-			infoText.Text = infoText.Text.Replace("PROGRAMVERSION", ((AssemblyDescriptionAttribute)customAttributes.First()).Description);
+			infoText.Text = ((AssemblyDescriptionAttribute)customAttributes.First()).Description;
         }
     }
 }

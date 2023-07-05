@@ -45,7 +45,7 @@
                           ScrollViewer.VerticalScrollBarVisibility="Disabled"
                           ItemContainerStyle="{StaticResource PlacementPointsListItemTheme}"
                           ItemsSource="{Binding PlacementPoints}"
-                          SelectedItem="{Binding SelectedPlacementPoint, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedPlacementPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionMode="Single">
                 </ListView>
                 <Button Content="+"
@@ -107,7 +107,7 @@
                           ScrollViewer.VerticalScrollBarVisibility="Disabled"
                           ItemContainerStyle="{StaticResource KillPointsListItemTheme}"
                           ItemsSource="{Binding KillPoints}"
-                          SelectedItem="{Binding SelectedKillPoint, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedKillPoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectionMode="Single">
                 </ListView>
                 <Button Content="+"
