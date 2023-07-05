@@ -17,8 +17,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Insert Version Tag to AssemblyInfo.cs $GITHUB_REF_NAME
-        run: sed -i 's/DEVBUILD/$GITHUB_REF_NAME/' ApexTournamentManager\Properties\AssemblyInfo.cs
+      - name: Insert Version Tag to AssemblyInfo.cs
+        run: sed -i 's/DEVBUILD/'${{github.ref_name}}'/' ApexTournamentManager\Properties\AssemblyInfo.cs
   
       - name: Setup MSbuild
         uses: microsoft/setup-msbuild@v1.3.1
@@ -51,5 +51,5 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: test
+          name: ApexTournamentManager_${{github.ref_name}}
           path: ApexTournamentManager\bin\Release\
