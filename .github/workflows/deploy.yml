@@ -2,8 +2,6 @@ name: "Deploy Apex Tournament Manager"
 
 on:
   push:
-    branches:
-      - "release"
     tags:
       - "V*"
 
