@@ -12,7 +12,7 @@ env:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -29,11 +29,7 @@ jobs:
         run: nuget restore ${{ env.PROJECT_PATH }}
 
       - name: Insert Version Tag to AssemblyInfo.cs $GITHUB_REF_NAME
-        uses: jacobtomlinson/gha-find-replace@v3
-        with:
-          find: "DEVBUILD"
-          replace: $GITHUB_REF_NAME
-          include: "**AssemblyInfo.cs"
+        run: sed -i 's/DEVBUILD/$GITHUB_REF_NAME/' filename
   
       - name: Build Solution
         run: msbuild ${{ env.PROJECT_PATH }} /p:Configuration=Release /p:SelfContained=true
