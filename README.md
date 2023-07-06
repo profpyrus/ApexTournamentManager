@@ -1,4 +1,4 @@
-#Apex Legends Tournament Manager
+# Apex Legends Tournament Manager
 This is a tool that's supposed to help you manage and integrate your Apex Legends Tournaments into your streams - in the most customizable, powerful way possible!
 
 Currently, the functions that are possible with this program look like the following:
@@ -9,7 +9,7 @@ Currently, the functions that are possible with this program look like the follo
 4. [Leaderboard View](#leaderboard)
 5. [Settings / Home View](#settings)
 
-##<a name="point"></a>Point Management
+## <a name="point"></a>Point Management
 You can assign different points to different "achievements" in the tournament, which will be automatically calculated for viewing on the leaderboard. This works by having each element in the point assignment list represent it's assigned value and everything above or below.
 
 See this example, which are the default values:
@@ -23,17 +23,17 @@ Here, each Team would be assigned 10 points for 1st, and 5 points for 2nd place.
 
 The Kills work the same, just the other way around. So 1 Kill or more, than 2 kills or more, etc. Since most people will want to assign one more point per kill though, we made that the default, up to 15 kills. Should a single player get more than 15 Kills (which is very impressive), you can add more Kill-point-assignments by pressing the '+' button.
 
-##<a name="team"></a>Team Management
+## <a name="team"></a>Team Management
 This page is used to set up all the teams taking part in your tournament, including the players.
 ![image](https://github.com/profpyrus/ApexTournamentManager/assets/116492135/6c3dafe8-50e8-4028-b59a-083736340894)
 At the very left, you have a list of all the teams, where you can add or delete teams by pressing '+' or '-'. Next to that list, you have the option to change the name of the team, and a list of all players, which one can also rename and add or remove.
 
-##<a name="match"></a>Match Management
+## <a name="match"></a>Match Management
 Here you add all the matches that take place in your tournament.
 ![image](https://github.com/profpyrus/ApexTournamentManager/assets/116492135/40cbb160-e21b-4bd2-987a-96cc6979da87)
 You can add a match using the '+' button, or remove the selected one using the '-' button. For each match, you have a list of all the Teams, for whitch you can each assign a placement, and register how many kills and deaths each player of the selected team got in the match. 
 
-##<a name="leaderboard"></a>Leaderboard View
+## <a name="leaderboard"></a>Leaderboard View
 Finally, the page where all the setup comes together. The Leaderboard View looks like this:
 ![image](https://github.com/profpyrus/ApexTournamentManager/assets/116492135/574d51ff-f134-4ac1-8967-7893e54e87ee)
 On the left are three dropdown menus:
@@ -45,7 +45,7 @@ The points for teams means each player gets assigned their points for the kills 
 
 Lastly there is a Button to send the 'Leaderboard to OBS'. This can only be used when connected to OBS via the Option on the [Home View](#settings)
 
-##<a name="settings"></a>Settings / Home View
+## <a name="settings"></a>Settings / Home View
 Besides the Info text on the right side of this page, there are 2 important parts to this page: The Session Options, and the OBS section.
 ![image](https://github.com/profpyrus/ApexTournamentManager/assets/116492135/71e444ca-05be-4b5f-ac11-4ee49112bc4a)
 ### Session
