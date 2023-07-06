@@ -19,6 +19,8 @@
         <Border Grid.Column="0" Grid.RowSpan="10"
                 BorderBrush="{StaticResource Base}"
                 BorderThickness="8"
+                Height="Auto"
+                VerticalAlignment="Top"
                 Margin="0"
                 Style="{StaticResource DefaultBorderStyle}">
             <StackPanel Margin="15">
@@ -36,13 +38,20 @@
                             Margin="0,0,0,15"
                             FontFamily="/Fonts/#Dosis"
                             FontSize="16"
-                            Content="Save Session"
-                            Command="{Binding SaveSession}"/>
+                            Content="Create Session"
+                            Command="{Binding CreateSession}"/>
                 <Border Style="{StaticResource DefaultBorderStyle}"
                         BorderThickness="4"
                         BorderBrush="{StaticResource Base}"
                         CornerRadius="0"
                         Margin="-15,0,-15,15"/>
+                <Button Style="{StaticResource ButtonTheme}"
+                            Height="35"
+                            Margin="0,0,0,15"
+                            FontFamily="/Fonts/#Dosis"
+                            FontSize="16"
+                            Content="Save Session"
+                            Command="{Binding SaveSession}"/>
                 <Button Style="{StaticResource ButtonTheme}"
                             Height="35"
                             Margin="0,0,0,0"
@@ -227,8 +236,15 @@
                         CornerRadius="0"
                         Margin="-15,0,-15,15"/>
                     <TextBlock x:Name="InfoText"
-                           Text="{StaticResource InfoText}"
-                           TextWrapping="Wrap"/>
+                           TextWrapping="Wrap"
+                               xml:space="preserve">This tool is supposed to help you manage your Apex Tournaments, especially if you are Streaming it! Setup your connection to OBS, configure your own Point System, add Teams and Players, manage Matches and send your Leaderboard to OBS!
+
+You can find more information, some Tutorials and the newest version on this <Hyperlink
+        NavigateUri="https://github.com/profpyrus/ApexTournamentManager"
+        RequestNavigate="Hyperlink_RequestNavigate">Github page</Hyperlink>.
+
+Thanks for using my tool, and good luck to all contestants! :D
+    - Prof</TextBlock>
                 </StackPanel>
                 <TextBlock x:Name="VersionText"
                            Text="V1.0.0"

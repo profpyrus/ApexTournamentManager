@@ -28,5 +28,10 @@ namespace ApexTournamentManager.MVVM.View
             IEnumerable<Attribute> customAttributes = Assembly.GetEntryAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute));
 			infoText.Text = ((AssemblyDescriptionAttribute)customAttributes.First()).Description;
         }
-    }
+
+		private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+		{
+			System.Diagnostics.Process.Start(e.Uri.ToString());
+		}
+	}
 }

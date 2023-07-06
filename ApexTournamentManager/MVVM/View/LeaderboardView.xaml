@@ -82,7 +82,7 @@
                           DataContext="{Binding Values}">
                         <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ScrollViewer.PanningMode="HorizontalOnly"
-                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                   BorderThickness="0"
                                   Margin="212,0,0,0"
                                   Style="{StaticResource ListSelectorTheme}"

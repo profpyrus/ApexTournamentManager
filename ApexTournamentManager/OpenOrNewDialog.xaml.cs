@@ -25,17 +25,11 @@ namespace ApexTournamentManager
 	{
 		private EventHandler FoundValidFile;
 
-		private SaveAndLoadHandler snl;
-
 		public event PropertyChangedEventHandler PropertyChanged;
-		public string SessionName { get; set; }
 
 		public OpenOrNewDialog(App app)
 		{
 			FoundValidFile += app.ValidPathFound;
-			SessionName = "New Session";
-
-			snl = new SaveAndLoadHandler();
 
 			InitializeComponent();
 		}
@@ -49,12 +43,12 @@ namespace ApexTournamentManager
 
 		private void CreateNewSession_Click(object sender, RoutedEventArgs e)
 		{
-			FoundValidFile?.Invoke(snl.CreateSession(SessionName), EventArgs.Empty);
+			FoundValidFile?.Invoke(SaveAndLoadHandler.CreateSession(), EventArgs.Empty);
 		}
 
 		private void OpenSession_Click(object sender, RoutedEventArgs e)
 		{
-			FoundValidFile?.Invoke(snl.OpenSessionFile(), EventArgs.Empty);
+			FoundValidFile?.Invoke(SaveAndLoadHandler.OpenSessionFile(), EventArgs.Empty);
 		}
 
 		private void Cancel_Click(object sender, RoutedEventArgs e)

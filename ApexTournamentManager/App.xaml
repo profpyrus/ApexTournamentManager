@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/Styles/AddRemoveButtonStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/ListSelectorStyle.xaml"/>
                 <ResourceDictionary Source="/Styles/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/ScrollBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <core:SelectedToVisibilityConverter x:Key="SelectedToVisibilityConverter"/>

@@ -53,14 +53,12 @@ namespace ApexTournamentManager.MVVM.ViewModel
 
         public MainViewModel(string sessionPath, Window window, System.Windows.Application app)
         {
-            SaveAndLoadHandler snl = new SaveAndLoadHandler();
-
 			_window = window;
-            _session = snl.OpenSession(sessionPath);
+            _session = SaveAndLoadHandler.OpenSession(sessionPath);
 
             obs = new ObsConnectionHandler();
 
-            HomeVM = new HomeViewModel(obs,this, app, snl);
+            HomeVM = new HomeViewModel(obs,this, app);
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => { CurrentView = HomeVM; });
@@ -69,7 +67,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
             PointsViewCommand = new RelayCommand(o => { CurrentView = new PointsManagementViewModel(_session); });
             LeaderboardViewCommand = new RelayCommand(o => { CurrentView = new LeaderboardViewModel(_session, obs); });
 
-            CloseWindow = new RelayCommand(o => { HomeVM.SaveSession.Execute(this); _window.Close(); });
+            CloseWindow = new RelayCommand(o => { _window.Close(); });
 			MinimizeWindow = new RelayCommand(o => { _window.WindowState = WindowState.Minimized; });
 		}
     }

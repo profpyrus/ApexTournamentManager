@@ -15,20 +15,16 @@ using System.IO;
 
 namespace ApexTournamentManager.Core
 {
-	class SaveAndLoadHandler
+	static class SaveAndLoadHandler
 	{
-		string filter = "Apex Legends Tournament Manager Session Files(*.atms)|*.atms";
-		string defaultExt = "atms";
+		static string filter = "Apex Legends Tournament Manager Session Files(*.atms)|*.atms";
+		static string defaultName = "New Session";
+		static string defaultExt = "atms";
 
-		public SaveAndLoadHandler()
-		{
-			
-		}
-
-		public string CreateSession(string SessionName)
+		public static string CreateSession()
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
-			dialog.FileName = SessionName;
+			dialog.FileName = defaultName;
 
 			if ((bool)GetFileDialog(dialog))
 			{
@@ -42,7 +38,7 @@ namespace ApexTournamentManager.Core
 			else return null;
 		}
 
-		public void SaveSessionAs(Session session)
+		public static void SaveSessionAs(Session session)
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.FileName = session.name;
@@ -55,12 +51,12 @@ namespace ApexTournamentManager.Core
 			}
 		}
 
-		public void SaveSession(Session session)
+		public static void SaveSession(Session session)
 		{
 			File.WriteAllText(session.path, SerializeSession(session));
 		}
 
-		public string OpenSessionFile()
+		public static string OpenSessionFile()
         {
 			OpenFileDialog dialog = new OpenFileDialog();
 
@@ -71,7 +67,7 @@ namespace ApexTournamentManager.Core
 			else return "";
         }
 
-		public Session OpenSession()
+		public static Session OpenSession()
 		{
 			string path = OpenSessionFile();
 			if (!string.IsNullOrEmpty(path))
@@ -81,20 +77,20 @@ namespace ApexTournamentManager.Core
 			} else { return null; }
 		}
 
-		public Session OpenSession(string path)
+		public static Session OpenSession(string path)
 		{
 			string ssession = File.ReadAllText(path);
 			return DeserializeSession(ssession, path);
 		}
 
-		public bool? GetFileDialog(FileDialog dialog)
+		public static bool? GetFileDialog(FileDialog dialog)
 		{
 			dialog.Filter = filter;
 			dialog.DefaultExt = defaultExt;
 			return dialog.ShowDialog();
 		}
 
-		public string SerializeSession(Session session)
+		public static string SerializeSession(Session session)
 		{
 			return JsonConvert.SerializeObject(session,
 				Formatting.Indented, new JsonSerializerSettings
@@ -103,7 +99,7 @@ namespace ApexTournamentManager.Core
 				});
 		}
 
-		public Session DeserializeSession(string json, string path)
+		public static Session DeserializeSession(string json, string path)
 		{
 			JObject jsession = JObject.Parse(json);
 

@@ -41,7 +41,6 @@
                           Margin="4,0,4,0"
                           IsSynchronizedWithCurrentItem="True"
                           SelectedIndex="0"
-                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
                           ItemContainerStyle="{StaticResource MatchListItemTheme}"
                           ItemsSource="{Binding Matches}"
                           SelectedItem="{Binding SelectedMatch}"
@@ -102,7 +101,6 @@
                                   Margin="4,0,4,0"
                                   IsSynchronizedWithCurrentItem="True"
                                   SelectedIndex="0"
-                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ItemContainerStyle="{StaticResource TeamListItemTheme}"
                                   ItemsSource="{Binding Teams}"
                                   SelectedItem="{Binding SelectedTeam, Mode=TwoWay}"
@@ -148,7 +146,6 @@
                                   Margin="4,0,4,0"
                                   IsSynchronizedWithCurrentItem="True"
                                   SelectedIndex="0"
-                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                   ItemContainerStyle="{StaticResource MatchPlayerListItemTheme}"
                                   ItemsSource="{Binding Players}"
                                   SelectionMode="Single">

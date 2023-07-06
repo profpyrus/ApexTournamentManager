@@ -13,7 +13,6 @@ namespace ApexTournamentManager.MVVM.ViewModel
     class HomeViewModel : ObservableObject
     {
 		ObsConnectionHandler _obs;
-		SaveAndLoadHandler _snl;
 		MainViewModel _mvm;
         SolidColorBrush connectedColor;
 		SolidColorBrush disconnectedColor;
@@ -21,6 +20,7 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		public SolidColorBrush ConnectionStatus { get; set; }
 		public bool IsConnected { get; set; }
 
+		public RelayCommand CreateSession { get; set; }
 		public RelayCommand SaveSession { get; set; }
 		public RelayCommand SaveSessionAs { get; set; }
 		public RelayCommand OpenSession { get; set; }
@@ -34,11 +34,10 @@ namespace ApexTournamentManager.MVVM.ViewModel
 		public string TemplateName { get; set; }
 		public string SceneName { get; set; }
 
-		public HomeViewModel(ObsConnectionHandler obs, MainViewModel mvm, Application app, SaveAndLoadHandler snl)
+		public HomeViewModel(ObsConnectionHandler obs, MainViewModel mvm, Application app)
         {
             _obs = obs;
 			_mvm = mvm;
-			_snl = snl;
 			connectedColor = (SolidColorBrush)app.Resources["Connected"];
 			disconnectedColor = (SolidColorBrush)app.Resources["NotConnected"];
 			ConnectionStatus = disconnectedColor;
@@ -48,9 +47,10 @@ namespace ApexTournamentManager.MVVM.ViewModel
 			TemplateName = "RANKTEMPLATE";
 			SceneName = "Scene";
 
-			SaveSession = new RelayCommand(o => { _snl.SaveSession(_mvm.session); });
-			SaveSessionAs = new RelayCommand(o => { _snl.SaveSessionAs(_mvm.session); });
-			OpenSession = new RelayCommand(o => { var session = _snl.OpenSession(); if (session != null) _mvm.session = session; });
+			CreateSession = new RelayCommand(o => { var session = SaveAndLoadHandler.OpenSession(SaveAndLoadHandler.CreateSession()); if (session != null) _mvm.session = session; });
+			SaveSession = new RelayCommand(o => { SaveAndLoadHandler.SaveSession(_mvm.session); });
+			SaveSessionAs = new RelayCommand(o => { SaveAndLoadHandler.SaveSessionAs(_mvm.session); });
+			OpenSession = new RelayCommand(o => { var session = SaveAndLoadHandler.OpenSession(); if (session != null) _mvm.session = session; });
 
 			ConnectToOBS = new RelayCommand(o => { ConnectionStatus = (IsConnected = _obs.Connect(IPText, PortText, "")) ? connectedColor : disconnectedColor; OnPropertyChanged(nameof(ConnectionStatus)); OnPropertyChanged(nameof(IsConnected)); });
             TestvaluesToOBS = new RelayCommand(o => { _obs.SendTestleaderboardToObs(); });
